@@ -62,12 +62,19 @@ export default function RootLayout() {
 function RootLayoutNav(){
     const colorScheme = useColorScheme();
 
+    const isLoggedIn = true
+
     return(
         <GestureHandlerRootView style={styles.container}>
             <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
                 <Stack>
-                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                    <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+                    <Stack.Protected guard={isLoggedIn}>
+                        <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+                        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+                    </Stack.Protected>
+                    <Stack.Protected guard={!isLoggedIn}>
+                        <Stack.Screen name="auth" options={{ headerShown: false }} />
+                    </Stack.Protected>
                 </Stack>
                 <PortalHost />
             </ThemeProvider>
