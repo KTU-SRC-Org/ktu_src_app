@@ -40,7 +40,7 @@ export const BackButton = forwardRef<View, BackButtonProps>(
         )}
         {...props}
       >
-        <Ionicons name="arrow-back" size={22} color={iconColor} /> 
+        <Ionicons name="arrow-back-circle-outline" size={22} color={iconColor} />
         {showLabel && (
           <Text className={clsx("ml-2 font-semibold text-base", textColor)}>
             {title}

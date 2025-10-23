@@ -7,7 +7,6 @@ import OTPInput from "@/components/shared/otp-input";
 import {AuthButton} from "@/components/shared/auth-button";
 import {BackButton} from "@/components/shared/back-button";
 
-
 const Verify = () => {
   const [timer, setTimer] = useState(180); //180 => 3min
 
@@ -16,7 +15,6 @@ const Verify = () => {
     const interval = setInterval(() => setTimer((t) => t - 1), 1000);
     return () => clearInterval(interval);
   }, [timer]);
-
 
   // Helper for timer count down
   const formatTime = (seconds: number) => {
@@ -34,11 +32,17 @@ const Verify = () => {
   const handleSubmitOTP = (data: OTPFormType) => {
     if (data.otpCode === '1234') {
       console.log('OTP Verified Successfully');
-      form.reset();
+      Keyboard.dismiss();
     } else {
       form.setError('otpCode', { message: 'Invalid PIN' });
+      Keyboard.dismiss();
     }
   };
+
+  const handleOtpResend = () => {
+    setTimer(180)
+    form.reset({'otpCode': ''});
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -48,7 +52,7 @@ const Verify = () => {
         <View className="flex flex-col items-center justify-center gap-12 pt-16">
           <View className="w-full items-center">
             <Text className="text-center text-2xl font-bold text-white">Check your email.</Text>
-            <Text className="mt-1 text-center text-base text-gray-300">
+            <Text className="mt-1 text-center text-base text-white">
               We’ve sent the code to fedejnr08@gmail.com.
             </Text>
           </View>
@@ -59,7 +63,7 @@ const Verify = () => {
             render={({ field, fieldState }) => (
               <OTPInput
                 length={4}
-                value={field.value.split('')}
+                value={(field.value ?? '').split('')}
                 setValue={(val) => field.onChange(val.join(''))}
                 isValid={fieldState.error ? false : field.value.length === 4 ? true : null}
               />
@@ -72,7 +76,7 @@ const Verify = () => {
                 {form.formState.errors.otpCode.message}
               </Text>
             ) : (
-              <Text className={`mt-2 text-center ${timer < 10 ? "text-red" : "text-gray-300"}`}>
+              <Text className={`mt-2 text-center ${timer < 10 ? "text-red-500" : "text-white"}`}>
                 Code expires in {formatTime(timer)}
               </Text>
             )}
@@ -81,12 +85,12 @@ const Verify = () => {
               title="Verify"
               onPress={form.handleSubmit(handleSubmitOTP)}
               loading={form.formState.isSubmitting}
-              disabled={!form.formState.isValid}
+              disabled={!form.formState.isValid || timer === 0 || form.formState.isSubmitting}
             />
             <AuthButton
               title="Send again"
               variant="outline"
-              onPress={() => setTimer(107)}
+              onPress={handleOtpResend}
               disabled={timer > 0}
             />
           </View>

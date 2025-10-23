@@ -58,6 +58,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
             ref={(ref) => {
               inputs.current[i] = ref!;
             }}
+            selection={{start: 0, end: 1}}
             className="h-[90px] flex-1 rounded-xl border-2 text-center text-2xl font-bold"
             style={{
               borderColor,
