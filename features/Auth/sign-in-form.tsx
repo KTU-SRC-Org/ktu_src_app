@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, Alert } from "react-native"
+import { Text, View} from "react-native"
 
 import { Input } from '@/components/ui/input';
 import {Label} from "@/components/ui/label";
@@ -23,7 +23,7 @@ export default function SignInForm() {
             password: ''
         },
     })
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data: SigninFormType) => console.log(data)
 
 
     return (
@@ -36,7 +36,7 @@ export default function SignInForm() {
                     }}
                     render={({ field: { onChange, onBlur, value } }) => (
                         <View className='mb-5'>
-                            <Label className={'mb-2'}>Email</Label>
+                            <Label className={'mb-2'}>Institution Email</Label>
                             <Input
                                 onBlur={onBlur}
                                 onChangeText={onChange}
@@ -44,7 +44,7 @@ export default function SignInForm() {
                                 keyboardType="email-address"
                                 textContentType="emailAddress"
                                 autoComplete="email"
-                                placeholder="Email"
+                                placeholder="example234d@ktu.edu.gh"
                             />
                         </View>
                     )}

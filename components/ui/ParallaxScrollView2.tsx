@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         width: "100%",
         height: HEADER_HEIGHT,
-        experimental_backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0,0) 0%, rgba(0, 0, 0, 1) 100%)"
+        experimental_backgroundImage: "linear-gradient(to bottom, rgba(10, 76, 163, 0.7) 0%, rgba(10, 76, 163, 0.9) 100%)"
     },
     headerContent:{
         flex: 2,

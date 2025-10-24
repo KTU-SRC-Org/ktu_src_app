@@ -2,18 +2,15 @@ import React, {useState, useRef} from 'react';
 import {StyleSheet} from 'react-native';
 import {
     View,
-    Text,
     TabController,
-    TabControllerItemProps,
     Colors,
     TabControllerImperativeMethods,
 } from 'react-native-ui-lib';
 import ParallaxScrollView from '@/components/ui/ParallaxScrollView2';
-import { Input } from '@/components/ui/input';
 import SignUpForm from "@/features/Auth/sign-up-form";
 import SignInForm from "@/features/Auth/sign-in-form";
 
-const SignIn = () => {
+const AuthScreen = () => {
     const tabController = useRef<TabControllerImperativeMethods>(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -67,7 +64,7 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default AuthScreen;
 
 const styles = StyleSheet.create({
     labelStyle: {

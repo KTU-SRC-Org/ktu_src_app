@@ -10,7 +10,11 @@ export const OTPSchema = z.object({
 
 export const SignupSchema = z.object({
   email: z.email(),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z.string().min(8, {error: 'Password must be at least 8 characters'}),
+  confirmPassword: z.string().min(8, { message: "Minimum 8 characters" }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
 })
 
 export const SigninSchema = z.object({
