@@ -28,6 +28,31 @@
         --chart-3: 197 37% 24%;
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
+
+        /*primary color - ktu dark blue color*/
+        --serene-50: 218 80% 97%;
+        --serene-100: 218 85% 92%;
+        --serene-200: 218 80% 82%;
+        --serene-300: 218 75% 65%;
+        --serene-400: 218 80% 45%;
+        --serene-500: 218 93% 22%; /*Base color*/
+        --serene-600: 218 90% 18%;
+        --serene-700: 218 85% 14%;
+        --serene-800: 218 80% 10%;
+        --serene-900: 218 75% 7%;
+
+        /*secondary color - ktu orange color*/
+        --velora-50: 28 90% 97%;
+        --velora-100: 28 90% 92%;
+        --velora-200: 28 85% 85%;
+        --velora-300: 28 80% 75%;
+        --velora-400: 28 85% 65%;
+        --velora-500: 28 90% 57%; /*Base color */
+        --velora-600: 28 85% 50%;
+        --velora-700: 28 80% 42%;
+        --velora-800: 28 75% 35%;
+        --velora-900: 28 70% 28%;
+
     }
 
     .dark:root {
