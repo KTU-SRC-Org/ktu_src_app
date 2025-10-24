@@ -62,7 +62,7 @@ export default function RootLayout() {
 function RootLayoutNav(){
     const colorScheme = useColorScheme();
 
-    const isLoggedIn = true
+    const isLoggedIn = false
 
     return(
         <GestureHandlerRootView style={styles.container}>
