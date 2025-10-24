@@ -5,7 +5,7 @@ import {Image} from "expo-image";
 
 export const blurhash = "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[" as string;
 
-const HEADER_HEIGHT = 400
+const HEADER_HEIGHT = 350
 
 const ParallaxScrollView = ({children}: PropsWithChildren) => {
 
@@ -56,7 +56,7 @@ const ParallaxScrollView = ({children}: PropsWithChildren) => {
                 <View style={styles.headerContainer}>
                     <View style={{flex: 1}}/>
 
-                    <View style={styles.headerContent}>
+                    <View >
                         {/*<Text style={styles.headerSubtitle}>Feature Session</Text>*/}
                         {/*<Text style={styles.headerTitle}>todaySession.title</Text>*/}
                         {/*<Text style={styles.headerDescription}>todaySession.description</Text>*/}

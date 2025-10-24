@@ -51,7 +51,7 @@ export default function SignUpForm() {
 
     return (
         <View>
-            <View className='mb-7'>
+            <View className='mb-10'>
                 <Controller
                     control={control}
                     rules={{
