@@ -1,11 +1,14 @@
 import {Text, View} from 'react-native'
+import ParallaxScrollView from "@/components/ui/ParallaxScrollView2";
 
 
 const SignIn = () => {
     return (
-        <View className='flex flex-1 justify-center items-center'>
-            <Text>Signin</Text>
-        </View>
+        <ParallaxScrollView>
+            <View className='flex flex-1 justify-center items-center'>
+                <Text>Signin</Text>
+            </View>
+        </ParallaxScrollView>
     );
 };
 
