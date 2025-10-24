@@ -109,6 +109,7 @@ export default ParallaxScrollView;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#fff",
     },
     headerSubtitle: {
         fontSize: 20,
