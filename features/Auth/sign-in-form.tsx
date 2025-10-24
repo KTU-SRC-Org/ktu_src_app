@@ -68,6 +68,7 @@ export default function SignInForm() {
                                 value={value}
                                 secureTextEntry
                             />
+                            {errors.password?.message && <Text className='text-rose-500'>{errors.password.message}</Text>}
                         </View>
                     )}
                     name="password"

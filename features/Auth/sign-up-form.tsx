@@ -73,7 +73,7 @@ export default function SignUpForm() {
                     )}
                     name="email"
                 />
-                {errors.email && <Text>This is required.</Text>}
+                {errors.email && <Text className='text-rose-500'>This is required.</Text>}
 
 
                 <Controller
@@ -91,7 +91,7 @@ export default function SignUpForm() {
                                 value={value}
                                 secureTextEntry
                             />
-                            {errors.password?.message && <Text>{errors.password.message}</Text>}
+                            {errors.password?.message && <Text className='text-rose-500'>{errors.password.message}</Text>}
                         </View>
                     )}
                     name="password"
@@ -112,7 +112,7 @@ export default function SignUpForm() {
                                 value={value}
                                 secureTextEntry
                             />
-                            {errors.confirmPassword?.message && <Text>{errors.confirmPassword.message}</Text>}
+                            {errors.confirmPassword?.message && <Text className='text-rose-500'>{errors.confirmPassword.message}</Text>}
                         </View>
                     )}
                     name="confirmPassword"
