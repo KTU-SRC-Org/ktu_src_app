@@ -5,19 +5,19 @@ import {Label} from "@/components/ui/label";
 
 
 import { useForm, Controller } from "react-hook-form"
-import {SignupSchema, SignupFormType, OTPFormType} from "@/lib/schemas/auth";
+import { SigninSchema , SigninFormType} from "@/lib/schemas/auth";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {AuthButton} from "@/components/shared/auth-button";
 import React from "react";
 
 
-export default function SignUpForm() {
+export default function SignInForm() {
     const {
         control,
         handleSubmit,
         formState: { errors, isSubmitting, isValid },
-    } = useForm<SignupFormType>({
-        resolver: zodResolver(SignupSchema),
+    } = useForm<SigninFormType>({
+        resolver: zodResolver(SigninSchema),
         defaultValues: {
             email: '',
             password: ''
@@ -75,13 +75,13 @@ export default function SignUpForm() {
             </View>
 
 
-            <View className='flex flex-col items-center'>
+            <View>
                 <AuthButton
-                    title="Sign up"
+                    title="Sign in"
                     onPress={handleSubmit(onSubmit)}
                     loading={isSubmitting}
                     disabled={!isValid || isSubmitting}
-                    className='rounded-sm p-0 py-2 w-2/3'
+                    className='rounded-sm p-0 py-2'
                 />
             </View>
 

@@ -10,14 +10,16 @@ import {
 } from 'react-native-ui-lib';
 import ParallaxScrollView from '@/components/ui/ParallaxScrollView2';
 import { Input } from '@/components/ui/input';
+import SignUpForm from "@/features/Auth/sign-up-form";
+import SignInForm from "@/features/Auth/sign-in-form";
 
 const SignIn = () => {
     const tabController = useRef<TabControllerImperativeMethods>(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     const items = [
-        {label: 'Sign In', key: 'signin'},
         {label: 'Sign Up', key: 'signup'},
+        {label: 'Sign In', key: 'signin'},
     ];
 
     return (
@@ -49,19 +51,13 @@ const SignIn = () => {
                     <TabController.PageCarousel>
                         <TabController.TabPage index={0}>
                             <View flex paddingV-30 paddingH-20>
-                                <Text>Text inn</Text>
-                                <Input
-                                    keyboardType="email-address"
-                                    textContentType="emailAddress"
-                                    autoComplete="email"
-                                    placeholder="Email"
-                                />
+                                <SignUpForm/>
                             </View>
                         </TabController.TabPage>
 
                         <TabController.TabPage index={1}>
-                            <View flex center paddingV-30>
-                                <Text>Signin</Text>
+                            <View flex paddingV-30 paddingH-20>
+                                <SignInForm/>
                             </View>
                         </TabController.TabPage>
                     </TabController.PageCarousel>

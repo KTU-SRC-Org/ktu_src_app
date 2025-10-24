@@ -60,13 +60,12 @@ const ParallaxScrollView = ({children}: PropsWithChildren) => {
                         {/*<Text style={styles.headerSubtitle}>Feature Session</Text>*/}
                         {/*<Text style={styles.headerTitle}>todaySession.title</Text>*/}
                         {/*<Text style={styles.headerDescription}>todaySession.description</Text>*/}
-                        <View className='flex flex-row h-full w-full  relative'>
+                        <View className='flex flex-row h-full w-full  relative pt-10'>
                             <Image
                                 source={require('@/assets/images/sign-up-image.png')}
                                 placeholder={blurhash}
                                 style={{
-                                    width: "50%",
-
+                                    width: "45%",
                                     objectFit: 'contain'
                                 }}
 
