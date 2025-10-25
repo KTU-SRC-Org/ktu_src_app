@@ -45,7 +45,7 @@ export default function SignUpForm() {
 
     const onSubmit = (data : SignupFormType) => {
         console.log(data)
-        router.push('/auth/verify')
+        router.push('/auth/verify-screen')
     }
 
 
