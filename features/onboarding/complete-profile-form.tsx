@@ -67,7 +67,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        className={"pt-16"}
+        className={"pt-8"}
       >
         <View style={styles.header}>
           <Text style={styles.title}>Complete Your Profile</Text>
