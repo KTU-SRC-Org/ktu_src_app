@@ -8,7 +8,7 @@ export default function AuthStackLayout() {
                 options={{ headerShown: false, title: 'Auth Screen' }}
             />
             <Stack.Screen
-                name="verify"
+                name="verify-screen"
                 options={{ headerShown: false, title: 'Verify' }}
             />
         </Stack>
