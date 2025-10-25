@@ -7,6 +7,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CompleteProfileForm from '@/features/onboarding/complete-profile-form';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
+import {router} from "expo-router";
 
 const CompleteProfileScreen = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,6 +16,7 @@ const CompleteProfileScreen = () => {
     setIsSubmitting(true);
     try {
       console.log('Profile Data:', data);
+      router.replace('./(drawer)/(tabs)');
     } finally {
       setIsSubmitting(false);
     }

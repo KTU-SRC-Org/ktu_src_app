@@ -5,10 +5,9 @@ import {AuthButton} from "@/components/shared/auth-button";
 import React, {useEffect, useState} from "react";
 import {OTPFormType, OTPSchema} from "@/lib/schemas/auth";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useRouter} from "expo-router";
+import { router} from "expo-router";
 
 const VerifyOtpForm = () => {
-  const router = useRouter();
   const [timer, setTimer] = useState(180); //180 => 3min
 
   useEffect(() => {
