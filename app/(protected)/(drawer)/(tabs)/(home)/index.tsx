@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView , View} from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
@@ -7,6 +7,7 @@ import HomeCustomHeader from '@/components/home/HomeCustomHeader';
 import {HomeUpdatesCarousel} from '@/components/builders/HomeUpdatesCarousel';
 import HomeRepresentativeCarousel from '@/components/builders/HomeRepresentativeCarousel';
 import UpcomingEventsSection from '@/components/home/UpcomingEventsSection';
+import ActiveProjectsSection from '@/components/home/ActiveProjectsSection';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
           <HomeRepresentativeCarousel />
           
           <UpcomingEventsSection/>
+          <ActiveProjectsSection/>
         </ScrollView>
       </SafeAreaView>
     </>

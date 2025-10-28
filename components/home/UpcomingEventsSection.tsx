@@ -3,7 +3,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Link } from 'expo-router';
 import UpcomingEventCard from '../cards/UpcomingEventCard';
 import MemoEventSectionImage from '../icons/EventSectionImage';
-import { Image } from 'expo-image';
 
 const UpcomingEventsSection = () => {
   return (
