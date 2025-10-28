@@ -7,7 +7,6 @@ import {RepresentativeCard} from "@/components/cards/RepresentativeCard";
 
 const window = Dimensions.get('window');
 const scale = 0.9;
-const PAGE_WIDTH = window.width * scale;
 const PAGE_HEIGHT = 220 * scale;
 
 
