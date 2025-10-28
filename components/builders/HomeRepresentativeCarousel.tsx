@@ -1,15 +1,14 @@
 import {useState, useCallback} from "react";
-import { View } from 'react-native';
+import { View, Dimensions, Text } from 'react-native';
 import { interpolate } from 'react-native-reanimated';
 import Carousel, { TAnimationStyle } from 'react-native-reanimated-carousel';
-import {Dimensions} from "react-native";
 
 import {RepresentativeCard} from "@/components/cards/RepresentativeCard";
 
 const window = Dimensions.get('window');
 const scale = 0.9;
 const PAGE_WIDTH = window.width * scale;
-const PAGE_HEIGHT = 200;
+const PAGE_HEIGHT = 220 * scale;
 
 
 interface RepresentativeData {
@@ -69,7 +68,7 @@ function PaginationIndicator({
     current: number;
 }) {
     return (
-        <View className="flex flex-row justify-center items-center gap-2 mt-4">
+        <View className="flex flex-row items-center justify-center gap-2 mt-2">
             {Array.from({ length: total }).map((_, index) => (
                 <View
                     key={index}
@@ -88,45 +87,46 @@ function PaginationIndicator({
 // Representative Carousel Component
 export function RepresentativeCarousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
-
+  
     const animationStyle: TAnimationStyle = useCallback((value: number) => {
-        'worklet';
-
-        const opacity = interpolate(value, [-1, 0, 1], [0, 1, 0]);
-        const scale = interpolate(value, [-1, 0, 1], [0.85, 1, 0.85]);
-
-        return {
-            transform: [{ scale }],
-            opacity,
-        };
+      'worklet';
+  
+      const opacity = interpolate(value, [-1, 0, 1], [0, 1, 0]);
+      const scale = interpolate(value, [-1, 0, 1], [0.85, 1, 0.85]);
+  
+      return {
+        transform: [{ scale }],
+        opacity,
+      };
     }, []);
-
+  
     return (
-        <View className="w-full">
-            <Carousel
-                loop={false}
-                autoPlay={true}
-                autoPlayInterval={4000}
-                style={{
-                    width: window.width,
-                    height: PAGE_HEIGHT,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
-                width={PAGE_WIDTH}
-                height={PAGE_HEIGHT}
-                data={dummyRepresentatives}
-                renderItem={({ item }) => <RepresentativeCard {...item} />}
-                customAnimation={animationStyle}
-                onSnapToItem={(index) => setCurrentIndex(index)}
-            />
-
-            <PaginationIndicator
-                total={dummyRepresentatives.length}
-                current={currentIndex}
-            />
-        </View>
+      <View className="w-full ">
+        <Text className="font-medium text-[16px] mb-1 px-4">Know your representatives</Text>
+        <Carousel
+          loop={false}
+          autoPlay={true}
+          autoPlayInterval={4000}
+          style={{
+            width: window.width,
+            height: PAGE_HEIGHT,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          width={window.width}
+          height={PAGE_HEIGHT}
+          data={dummyRepresentatives}
+          renderItem={({ item }) => <RepresentativeCard {...item} />}
+          customAnimation={animationStyle}
+          onSnapToItem={(index) => setCurrentIndex(index)}
+        />
+        
+        <PaginationIndicator 
+          total={dummyRepresentatives.length} 
+          current={currentIndex} 
+        />
+      </View>
     );
-}
-
-export default RepresentativeCarousel;
+  }
+  
+  export default RepresentativeCarousel;

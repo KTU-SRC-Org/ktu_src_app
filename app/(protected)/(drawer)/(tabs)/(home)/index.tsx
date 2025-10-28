@@ -1,22 +1,22 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
-import {SafeAreaView} from "react-native-safe-area-context";
+import { StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
-import { ScreenContent } from '@/components/ScreenContent';
-import HomeCustomHeader from "@/components/home/HomeCustomHeader";
-import HomeUpdatesCarousel from "@/components/builders/HomeUpdatesCarousel";
-import HomeRepresentativeCarousel from "@/components/builders/HomeRepresentativeCarousel";
-import {RepresentativeCard} from "@/components/cards/RepresentativeCard";
+
+import HomeCustomHeader from '@/components/home/HomeCustomHeader';
+import {HomeUpdatesCarousel} from '@/components/builders/HomeUpdatesCarousel';
+import HomeRepresentativeCarousel from '@/components/builders/HomeRepresentativeCarousel';
 
 export default function Home() {
   return (
     <>
-      <SafeAreaView style={styles.container}>
-          <HomeCustomHeader />
+      <SafeAreaView edges={['top','right','left']} style={styles.container}>
+        <StatusBar style="dark" />
+        <HomeCustomHeader />
 
-        <ScrollView style={{flex: 1}} className='bg-red-500 pt-2'>
-            <HomeUpdatesCarousel />
-            <RepresentativeCard id={'dfdfd'} name={'dfdfd'} position={'dfdffd'} description={'dfdfdf'} imageUrl={'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop'}/>
-
+        <ScrollView style={{ flex: 1 }} className="pt-2">
+          <HomeUpdatesCarousel />
+          <HomeRepresentativeCarousel />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -25,7 +25,7 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: '#fff',
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });
