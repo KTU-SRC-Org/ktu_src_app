@@ -12,8 +12,6 @@ import Svg, {
 import { memo } from "react"
 const EventSectionImage = (props: SvgProps) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
     width={190}
     height={154}
     fill="none"
@@ -23,7 +21,6 @@ const EventSectionImage = (props: SvgProps) => (
       <Path
         fill="url(#b)"
         d="M0 0h176v146H0z"
-        shapeRendering="crispEdges"
         transform="matrix(-1 0 0 1 190 0)"
       />
     </G>
