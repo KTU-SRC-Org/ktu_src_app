@@ -12,7 +12,7 @@ const ProjectProgress = ({ progress = 33, title, indicatorColor, gradientColors 
   return (
     <View>
       <Text>{title}</Text>
-      <Progress className="bg-red-300" indicatorClassName={`${indicatorColor}`} value={progress}  gradientColors={gradientColors} />
+      <Progress indicatorClassName={`${indicatorColor}`} value={progress}  gradientColors={gradientColors} />
     </View>
   );
 };
