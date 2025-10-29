@@ -10,7 +10,6 @@ const CategoryScreen = () => {
 
   return(
     <SafeAreaView style={styles.container}>
-      <BackNavigationHeader title={categoryId}/>
       <CategoryItems id={categoryId}/>
     </SafeAreaView>
   )

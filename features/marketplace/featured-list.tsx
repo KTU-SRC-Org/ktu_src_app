@@ -1,14 +1,25 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, Image, FlatList} from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from "@/features/marketplace/product-card";
 import CategoryCard from "@/features/marketplace/category-card";
-import {ALL_CATEGORIES, MOCK_ITEMS} from "@/features/marketplace/index";
+import {ALL_CATEGORIES, MOCK_ITEMS, ProductCardInterface} from "@/features/marketplace/index";
 
 export default function FeaturedList() {
   const router = useRouter();
+
+  const renderProduct = ({ item }: { item: ProductCardInterface }) => (
+    <ProductCard
+      key={item.id}
+      id={item.id}
+      name={item.name}
+      price={item.price}
+      image={item.images[0]}
+      rating={item.rating}
+    />
+  );
 
   return (
     <View className="flex-1 flex-col gap-8 px-4">
@@ -96,18 +107,16 @@ export default function FeaturedList() {
         <Text className="text-lg font-bold mb-2">
           Featured Items
         </Text>
-        <View className="flex-row flex-wrap justify-between gap-y-2">
-          {MOCK_ITEMS.slice(0,4).map((item) => (
-            <ProductCard
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              price={item.price}
-              image={item.images[0]}
-              rating={item.rating}
-            />
-          ))}
-        </View>
+        <FlatList
+          data={MOCK_ITEMS.slice(0, 5)}
+          renderItem={renderProduct}
+          keyExtractor={(item) => item.id}
+          horizontal={false}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: 'space-between', marginBottom: 12 }}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        />
       </View>
     </View>
   );

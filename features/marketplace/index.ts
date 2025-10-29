@@ -10,6 +10,9 @@ export interface ProductCardInterface {
   stock?: number;
   sizes?: string[];
   description?: string;
+  category?: string;
+  createdAt?: string;
+  updatedAt?: string;
   seller?: {
     name: string;
     rating: number;
@@ -32,12 +35,16 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       require("@/assets/images/marketplace/gadget.png"),
     ],
     sizes: ["128GB", "256GB", "512GB"],
+    category: "phones",
+    createdAt: "2025-01-04",
+    updatedAt: "2025-02-10",
     description:
       "The iPhone 13 Pro Max features a stunning display, A15 Bionic chip, and long-lasting battery. Experience unmatched performance and camera quality.",
     seller: {
       name: "John's Store",
       rating: 4.8,
       sales: "1.2k",
+
     },
   },
   {
@@ -47,6 +54,9 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
     rating: 4.2,
     reviews: 96,
     stock: 5,
+    category: "phones",
+    createdAt: "2025-02-04",
+    updatedAt: "2025-04-10",
     images: [
       require("@/assets/images/marketplace/phone.png"),
       require("@/assets/images/marketplace/sales.png"),
@@ -61,8 +71,96 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       sales: "980",
     },
   },
+  {
+    id: "3",
+    name: "Wireless Bluetooth Headphones",
+    price: 59,
+    rating: 4.6,
+    reviews: 312,
+    category: "accessories",
+    createdAt: "2025-04-04",
+    updatedAt: "2025-04-10",
+    stock: 8,
+    images: [
+      require("@/assets/images/marketplace/gadget.png"),
+      require("@/assets/images/marketplace/sales.png"),
+    ],
+    description:
+      "Enjoy immersive sound quality and deep bass with these wireless Bluetooth headphones featuring noise cancellation and 30-hour battery life.",
+    seller: {
+      name: "AudioHub",
+      rating: 4.5,
+      sales: "2.3k",
+    },
+  },
+  {
+    id: "4",
+    name: "Men's Casual Sneakers",
+    price: 79,
+    rating: 4.4,
+    reviews: 67,
+    stock: 3,
+    category: "fashion",
+    createdAt: "2025-08-04",
+    updatedAt: "2025-09-10",
+    images: [
+      require("@/assets/images/marketplace/sales.png"),
+      require("@/assets/images/marketplace/gadget.png"),
+    ],
+    sizes: ["40", "41", "42", "43", "44"],
+    description:
+      "Comfortable and stylish men's sneakers made from breathable materials. Perfect for daily wear and light outdoor activities.",
+    seller: {
+      name: "UrbanWear",
+      rating: 4.3,
+      sales: "620",
+    },
+  },
+  {
+    id: "5",
+    name: "Smart Home Speaker",
+    price: 99,
+    rating: 4.7,
+    reviews: 210,
+    stock: 0,
+    category: "electronics",
+    createdAt: "2025-01-04",
+    updatedAt: "2025-02-10",
+    images: [
+      require("@/assets/images/marketplace/gadget.png"),
+      require("@/assets/images/marketplace/sales.png"),
+    ],
+    description:
+      "Smart home speaker with integrated voice assistant. Stream music, control devices, and manage your day hands-free.",
+    seller: {
+      name: "HomeTech",
+      rating: 4.9,
+      sales: "3.1k",
+    },
+  },
+  {
+    id: "6",
+    name: "Organic Green Tea (100g)",
+    price: 15,
+    rating: 4.8,
+    reviews: 188,
+    category: "groceries",
+    createdAt: "2025-10-04",
+    updatedAt: "2025-09-10",
+    stock: 12,
+    images: [
+      require("@/assets/images/marketplace/sales.png"),
+      require("@/assets/images/marketplace/gadget.png"),
+    ],
+    description:
+      "Premium organic green tea leaves for a refreshing and healthy beverage experience. Rich in antioxidants and natural flavor.",
+    seller: {
+      name: "Nature’s Basket",
+      rating: 4.6,
+      sales: "540",
+    },
+  },
 ];
-
 
 export interface CategoryInterface {
   id: string;
