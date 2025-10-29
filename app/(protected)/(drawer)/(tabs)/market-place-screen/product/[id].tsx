@@ -8,7 +8,7 @@ const ProductDetailScreen = () => {
   const productId = Array.isArray(id) ? id[0] : id ?? "";
 
   return(
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
       <ProductDetails id={productId}/>
     </SafeAreaView>
   )

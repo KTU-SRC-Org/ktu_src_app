@@ -23,7 +23,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ id, name, icon, color }) =>
           params: { id: id },
         })
       }>
-      <Text className="text-[30px]">{icon}</Text>{' '}
+      <Text className="text-[30px]">{icon}</Text>
       <Text className="text-sm font-semibold text-white">{name}</Text>
     </TouchableOpacity>
   );

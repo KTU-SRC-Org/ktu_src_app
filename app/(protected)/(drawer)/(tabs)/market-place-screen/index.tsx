@@ -6,11 +6,11 @@ import FeaturedList from "@/features/marketplace/featured-list";
 
 const Index = () => {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView edges={['top','left','right']} style={styles.container}>
         <MarketplaceHeader />
-        <ScrollView showsVerticalScrollIndicator={false}>
+
           <FeaturedList/>
-        </ScrollView>
+
       </SafeAreaView>
     );
 };

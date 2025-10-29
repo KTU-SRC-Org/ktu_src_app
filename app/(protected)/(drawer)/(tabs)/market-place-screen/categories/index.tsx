@@ -6,7 +6,7 @@ import BackNavigationHeader from "@/features/marketplace/back-navigation-header"
 
 const CategoriesScreen = () => {
   return(
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
       <BackNavigationHeader title={"All Categories"} />
       <AllCategories />
     </SafeAreaView>
