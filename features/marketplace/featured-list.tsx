@@ -63,7 +63,9 @@ const MarketplaceListHeader = () => {
                     <Text className="text-lg font-bold">Categories</Text>
                     <TouchableOpacity
                         className="flex-row items-center space-x-1"
-                        onPress={() => router.push('/market-place-screen/categories')}
+                        onPress={() => router.push({
+                          pathname: '/marketplace/categories'
+                        })}
                     >
                         <Text className="font-semibold text-base text-[#FF8C42]">
                             See all

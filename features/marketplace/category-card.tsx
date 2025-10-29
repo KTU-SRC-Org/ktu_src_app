@@ -19,7 +19,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ id, name, icon, color }) =>
       style={{ backgroundColor: color }}
       onPress={() =>
         router.push({
-          pathname: '/market-place-screen/category/[id]',
+          pathname: '/marketplace/category/[id]',
           params: { id: id },
         })
       }>

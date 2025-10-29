@@ -23,7 +23,7 @@ const ProductCard = ({id, name, price, image, rating}: ProductCardProps) => {
       style={{ width: (width - 52) / 2 }}
       onPress={() =>
         router.push({
-          pathname: "/market-place-screen/product/[id]",
+          pathname: "/marketplace/product/[id]",
           params: { id: id },
         })
       }

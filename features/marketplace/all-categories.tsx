@@ -12,7 +12,7 @@ export default function AllCategories() {
       className="flex-row items-center bg-gray-100 p-4 rounded-xl mb-3"
       onPress={() =>
         router.push({
-          pathname: "/market-place-screen/category/[id]",
+          pathname: "/marketplace/category/[id]",
           params: { id: item.id },
         })
       }
