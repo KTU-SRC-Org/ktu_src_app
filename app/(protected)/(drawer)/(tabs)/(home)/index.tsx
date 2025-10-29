@@ -9,6 +9,7 @@ import HomeRepresentativeCarousel from '@/components/builders/HomeRepresentative
 import UpcomingEventsSection from '@/components/home/UpcomingEventsSection';
 import ActiveProjectsSection from '@/components/home/ActiveProjectsSection';
 import EnterMarketSection from '@/components/home/EnterMarketSection';
+import { CampusNewsSection } from '@/components/home/CampusNewsSection';
 
 export default function Home() {
   return (
@@ -22,9 +23,11 @@ export default function Home() {
           <HomeRepresentativeCarousel />
           
           <UpcomingEventsSection/>
+          <CampusNewsSection/>
           <ActiveProjectsSection/>
 
           <EnterMarketSection/>
+          
         </ScrollView>
       </SafeAreaView>
     </>
