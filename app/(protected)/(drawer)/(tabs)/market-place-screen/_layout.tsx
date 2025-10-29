@@ -1,14 +1,34 @@
 import { Stack } from 'expo-router';
 
-const Layout = () => {
-    return (
-        <Stack>
-            <Stack.Screen
-                name="index"
-                options={{ headerShown: false }}
-            />
-        </Stack>
-    );
-};
-
-export default Layout;
+export default function MarketplaceStack() {
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen
+        name="index"
+        options={{
+        }}
+      />
+      {/*<Stack.Screen*/}
+      {/*  name="categories/index"*/}
+      {/*  options={{*/}
+      {/*    headerShown: false,*/}
+      {/*    presentation: 'card',*/}
+      {/*  }}*/}
+      {/*/>*/}
+      {/*<Stack.Screen*/}
+      {/*  name="category/[id]"*/}
+      {/*  options={{*/}
+      {/*    headerShown: false,*/}
+      {/*    presentation: 'card',*/}
+      {/*  }}*/}
+      {/*/>*/}
+      {/*<Stack.Screen*/}
+      {/*  name="product/[id]"*/}
+      {/*  options={{*/}
+      {/*    headerShown: false,*/}
+      {/*    presentation: 'card',*/}
+      {/*  }}*/}
+      {/*/>*/}
+    </Stack>
+  );
+}
