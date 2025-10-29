@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Download, Share2, Copy, ExternalLink } from 'lucide-react-native';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,6 +11,7 @@ interface NotificationCardProps {
     title: string;
     timestamp: string;
     description: string;
+    gradientColors?: [string, string];
     readMoreLink?: string;
     avatarUrl?: string;
     iconUrl?: string;
@@ -20,10 +21,6 @@ interface NotificationCardProps {
     onExternalLink?: () => void;
     onReadMore?: () => void;
 }
-
-const blurhash =
-    '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
-
 export function SRCUpdateCard({
                                   title = "SRC Update – WiFi Expansion",
                                   timestamp = "2h ago",
@@ -36,17 +33,18 @@ export function SRCUpdateCard({
                                   onCopy,
                                   onExternalLink,
                                   onReadMore,
+                                  gradientColors = ['#FF2E4C', '#1E2A7B'],
                               }: NotificationCardProps) {
     return (
         <View className="w-full">
             <LinearGradient
-                colors={['#FF2E4C', '#1E2A7B']}
+                colors={gradientColors}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 className="!rounded-xl overflow-hidden relative"
                 style={{borderRadius: 10}}
             >
-                <Card className="bg-transparent border-0 shadow-none p-0 relative">
+                <Card className="relative p-0 bg-transparent border-0 shadow-none">
                     <CardContent className="px-4 py-3">
                         {/* Header Section */}
                         <View className="flex flex-row items-start justify-between mb-1">
@@ -57,7 +55,7 @@ export function SRCUpdateCard({
                                         <AvatarImage source={{ uri: avatarUrl }} />
                                     ) : (
                                         <AvatarFallback className="bg-white">
-                                            <Text className="text-purple-600 font-semibold text-sm">SRC</Text>
+                                            <Text className="text-sm font-semibold text-purple-600">SRC</Text>
                                         </AvatarFallback>
                                     )}
                                 </Avatar>
@@ -75,20 +73,20 @@ export function SRCUpdateCard({
 
                             {/* Icon */}
                             {iconUrl && (
-                                <View className="bg-white/20 rounded-full p-2">
+                                <View className="p-2 rounded-full bg-white/20">
                                     <View className="size-6" />
                                 </View>
                             )}
                         </View>
 
                         {/* Description */}
-                        <View className="mb-3 px-8">
-                            <Text className="text-white text-sm leading-relaxed">
+                        <View className="px-8 mb-3">
+                            <Text className="text-sm leading-relaxed text-white">
                                 {description}
                             </Text>
                             {readMoreLink && (
                                 <TouchableOpacity onPress={onReadMore} className="mt-1">
-                                    <Text className="text-white font-semibold text-sm">
+                                    <Text className="text-sm font-semibold text-white">
                                         {readMoreLink}
                                     </Text>
                                 </TouchableOpacity>
@@ -134,7 +132,7 @@ export function SRCUpdateCard({
                     </CardContent>
 
                 </Card>
-                {/*<View  className='bg-red-400 h-10 absolute'>*/}
+                {/*<View  className='absolute h-10 bg-red-400'>*/}
                 {/*    <Image*/}
                 {/*        style={styles.image}*/}
                 {/*        className="w-full"*/}
@@ -156,7 +154,7 @@ export function SRCUpdateCard({
 // Example Usage Component
 export default function NotificationExample() {
     return (
-        <View className="flex-1 bg-gray-100 p-4 justify-center">
+        <View className="justify-center flex-1 p-4 bg-gray-100">
             <SRCUpdateCard
                 title="SRC Update – WiFi Expansion"
                 timestamp="2h ago"
@@ -170,11 +168,3 @@ export default function NotificationExample() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    image: {
-        flex: 1,
-        width: '100%',
-        backgroundColor: '#0553',
-    },
-});
