@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from "@/features/marketplace/product-card";
 import CategoryCard from "@/features/marketplace/category-card";
 import {ALL_CATEGORIES, MOCK_ITEMS, ProductCardInterface} from "@/features/marketplace/index";
+import ProductSearchBar from "@/features/marketplace/product-search-bar";
 
 // This component contains ALL the content that appears ABOVE the product list
 const MarketplaceListHeader = () => {
@@ -14,17 +15,7 @@ const MarketplaceListHeader = () => {
     return (
         // This View replaces the original root View and provides spacing
         <View className="flex-col gap-8">
-            {/* Search Bar */}
-            <TouchableOpacity
-                className="flex-row items-center bg-[#F5F5F5] px-4 py-4 rounded-xl space-x-4"
-            >
-                <Ionicons name="search-outline" size={20} color="#999" />
-                <Text className="flex-1 text-gray-500 text-base">
-                    Search Product
-                </Text>
-                <Ionicons name="options-outline" size={20} color="#999" />
-            </TouchableOpacity>
-
+           <ProductSearchBar/>
             {/* Banner */}
             <View className="relative">
                 <LinearGradient
@@ -125,7 +116,7 @@ export default function FeaturedList() {
             ListHeaderComponent={MarketplaceListHeader}
 
             // List data and props remain the same
-            data={MOCK_ITEMS.slice(0, 5)}
+            data={MOCK_ITEMS.slice(0, 3)}
             renderItem={renderProduct}
             keyExtractor={(item) => item.id}
             horizontal={false}

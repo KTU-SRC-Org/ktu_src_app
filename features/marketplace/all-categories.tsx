@@ -9,7 +9,7 @@ export default function AllCategories() {
 
   const renderCategory = ({ item }: { item: CategoryInterface }) => (
     <TouchableOpacity
-      className="flex-row items-center bg-gray-100 p-4 rounded-xl mb-3"
+      className="flex-row items-center bg-gray-100 p-4 rounded-xl my-2"
       onPress={() =>
         router.push({
           pathname: "/marketplace/category/[id]",
@@ -38,7 +38,7 @@ export default function AllCategories() {
         data={ALL_CATEGORIES}
         renderItem={renderCategory}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 20 }}
+        contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
         showsVerticalScrollIndicator={false}
       />
     </View>

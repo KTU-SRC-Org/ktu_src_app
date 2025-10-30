@@ -1,23 +1,25 @@
-import {Text, TouchableOpacity, View} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import { Text, View } from "react-native";
 import React from "react";
-import {useRouter} from "expo-router";
+import { BackButton } from "@/components/shared/back-button";
 
+const BackNavigationHeader = ({title, itemCount,}: {
+  title: string;
+  itemCount?: number;
+}) => {
+  return (
+    <View className="relative flex-row items-center justify-center bg-white py-4 px-6">
+      <View className="absolute left-2">
+        <BackButton />
+      </View>
 
-const BackNavigationHeader = ({title, itemCount}: {title: string, itemCount?: number}) => {
-  const router = useRouter();
-
-  return(
-    <View className="p-4 flex-row justify-between items-center">
-      <TouchableOpacity onPress={() => router.back()}>
-        <Ionicons name="arrow-back" size={24} color="#000" />
-      </TouchableOpacity>
-      <Text className="flex flex-row gap-2 items-center text-lg font-bold capitalize">
-        {title} {''}
-        {itemCount !== undefined && itemCount > 0 && <Text>{` [${itemCount}]`}</Text>}
+      <Text className="text-lg font-bold text-black capitalize text-center">
+        {title}
+        {itemCount !== undefined && itemCount > 0 && (
+          <Text className="text-black">{` [${itemCount}]`}</Text>
+        )}
       </Text>
-      <View className="w-6" />
     </View>
-  )
-}
+  );
+};
+
 export default BackNavigationHeader;

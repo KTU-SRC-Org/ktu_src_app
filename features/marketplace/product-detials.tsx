@@ -140,7 +140,7 @@ const ProductDetails = ({ id }: { id: string }) => {
         </View>
       </ScrollView>
 
-      <View className="absolute bottom-0 left-0 right-0 flex-row bg-white p-4">
+      <View className="absolute bottom-0 left-0 right-0 flex-row px-4">
         <TouchableOpacity className="flex-1 flex-row items-center justify-center rounded-xl bg-gray-800 py-4">
           <Ionicons name="call-outline" size={20} color="#fff" />
           <Text className="ml-2 text-base font-semibold text-white">Contact Seller</Text>
