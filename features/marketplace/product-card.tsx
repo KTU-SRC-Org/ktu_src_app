@@ -11,9 +11,10 @@ interface ProductCardProps {
   price: number;
   image: ImageSourcePropType;
   rating: number;
+  category?: string
 }
 
-const ProductCard = ({id, name, price, image, rating}: ProductCardProps) => {
+const ProductCard = ({id, name, price, image, rating, category}: ProductCardProps) => {
   const router = useRouter();
 
   return(
@@ -24,7 +25,7 @@ const ProductCard = ({id, name, price, image, rating}: ProductCardProps) => {
       onPress={() =>
         router.push({
           pathname: "/marketplace/product/[id]",
-          params: { id: id },
+          params: { id: id, category },
         })
       }
     >

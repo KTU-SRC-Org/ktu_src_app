@@ -4,12 +4,16 @@ import {StyleSheet} from "react-native";
 import ProductDetails from "@/features/marketplace/product-detials";
 
 const ProductDetailScreen = () => {
-  const { id } = useLocalSearchParams();
+  const { id , category } = useLocalSearchParams();
   const productId = Array.isArray(id) ? id[0] : id ?? "";
+  const categoryId = Array.isArray(category) ? category[0] : category ?? "";
 
   return(
     <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
-      <ProductDetails id={productId}/>
+      <ProductDetails
+        id={productId}
+        category={categoryId}
+      />
     </SafeAreaView>
   )
 }

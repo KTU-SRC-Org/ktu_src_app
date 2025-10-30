@@ -17,6 +17,9 @@ export interface ProductCardInterface {
     name: string;
     rating: number;
     sales: string;
+    whatsappNumber?: string;
+    phoneNumber?: string;
+    preferredContact?: 'whatsapp' | 'call';
   };
 }
 
@@ -44,7 +47,8 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "John's Store",
       rating: 4.8,
       sales: "1.2k",
-
+      whatsappNumber: "233559286073",
+      preferredContact: "whatsapp"
     },
   },
   {
@@ -69,6 +73,8 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "Tech World",
       rating: 4.7,
       sales: "980",
+      phoneNumber: "233559286073",
+      preferredContact: "call"
     },
   },
   {
@@ -91,6 +97,9 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "AudioHub",
       rating: 4.5,
       sales: "2.3k",
+      phoneNumber: "233559286073",
+      whatsappNumber: "233559286073",
+      preferredContact: "whatsapp"
     },
   },
   {
@@ -114,6 +123,8 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "UrbanWear",
       rating: 4.3,
       sales: "620",
+      whatsappNumber: "233559286073",
+      preferredContact: "call"
     },
   },
   {
@@ -136,6 +147,8 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "HomeTech",
       rating: 4.9,
       sales: "3.1k",
+      phoneNumber: "233559286073",
+      preferredContact: "call"
     },
   },
   {
@@ -158,6 +171,9 @@ export const MOCK_ITEMS: ProductCardInterface[] = [
       name: "Nature’s Basket",
       rating: 4.6,
       sales: "540",
+      phoneNumber: "233559286073",
+      whatsappNumber: "233559286073",
+      preferredContact: "whatsapp"
     },
   },
 ];

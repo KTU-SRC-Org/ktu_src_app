@@ -55,6 +55,7 @@ const CategoryItems = ({id}: { id: string }) => {
         price={item.price}
         image={item.images[0]}
         rating={item.rating}
+        category={id}
       />
     </View>
   );

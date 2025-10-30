@@ -3,15 +3,11 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Modal,
-  ScrollView,
-  Dimensions,
-  StyleSheet,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import NewProductForms from "@/features/marketplace/new-product-forms";
+import FormModal from "@/components/builders/form.modal";
 
-const { height } = Dimensions.get("window");
 
 const MarketplaceHeader = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,45 +30,14 @@ const MarketplaceHeader = () => {
           <Ionicons name="add" size={30} color="#fff" />
         </TouchableOpacity>
       </View>
-
-      <Modal
-        animationType="slide"
-        transparent
+      <FormModal
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        onClose={() => setModalVisible(false)}
+        fullScreen
       >
-        <TouchableOpacity
-          style={styles.overlay}
-          activeOpacity={1}
-          onPressOut={() => setModalVisible(false)}
-        >
-          <View style={styles.bottomSheet}>
-            <ScrollView
-              showsVerticalScrollIndicator
-              contentContainerStyle={{ padding: 16 }}
-            >
-              <NewProductForms/>
-            </ScrollView>
-          </View>
-        </TouchableOpacity>
-      </Modal>
+        <NewProductForms />
+      </FormModal>
     </>
   );
 };
-
 export default MarketplaceHeader;
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
-    justifyContent: "flex-end",
-  },
-  bottomSheet: {
-    height: height * 0.7,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    overflow: "hidden",
-  },
-});
