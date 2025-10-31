@@ -14,7 +14,7 @@ const EnterMarketSection = () => {
         />
 
         <View className="absolute rounded-full right-4 top-2">
-          <Link className="" href={'/market-place-screen'}>
+          <Link className="" href={'/marketplace-screen'}>
             <View className="flex flex-row items-center justify-center p-2 px-3 rounded-full bg-gray-500/20">
               <Text className="text-[15px] text-white">Enter</Text>
               <ArrowRight size={17} color={'white'} />

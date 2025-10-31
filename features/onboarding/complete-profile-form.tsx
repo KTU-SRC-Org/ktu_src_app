@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
 import { useForm } from 'react-hook-form';
-import { FormField } from '@/components/builders/form-field';
 import { AuthButton } from '@/components/shared/auth-button';
 import {CompleteProfileFormType, CompleteProfileSchema} from '@/lib/schemas/onboarding';
 import {zodResolver} from "@hookform/resolvers/zod";
+import {TextInputField} from "@/components/builders/text-input-field";
+import {SelectInputField} from "@/components/builders/select-input-field";
 
 interface CompleteProfileFormProps {
   onSubmitPress: (data: CompleteProfileFormType) => void;
@@ -77,7 +78,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
         </View>
 
         <View style={styles.formContainer}>
-          <FormField
+          <TextInputField
             control={control}
             name="fullName"
             label="Full Name"
@@ -85,7 +86,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
             type="text"
           />
 
-          <FormField
+          <TextInputField
             control={control}
             name="indexNumber"
             label="Index Number"
@@ -93,7 +94,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
             type="text"
           />
 
-          <FormField
+          <TextInputField
             control={control}
             name="phoneNumber"
             label="Phone Number"
@@ -101,21 +102,19 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
             type="phone"
           />
 
-          <FormField
+          <SelectInputField
             control={control}
             name="program"
             label="Program of Study"
             placeholder="Select your program"
-            type="select"
             options={programOptions}
           />
 
-          <FormField
+          <SelectInputField
             control={control}
             name="level"
             label="Level"
             placeholder="Select your level"
-            type="select"
             options={levelOptions}
           />
         </View>
