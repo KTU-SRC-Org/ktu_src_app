@@ -1,24 +1,33 @@
 #  KTU SRC App
 
-> A brief, one-sentence description of what the project does. (e.g., "The official mobile and web platform for the KTU Students' Representative Council.")
+>  The official mobile platform for the Koforidua KTU Students' Representative Council.")
 
 ---
 
 ## 📖 Table of Contents
 
-* [🚀 Getting Started](#-getting-started)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-    * [Running the Project](#running-the-project)
-* [💻 Tech Stack](#-tech-stack)
-* [📁 Project Structure](#-project-structure)
-* [🛠️ Building Features (Contribution Guidelines)](#️-building-features-contribution-guidelines)
-    * [Feature Branch Workflow](#feature-branch-workflow)
-    * [Coding Standards (Dos & Don'ts)](#coding-standards-dos--donts)
-    * [Dependency Management](#dependency-management)
-* [🧪 Testing](#-testing)
-* [🚀 Deployment](#-deployment)
-* [⚖️ License](#️-license)
+- [KTU SRC App](#ktu-src-app)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🚀 Getting Started](#-getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Running the Project](#running-the-project)
+        - [On MacOs (for IOS simulator)](#on-macos-for-ios-simulator)
+        - [On Windows (for Android emulator)](#on-windows-for-android-emulator)
+        - [Instructions on how to start the local development server.](#instructions-on-how-to-start-the-local-development-server)
+        - [To start the app](#to-start-the-app)
+  - [💻 Tech Stack](#-tech-stack)
+  - [📁 Project Structure](#-project-structure)
+    - [Folder Explanations](#folder-explanations)
+  - [🛠️ Building Features (Contribution Guidelines)](#️-building-features-contribution-guidelines)
+    - [Feature Branch Workflow](#feature-branch-workflow)
+    - [Coding Standards (Dos \& Don'ts)](#coding-standards-dos--donts)
+      - [✅ **DO**](#-do)
+      - [❌ **DON'T**](#-dont)
+    - [Dependency Management (Libraries)](#dependency-management-libraries)
+  - [🧪 Testing](#-testing)
+  - [🚀 Deployment](#-deployment)
+  - [⚖️ License](#️-license)
 
 ---
 
@@ -31,10 +40,10 @@ This section will guide you through setting up the project on your local machine
 List all the software and tools developers need to have installed *before* they can run your project.
 
 * **Node.js:** `v18.x` or higher (Download [here](https://nodejs.org/))
-* **npm** / **yarn** / **pnpm:** `npm@9.x` or `yarn@1.22.x`
+* **npm** / **pnpm:**  `npm@10.x` or `pnpm@9.15.x` (FYI: We use pnpm for installations)
 * **Git:** (Download [here](https://git-scm.com/))
-* **A Code Editor:** [VS Code](https://code.visualstudio.com/) (Recommended)
-* **Database:** (e.g., PostgreSQL `v14` or MongoDB Atlas account)
+* **A Code Editor:** [VS Code](https://code.visualstudio.com/) (Recommended) or Cursor or Webstorm
+* **Database:** You may need to set up Supabase instance locally or use a remote supabase account for development.
 
 ### Installation
 
@@ -48,11 +57,7 @@ Provide step-by-step instructions on how to get the development environment runn
 2.  **Install dependencies:**
     (Choose the command for your project's package manager)
     ```bash
-    npm install
-    ```
-    *or*
-    ```bash
-    yarn install
+    pnpm install
     ```
 3.  **Set up environment variables:**
     Create a `.env` file in the root of the project by copying the example file.
@@ -63,18 +68,38 @@ Provide step-by-step instructions on how to get the development environment runn
 
 4.  **Run database migrations (if applicable):**
     ```bash
-    npm run db:migrate
+    pnpm run db:migrate
     ```
 
 ### Running the Project
 
-Instructions on how to start the local development server.
+`Currently we are using Expo go for development but might more to a development build in the future.`
+
+##### On MacOs (for IOS simulator)
+`Check out the Expo docs :` [IOS Expo dev](https://docs.expo.dev/get-started/set-up-your-environment/?platform=ios&device=simulated)
+
+##### On Windows (for Android emulator)
+`Check out the Expo docs :` [Android Expo dev](https://docs.expo.dev/get-started/set-up-your-environment/?platform=android&device=simulated)
+
+##### Instructions on how to start the local development server.
 
 ```bash
-npm run dev
-````
+npx expo start -c
+```
 
-The application should now be running on [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000).
+*or*
+
+```bash
+pnpm start
+```
+
+The application should now be running on [exp://172.20.10.2:8081](https://www.google.com/search?q=exp://172.20.10.2:8081).
+
+##### To start the app
+`Press a to run on android emulator or device`
+`Press i to run on ios simulator or device`
+
+Please refer to the Expo documentation for further instructions on running the app on your device or simulator.
 
 -----
 
@@ -82,11 +107,22 @@ The application should now be running on [http://localhost:3000](https://www.goo
 
 A high-level list of the main technologies used in the project. This helps new developers understand the ecosystem at a glance.
 
-* **Frontend:** React, Next.js, Tailwind CSS, TypeScript
-* **Backend:** Node.js, Express.js, Prisma
-* **Database:** PostgreSQL
+* **Frontend:** React, React Native, Tailwind CSS, NativeWind, TypeScript
+* **State Management:** Zustand
+* Core Libraries:
+    * **Data Fetching & Caching:** React Query
+    * **Form Handling:** React Hook Form
+    * **Navigation:** Expo router
+    * **Authentication:** Supabase Auth
+* Libraries to note:
+    * **Date Manipulation:** date-fns
+    * **Icons:** React Native Vector Icons
+    * **React Native reusable components:** UI components built on top of shadcn/ui
+    * **React Native reanimated:** For animations
+* **Backend:** Supabase
+* **Database:** PostgreSQL (Supabase)
 * **Testing:** Jest, React Testing Library
-* **Deployment:** Vercel (for frontend), Heroku (for backend)
+* **Deployment:** Expo EAS
 
 -----
 
