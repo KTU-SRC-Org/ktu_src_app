@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import type { Key } from 'react';
+import { View, Text, Pressable, Image } from 'react-native';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import { X } from 'lucide-react-native';
@@ -20,7 +20,7 @@ export function ImageField<T extends FieldValues>({
 }: ImageFieldProps<T>) {
   const pickImage = async (onChange: (v: any) => void, existing: string[]) => {
     const res = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ['images'],
       allowsMultipleSelection: true,
       quality: 0.7,
     });
@@ -30,7 +30,7 @@ export function ImageField<T extends FieldValues>({
     }
   };
 
-  const removeImage = (i: React.Key | null | undefined, onChange: (v: any) => void, v: string[]) =>
+  const removeImage = (i: Key | null | undefined, onChange: (v: any) => void, v: string[]) =>
     onChange(v.filter((_, idx) => idx !== i));
 
   return (
@@ -41,27 +41,27 @@ export function ImageField<T extends FieldValues>({
         <View className="w-full">
           <Label className="mb-1 font-semibold text-gray-900">{label}</Label>
 
-          <TouchableOpacity
+          <Pressable
             onPress={() => pickImage(onChange, value || [])}
             disabled={disabled}
-            className="flex items-center justify-center rounded-lg border border-dashed border-gray-400 p-4">
+            className="flex items-center justify-center p-4 border border-gray-400 border-dashed rounded-lg">
             <Text className="text-gray-600">
               {Array.isArray(value) && value.length > 0
                 ? 'Add more images'
                 : 'Tap to upload image(s)'}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
           {Array.isArray(value) && value.length > 0 && (
-            <View className="mt-3 flex-row flex-wrap gap-3">
-              {value.map((uri: any, index: React.Key | null | undefined) => (
+            <View className="flex-row flex-wrap gap-3 mt-3">
+              {value.map((uri: string, index: Key | null | undefined) => (
                 <View key={index} className="relative">
-                  <Image source={{ uri }} className="h-20 w-20 rounded-md" />
-                  <TouchableOpacity
+                  <Image source={{ uri }} className="w-20 h-20 rounded-md" />
+                  <Pressable
                     onPress={() => removeImage(index, onChange, value)}
-                    className="absolute -right-2 -top-2 rounded-full bg-red-500 p-1">
+                    className="absolute p-1 bg-red-500 rounded-full -right-2 -top-2">
                     <X size={14} color="white" />
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
               ))}
             </View>

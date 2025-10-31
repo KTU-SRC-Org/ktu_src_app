@@ -4,7 +4,7 @@ import {useState} from "react";
 import { Input } from '@/components/ui/input';
 import {Label} from "@/components/ui/label";
 import { Checkbox } from '@/components/ui/checkbox';
-import * as Haptics from 'expo-haptics';
+import {impactAsync, ImpactFeedbackStyle} from 'expo-haptics';
 
 
 import { useForm, Controller } from "react-hook-form"
@@ -39,7 +39,7 @@ export default function SignUpForm() {
 
 
     function onCheckedChange(checked: boolean) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        impactAsync(ImpactFeedbackStyle.Light);
         setChecked(checked);
     }
 
@@ -134,7 +134,7 @@ export default function SignUpForm() {
                         htmlFor="terms-checkbox"
                         onPress={Platform.select({
                             native: () => {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                impactAsync(ImpactFeedbackStyle.Light);
                                 setChecked((prev) => !prev);
                             },
                         })}>
@@ -147,7 +147,7 @@ export default function SignUpForm() {
                     onPress={handleSubmit(onSubmit)}
                     loading={isSubmitting}
                     disabled={(!isValid || isSubmitting) || !checked}
-                    className='rounded-sm p-0 py-2'
+                    className='p-0 py-2 rounded-sm'
                 />
             </View>
 

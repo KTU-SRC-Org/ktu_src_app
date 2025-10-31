@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,9 +14,9 @@ const MarketplaceHeader = () => {
 
   return (
     <>
-      <View className="flex-row justify-between items-center p-4">
+      <View className="flex-row items-center justify-between p-4">
         <Text className="text-2xl font-bold">Marketplace</Text>
-        <TouchableOpacity
+        <Pressable
           className="bg-[#FF8C42] w-10 h-10 rounded-full justify-center items-center shadow-lg"
           style={{
             elevation: 5,
@@ -28,7 +28,7 @@ const MarketplaceHeader = () => {
           onPress={() => setModalVisible(true)}
         >
           <Ionicons name="add" size={30} color="#fff" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <FormModal
         visible={modalVisible}

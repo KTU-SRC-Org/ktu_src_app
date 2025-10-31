@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import {useRef} from "react";
 import {View, ScrollView, Text, KeyboardAvoidingView, Platform, TextInput} from "react-native";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,7 +55,7 @@ const NewProductForm = () => {
           showsVerticalScrollIndicator={false}
         >
           <View className="mb-4">
-            <Text className="text-2xl font-bold mb-1 text-gray-900">
+            <Text className="mb-1 text-2xl font-bold text-gray-900">
               Create New Product
             </Text>
             <Text className="text-sm text-gray-500">
@@ -63,7 +63,7 @@ const NewProductForm = () => {
             </Text>
           </View>
 
-          <View className="w-full flex flex-col gap-4">
+          <View className="flex flex-col w-full gap-4">
             <TextInputField
               control={control}
               name="name"
@@ -128,7 +128,7 @@ const NewProductForm = () => {
               title="Create Product"
               onPress={handleSubmit(onSubmit)}
               disabled={!isValid}
-              className="rounded-md py-3"
+              className="py-3 rounded-md"
             />
           </View>
         </ScrollView>
