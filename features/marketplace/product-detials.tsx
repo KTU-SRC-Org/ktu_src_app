@@ -21,7 +21,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  console.log("category?",category); //Query from category
+  console.log("category from product details : ?",category); //Query from category
   //Dummy fetch data sample
   const product = MOCK_ITEMS.find((item) => item.id === id);
 
@@ -83,7 +83,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
   if (!product) {
     return (
-      <View className="flex-1 justify-center items-center">
+      <View className="items-center justify-center flex-1">
         <Text className="text-gray-500">Product not found.</Text>
       </View>
     );
@@ -92,14 +92,14 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
   return (
     <>
       <View className="flex-1 bg-white">
-        <View className="absolute left-0 right-0 top-0 z-10 flex-row justify-between p-4 pb-2">
+        <View className="absolute top-0 left-0 right-0 z-10 flex-row justify-between p-4 pb-2">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
+            className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
             <Ionicons name="arrow-back" size={24} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
+          <TouchableOpacity className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
             <Ionicons name="share-social-outline" size={24} color="#000" />
           </TouchableOpacity>
         </View>
@@ -118,7 +118,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
             }}>
             <ProductImageCarousel images={product.images} />
             <TouchableOpacity
-              className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"
+              className="absolute items-center justify-center w-12 h-12 bg-white rounded-full shadow-md bottom-5 right-5"
               style={{
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
@@ -132,7 +132,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
           <View className="px-4 pt-4">
             <Text className="mb-2 text-3xl font-bold text-[#FF8C42]">₵{product.price}</Text>
-            <Text className="mb-3 text-lg font-semibold text-gray-800 flex-row">
+            <Text className="flex-row mb-3 text-lg font-semibold text-gray-800">
               {product.name}{' '}
               <Text
                 className={`text-xs font-semibold ${
@@ -150,8 +150,8 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
                     : '- [ In stock ]'}
               </Text>
             </Text>
-            <View className="mb-4 flex-row items-center">
-              <View className="mr-2 flex-row">
+            <View className="flex-row items-center mb-4">
+              <View className="flex-row mr-2">
                 {[1, 2, 3, 4, 5].map((star, index) => (
                   <Ionicons
                     key={index}
@@ -176,7 +176,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
                   {product.sizes.map((size) => (
                     <View
                       key={size}
-                      className="px-4 py-2 rounded-full border border-gray-300 bg-gray-50"
+                      className="px-4 py-2 border border-gray-300 rounded-full bg-gray-50"
                     >
                       <Text className="text-sm font-medium text-gray-700">{size}</Text>
                     </View>
@@ -193,8 +193,8 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
             </View>
 
             {product.seller && (
-              <TouchableOpacity className="mb-8 flex-row items-center rounded-xl bg-gray-100 p-4">
-                <View className="mr-3 h-12 w-12 items-center justify-center rounded-full bg-gray-200">
+              <TouchableOpacity className="flex-row items-center p-4 mb-8 bg-gray-100 rounded-xl">
+                <View className="items-center justify-center w-12 h-12 mr-3 bg-gray-200 rounded-full">
                   <Ionicons name="person" size={24} color="#666" />
                 </View>
                 <View className="flex-1">
@@ -212,7 +212,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
         <View className="absolute bottom-0 left-0 right-0 flex-row px-4 pt-4 pb-2">
           <TouchableOpacity
-            className="flex-1 flex-row items-center justify-center rounded-xl bg-gray-800 py-4"
+            className="flex-row items-center justify-center flex-1 py-4 bg-gray-800 rounded-xl"
             onPress={handleContactPress}
           >
             <Ionicons name="call-outline" size={20} color="#fff" />
@@ -228,19 +228,19 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
         animationType="slide"
         onRequestClose={() => setShowModal(false)}
       >
-        <View className="flex-1 justify-end bg-black/40">
-          <View className="bg-white rounded-t-2xl p-6">
-            <Text className="text-lg font-semibold mb-4 text-center">
+        <View className="justify-end flex-1 bg-black/40">
+          <View className="p-6 bg-white rounded-t-2xl">
+            <Text className="mb-4 text-lg font-semibold text-center">
               Contact Seller
             </Text>
 
             {whatsappNumber && (
               <TouchableOpacity
-                className="flex-row items-center justify-center py-3 bg-green-600 rounded-xl mb-3"
+                className="flex-row items-center justify-center py-3 mb-3 bg-green-600 rounded-xl"
                 onPress={handleChatOnWhatsApp}
               >
                 <Ionicons name="logo-whatsapp" size={22} color="#fff" />
-                <Text className="ml-2 text-white font-semibold text-base">
+                <Text className="ml-2 text-base font-semibold text-white">
                   WhatsApp
                 </Text>
               </TouchableOpacity>
@@ -248,21 +248,21 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
             {phoneNumber && (
               <TouchableOpacity
-                className="flex-row items-center justify-center py-3 bg-blue-600 rounded-xl mb-3"
+                className="flex-row items-center justify-center py-3 mb-3 bg-blue-600 rounded-xl"
                 onPress={handlePhoneCall}
               >
                 <Ionicons name="call" size={22} color="#fff" />
-                <Text className="ml-2 text-white font-semibold text-base">
+                <Text className="ml-2 text-base font-semibold text-white">
                   Voice Call
                 </Text>
               </TouchableOpacity>
             )}
 
             <TouchableOpacity
-              className="mt-3 items-center"
+              className="items-center mt-3"
               onPress={() => setShowModal(false)}
             >
-              <Text className="text-gray-500 font-medium">Cancel</Text>
+              <Text className="font-medium text-gray-500">Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
