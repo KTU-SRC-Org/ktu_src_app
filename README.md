@@ -119,6 +119,8 @@ A high-level list of the main technologies used in the project. This helps new d
     * **Icons:** React Native Vector Icons
     * **React Native reusable components:** UI components built on top of shadcn/ui
     * **React Native reanimated:** For animations
+    * **Localization:** i18next
+    * **React Native Worklets:** For new threads (In terms of performance)
 * **Backend:** Supabase
 * **Database:** PostgreSQL (Supabase)
 * **Testing:** Jest, React Testing Library
@@ -134,14 +136,20 @@ Here is the high-level structure of the repository, followed by an explanation o
 ktu-src-app/
 ├── .github/        # GitHub Actions, PR templates
 ├── .vscode/        # Recommended VS Code settings and extensions
-├── public/         # Static assets (images, fonts, favicons)
-├── src/            # Main application source code
-│   ├── app/        # (e.g., Next.js 13+ app router) or pages/
-│   ├── components/ # Shared, reusable UI components (buttons, modals)
-│   ├── lib/        # Helper functions, utility scripts, API clients
-│   ├── store/      # State management (Zustand, Redux, Context)
-│   ├── styles/     # Global stylesheets
-│   └── types/      # Shared TypeScript type definitions
+├── assets/         # Static assets (images, fonts, favicons)
+├── app/         # layouts and screens for app routes
+├── components/  # Shared, reusable UI components (buttons, modals)
+├── constants/        # dummy data and constant values
+├── core/        # Third-party setups eg: Localization setup
+├── features/        # Feature-specific modules (auth, profile, dashboard)
+├── hooks/        # Custom React hooks
+├── lib/        # Helper functions, utility scripts, API clients
+├── store/      # State management (Zustand, Redux, Context)
+├── translation/        # i18n translation files
+├── utils/      # General utility functions
+├── styles/     # Global stylesheets
+├── types/      # Shared TypeScript type definitions
+├── app.json        # Expo configuration for app
 ├── .env.example    # Example environment variables
 ├── .eslintrc.json  # ESLint configuration
 ├── .gitignore      # Files to be ignored by Git
@@ -152,14 +160,19 @@ ktu-src-app/
 
 ### Folder Explanations
 
-* **`src/app`**: Contains all the routes and pages for the application. Each folder inside represents a URL segment.
-* **`src/components`**: Home for all reusable UI components.
+* **`app`**: Contains all the routes/layouts and screens for the application. Each folder inside represents a URL segment.
+* **`components`**: Home for all reusable UI components.
+    * **`/builders`**: Custom components that extend other UI components in the ui folder or third-party.
     * **`/ui`**: Small, "dumb" components (e.g., `Button.tsx`, `Input.tsx`).
     * **`/common`**: Larger components made of smaller ones (e.g., `Navbar.tsx`, `Footer.tsx`).
-    * **`/features`**: Components specific to a certain feature (e.g., `src/components/features/events/EventCard.tsx`).
-* **`src/lib`**: Utility functions, custom hooks, and API client configurations. (e.g., `utils.ts`, `useAuth.ts`).
-* **`src/store`**: Global state management. Each "slice" of the store should be in its own file (e.g., `userStore.ts`).
-* **`public`**: All static assets. Files here are served from the root (e.g., `/logo.png`).
+    * **`/shared`**: Components shared across multiple features but not globally (e.g., `UserCard.tsx`).
+    * **`/cards`**: Components specifically designed as cards (e.g., `ProductCard.tsx`).
+* **`features`**: A component that put together multiple components with logic
+* **`lib`**: Utility functions, and API client configurations. (e.g., `utils.ts`, `useAuth.ts`).
+* **`hooks`**: Custom React hooks for shared logic (e.g., `useFetchData.ts`).
+* **`/store`**: Global state management. Each "slice" of the store should be in its own file (e.g., `userStore.ts`).
+* **`utils`**: General utility functions that don't fit elsewhere (e.g., `dateFormatter.ts`).
+* **`assets`**: All static assets. Files here are served from the root (e.g., `/logo.png`).
 
 -----
 
@@ -172,7 +185,7 @@ This section outlines the patterns and rules all developers must follow when bui
 We use a Git workflow based on feature branches.
 
 1.  **Pull the latest changes:**
-    Make sure your `main` (or `develop`) branch is up-to-date.
+    Make sure your `main` (or `dev`) branch is up-to-date.
 
     ```bash
     git checkout main
@@ -182,9 +195,9 @@ We use a Git workflow based on feature branches.
 2.  **Create a new branch:**
     Branch names must follow this pattern:
 
-    * **Feature:** `feat/feature-name` (e.g., `feat/user-profile-page`)
-    * **Bugfix:** `fix/bug-description` (e.g., `fix/login-button-crash`)
-    * **Chore/Docs:** `chore/task-name` (e.g., `chore/update-readme`)
+    * **Feature:** `feat/feature-name` or `feat:(🛠️)-feature-name` (e.g., `feat/user-profile-page`)
+    * **Bugfix:** `fix/bug-description` or `fix:(👾)-bug-description` (e.g., `fix/login-button-crash`)
+    * **Chore/Docs:** `chore/task-name` or `chore:(🫩)-update-readme` (e.g., `chore/update-readme`)
 
     <!-- end list -->
 
@@ -217,14 +230,15 @@ To maintain code quality and consistency, please follow these rules.
 
 #### ✅ **DO**
 
-* **Follow the Linter:** Run `npm run lint` before committing. All code must be free of linting errors.
-* **Write in TypeScript:** All new code should be written in TypeScript (`.tsx` or `.ts`).
+* **Follow the Linter:** Run `pnpm run lint` before committing. All code must be free of linting errors.
+* **Write in TypeScript:** All new code should be written in TypeScript (`.tsx` or `.ts`) with the appropriate types if present.
 * **Use Naming Conventions:**
-    * **Components:** `PascalCase` (e.g., `UserProfile.tsx`)
+    * **Screens:** `Snake Case` (e.g., `marketplace-screen.tsx`) (do try as much as possible to use a single word if possible and addition of the word `screen` is optional)
+    * **Components:** `PascalCase` (e.g., `UserProfile.tsx`) (components in the `ui` folder can use snake case)
     * **Variables/Functions:** `camelCase` (e.g., `getUserData`)
     * **Types/Interfaces:** `PascalCase` (e.g., `IUserProfile` or `UserProfileType`)
 * **Comment Complex Logic:** If you write code that is not obvious, leave a comment explaining *why* it's done that way, not *what* it does.
-* **Write Tests:** All new features or bug fixes must be accompanied by unit or integration tests.
+* **Write Tests:** All new features or bug fixes must be accompanied by unit or integration tests. (No testing as of now )
 * **Use Environment Variables:** Never hard-code sensitive information (API keys, database strings) directly in the code. Use the `.env` file.
 
 #### ❌ **DON'T**
@@ -233,23 +247,28 @@ To maintain code quality and consistency, please follow these rules.
 * **Don't Leave `console.log`:** Remove all `console.log` statements before opening a PR.
 * **Don't Install Unnecessary Libraries:** (See next section).
 * **Don't Write "Magic Strings":** Store reusable strings (like error messages or route paths) in a constants file (e.g., `src/lib/constants.ts`).
-* **Don't Mix Default and Named Exports:** Each component file should use `export default YourComponent;`. Helper files (`lib`) should use named exports (`export const myFunc;`).
+* **Don't Mix Default and Named Exports:** Each component file should use `export default YourComponent;`. Helper files (`lib`) should use named exports (`export const myFunc;`). **NB:** Some components might need to use named export instead of default, it is understandable
+* **The * as imports:** Please avoid using `import * as Something from 'some-library'`. Instead, import only what you need: `import { SpecificThing } from 'some-library'`.
+* **Don't import React** in every file: With the new JSX Transform in React 17+, you no longer need to import React at the top of your files. Avoid unnecessary imports.
+* **Don't use inline styles:** Use Tailwind CSS classes or StyleSheet objects instead of inline styles for consistency and performance.
 
 ### Dependency Management (Libraries)
 
 This covers which libraries to install and which to avoid.
-
+* **First point of contact:** Expo's set of libraries should be your first location if you need to use a library [Expo Libraries](https://docs.expo.dev/versions/latest/sdk/expo/)
 * **To Install a Library:** Before adding a new dependency, **you must discuss it with the team lead**. We want to keep the project light and avoid duplicate packages.
-    * If approved, install it: `npm install package-name` (for runtime) or `npm install package-name -D` (for dev tools).
-* **Libraries to AVOID:**
+    * If approved, install it: `pnpm add package-name` (for runtime) or `pnpm add package-name -D` (for dev tools).
+* **Libraries to AVOID (eg) :**
     * **jQuery:** We use React for all DOM manipulation.
     * **Moment.js:** This is a large, legacy library. Use `date-fns` or `dayjs` for date manipulation.
     * **Lodash (full library):** If you need a utility, import it directly to avoid pulling in the entire library (e.g., `import get from 'lodash/get'`).
 
+    #### FYI: Avoid adding large libraries that significantly increase the bundle size unless absolutely necessary. 
+
 -----
 
 ## 🧪 Testing
-
+Below is just a placeholder , we dont test in the project yet
 This project uses **Jest** for unit testing.
 
 * **Run all tests:**
@@ -270,13 +289,10 @@ This project uses **Jest** for unit testing.
 
 ## 🚀 Deployment
 
-This section describes how the application is deployed to production.
-
-* **Frontend (Vercel):** The frontend is deployed automatically. Any push or merge to the `main` branch will trigger a new production deployment on Vercel.
-* **Backend (Heroku):** The backend requires a manual push or is connected to a `release` branch (TBD).
+To be updated later
 
 -----
 
 ## ⚖️ License
 
-This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
+This project is licensed under the [Private License](https://www.google.com/search?q=LICENSE).
