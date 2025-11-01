@@ -1,0 +1,74 @@
+export const dummyProperties = [
+  {
+    id : '1',
+    image:
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200",
+    rating: 4.8,
+    name: "Modern Family Villa",
+    address: "123 Palm Street, Los Angeles, CA",
+    price: 2450,
+  },
+  {
+    id: '2',
+    image:
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?q=80&w=1200",
+    rating: 4.5,
+    name: "Cozy Downtown Apartment",
+    address: "87 Riverwalk Ave, Chicago, IL",
+    price: 1800,
+  },
+  {
+    id: '3',
+    image:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200",
+    rating: 4.9,
+    name: "Luxury Seaside Villa",
+    address: "32 Ocean Drive, Miami Beach, FL",
+    price: 5200,
+  },
+  {
+    id: '4',
+    image:
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1200",
+    rating: 4.7,
+    name: "Mountain Retreat Cabin",
+    address: "455 Aspen Way, Denver, CO",
+    price: 3200,
+  },
+  {
+    id: '5',
+    image:
+      "https://images.unsplash.com/photo-1600585154207-76bbd1e2d8fc?q=80&w=1200",
+    rating: 4.4,
+    name: "Stylish Urban Loft",
+    address: "10 Greenpoint Ave, Brooklyn, NY",
+    price: 2100,
+  },
+  {
+    id: '6',
+    image:
+      "https://images.unsplash.com/photo-1599423300746-b62533397364?q=80&w=1200",
+    rating: 4.6,
+    name: "Suburban Family Home",
+    address: "240 Maple Lane, Austin, TX",
+    price: 2700,
+  },
+  {
+    id: '7',
+    image:
+      "https://images.unsplash.com/photo-1600585153944-7c1a46a1d66e?q=80&w=1200",
+    rating: 4.3,
+    name: "Modern Studio Apartment",
+    address: "500 Sunset Blvd, San Francisco, CA",
+    price: 1750,
+  },
+  {
+    id: '8',
+    image:
+      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?q=80&w=1200",
+    rating: 4.9,
+    name: "Beachfront Paradise",
+    address: "89 Sand Dune Rd, Malibu, CA",
+    price: 6100,
+  },
+];

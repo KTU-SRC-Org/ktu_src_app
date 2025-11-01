@@ -34,6 +34,14 @@ export default function TabLayout() {
         />
 
         <Tabs.Screen
+            name="hotels-showcase"
+            options={{
+                title: '',
+                tabBarIcon: ({ color }) => <Store  color={color} style={styles.tabBarIcon} size={28} />,
+            }}
+        />
+
+        <Tabs.Screen
             name="two"
             options={{
                 title: '',
