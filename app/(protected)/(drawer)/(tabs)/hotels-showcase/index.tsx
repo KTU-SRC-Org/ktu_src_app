@@ -118,6 +118,7 @@ const HostelsShowcase = () => {
         <DrawerToggleButton/>
       ),
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderItem = ({ item }: { item: Property }) => (
