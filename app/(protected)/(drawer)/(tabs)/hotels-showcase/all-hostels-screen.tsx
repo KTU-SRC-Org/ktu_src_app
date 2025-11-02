@@ -1,12 +1,22 @@
 // AllHostelsScreen.tsx
-import { router, useNavigation, useLocalSearchParams } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import { useLayoutEffect, useMemo, useState, useCallback, memo } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Platform, FlatList } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
+  FlatList,
+  Pressable
+} from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from '@/components/cards/hostels-showcase/Card';
 import { blurhash } from '@/contants';
 import Search from '@/components/shared/Search';
+import { useSearchSync } from '@/hooks/use-search-sync';
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
@@ -73,7 +83,7 @@ const Header = memo(function Header({
   toggleViewMode: () => void;
   query: string;
   setQuery: (t: string) => void;
-  submitQuery: () => void;
+  submitQuery?: () => void;
 }) {
   return (
     <>
@@ -86,32 +96,24 @@ const Header = memo(function Header({
           transition={1000}
         />
         <View style={styles.overlay} />
-        <View
-          className="absolute z-50 inset-x-7"
-          style={{ top: Platform.OS === "ios" ? 70 : 20 }}
-        >
+        <View className="absolute z-50 inset-x-7" style={{ top: Platform.OS === 'ios' ? 70 : 20 }}>
           <View className="flex flex-row items-center justify-between w-full">
-            <TouchableOpacity
+            <Pressable
               onPress={() => router.back()}
-              className="flex flex-row items-center justify-center bg-white rounded-full size-11"
-            >
+              className="flex flex-row items-center justify-center bg-white rounded-full size-11">
               <Ionicons name="chevron-back" size={24} color="#000" />
-            </TouchableOpacity>
+            </Pressable>
 
             <View className="flex flex-row items-center gap-3">
-              <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
+              <Pressable className="items-center justify-center bg-white rounded-full size-11">
                 <Ionicons name="share-outline" size={24} color="#191D31" />
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </View>
       </View>
 
-      <Search
-        value={query}
-        onChangeText={setQuery}
-        onSubmit={submitQuery}
-      />
+      <Search value={query} onChangeText={setQuery} onSubmit={submitQuery} />
 
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>All available hostels</Text>
@@ -129,19 +131,12 @@ const Header = memo(function Header({
 
 const AllHostelsScreen = () => {
   const navigation = useNavigation();
-  const params = useLocalSearchParams<{ query?: string }>();
 
-  // 1) Local state drives the input & filtering
-  const [query, setQuery] = useState(params.query ?? '');
-
-  // 2) Only push to URL when user submits (prevents remount on each keystroke)
-  const submitQuery = useCallback(() => {
-    router.setParams({ query: query || undefined}); // undefined removes the param when empty
-  }, [query]);
+  const { search, handleChange, debouncedSearch } = useSearchSync();
 
   const [viewMode, setViewMode] = useState<1 | 2>(2);
   const toggleViewMode = useCallback(() => {
-    setViewMode(v => (v === 2 ? 1 : 2));
+    setViewMode((v) => (v === 2 ? 1 : 2));
   }, []);
 
   useLayoutEffect(() => {
@@ -149,15 +144,17 @@ const AllHostelsScreen = () => {
   }, [navigation]);
 
   const filteredHostels = useMemo(() => {
-    if (!query) return dummyHostels;
-    const q = query.toLowerCase();
-    return dummyHostels.filter(h =>
-      h.name.toLowerCase().includes(q) || h.address.toLowerCase().includes(q)
+    if (!debouncedSearch) return dummyHostels;
+    const q = debouncedSearch.toLowerCase();
+    return dummyHostels.filter(
+      (h) => h.name.toLowerCase().includes(q) || h.address.toLowerCase().includes(q)
     );
-  }, [query]);
+  }, [debouncedSearch]);
 
   const renderItem = ({ item }: any) => (
-    <Card item={item} onPress={() => router.push(`/hostels/${item.id}`)} />
+    <View className={`${viewMode === 2 ? 'w-full flex-1' : 'w-full px-2'}`}>
+      <Card item={item} onPress={() => router.push(`/hostels/${item.id}`)} />
+    </View>
   );
 
   return (
@@ -168,19 +165,17 @@ const AllHostelsScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={viewMode}
-        // ✨ Use a stable element, not an inline function
         ListHeaderComponent={
           <Header
             viewMode={viewMode}
             toggleViewMode={toggleViewMode}
-            query={query}
-            setQuery={setQuery}
-            submitQuery={submitQuery}
+            query={search}
+            setQuery={handleChange}
           />
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
-        columnWrapperStyle={viewMode === 1 ? undefined : { gap: 5, paddingHorizontal: 10 }}
+        columnWrapperStyle={viewMode === 1 ? undefined : { gap: 10, paddingHorizontal: 10 }}
         keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
@@ -199,11 +194,25 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'white' },
   imageContainer: { height: IMG_HEIGHT, width, position: 'relative', backgroundColor: '#14B8A6' },
   image: { height: IMG_HEIGHT, width },
-  overlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.2)' },
-  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 16, backgroundColor: '#fff' },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: '#fff',
+  },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: '#000' },
   viewToggle: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
-  listContent: { paddingBottom: 100 },
+  listContent: { paddingBottom: 50 },
   emptyContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 60 },
   emptyText: { fontSize: 20, fontWeight: '600', color: '#6B7280', marginTop: 16 },
   emptySubtext: { fontSize: 14, color: '#9CA3AF', marginTop: 8 },

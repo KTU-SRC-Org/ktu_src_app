@@ -7,7 +7,7 @@ import { Search as SearchIcon } from "lucide-react-native";
 type Props = {
   value: string;
   onChangeText: (t: string) => void;
-  onSubmit: () => void; // when user finishes typing
+  onSubmit?: () => void; // when user finishes typing
 };
 
 const Search = memo(({ value, onChangeText, onSubmit }: Props) => {
