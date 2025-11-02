@@ -1,5 +1,5 @@
-import React, {useMemo, useState} from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import {useMemo, useState} from "react";
+import { View, Text, FlatList } from "react-native";
 import ProductCard from "@/features/marketplace/product-card";
 import {MOCK_ITEMS, ProductCardInterface} from "@/features/marketplace/index";
 import BackNavigationHeader from "@/features/marketplace/back-navigation-header";
@@ -9,7 +9,7 @@ const CategoryItems = ({id}: { id: string }) => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filters = ["All", "Popular", "New", "Price: Low", "Price: High"];
+  //const filters = ["All", "Popular", "New", "Price: Low", "Price: High"];
 
   const categoryItems = useMemo(
     () => MOCK_ITEMS.filter((item) => item.category === id),

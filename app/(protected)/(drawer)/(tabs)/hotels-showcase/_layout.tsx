@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
 
 const Layout = () => {
@@ -20,6 +19,5 @@ const Layout = () => {
     );
 }
 
-const styles = StyleSheet.create({})
 
 export default Layout;

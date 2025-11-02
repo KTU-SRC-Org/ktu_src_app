@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useNavigation, router } from 'expo-router';
+import { useNavigation, router } from 'expo-router';
 import { useLayoutEffect } from 'react';
 import {
   View,
@@ -50,8 +50,6 @@ const HostelsShowcase = () => {
   
   const latestPropertiesLoading = false;
   const loading = false;
-
-  const params = useLocalSearchParams<{ query?: string; filter?: string }>();
 
   const handleCardPress = (id: string) => router.push(`/hostels/1`);
 
