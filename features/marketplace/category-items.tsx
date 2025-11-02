@@ -101,7 +101,7 @@ const CategoryItems = ({id}: { id: string }) => {
           onChangeText={setSearchQuery}
         />}
         ListEmptyComponent={
-          <Text className="text-center text-gray-400 mt-10">
+          <Text className="mt-10 text-center text-gray-400">
             {searchQuery ? "No product found in this search"
               : "No product found in this category."
             }

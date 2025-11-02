@@ -123,7 +123,9 @@ const HostelsShowcase = () => {
   }, []);
 
   const renderItem = ({ item }: { item: Property }) => (
-    <Card item={item} onPress={() => handleCardPress(item.id)} />
+    <View style={styles.gridItem}>
+        <Card item={item} onPress={() => handleCardPress(item.id)} />
+    </View>
   );
 
   const renderListHeader = () => (
@@ -268,6 +270,10 @@ const styles = StyleSheet.create({
     height: 150,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: 'grey',
+  },
+    gridItem: {
+    flex: 1,
+    margin: 8,
   },
 });
 
