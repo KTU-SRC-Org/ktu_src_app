@@ -1,25 +1,16 @@
-import { router, useNavigation } from 'expo-router';
-import { useLayoutEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  Platform,
-  TextInput,
-  FlatList
-} from 'react-native';
+// AllHostelsScreen.tsx
+import { router, useNavigation, useLocalSearchParams } from 'expo-router';
+import { useLayoutEffect, useMemo, useState, useCallback, memo } from 'react';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Platform, FlatList } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { FlashList } from '@shopify/flash-list';
 import { Card } from '@/components/cards/hostels-showcase/Card';
 import { blurhash } from '@/contants';
+import Search from '@/components/shared/Search';
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
 
-// Dummy hostels data
 const dummyHostels = [
   {
     id: '1',
@@ -71,107 +62,102 @@ const dummyHostels = [
   },
 ];
 
-interface Property {
-  id: string;
-  image: string;
-  rating: number;
-  name: string;
-  address: string;
-  price: number;
-}
-
-const AllHostelsScreen = () => {
-  const navigation = useNavigation();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState<1 | 2>(2);
-
-  const handleCardPress = (id: string) => router.push(`/hostels/${id}`);
-
-  const filteredHostels = dummyHostels.filter((hostel) =>
-    hostel.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
-
-  const renderItem = ({ item }: { item: Property }) => (
-    <Card item={item} onPress={() => handleCardPress(item.id)} />
-  );
-
-  const renderListHeader = () => (
+const Header = memo(function Header({
+  viewMode,
+  toggleViewMode,
+  query,
+  setQuery,
+  submitQuery,
+}: {
+  viewMode: 1 | 2;
+  toggleViewMode: () => void;
+  query: string;
+  setQuery: (t: string) => void;
+  submitQuery: () => void;
+}) {
+  return (
     <>
-      {/* Hero Image with "Go Back" button */}
       <View style={styles.imageContainer}>
         <Image
           source={require('@/assets/images/hostels-showcase/House-For-Rent1.png')}
           style={styles.image}
           placeholder={{ blurhash }}
-        contentFit="cover"
-        transition={1000}
+          contentFit="cover"
+          transition={1000}
         />
-        
-        {/* Overlay gradient */}
         <View style={styles.overlay} />
-        
-        {/* Go Back Button */}
-          <View
-            className="absolute z-50 inset-x-7"
-            style={{
-              top: Platform.OS === "ios" ? 70 : 20,
-            }}
-          >
-            <View className="flex flex-row items-center justify-between w-full">
-              <TouchableOpacity
-                onPress={() => router.back()}
-                className="flex flex-row items-center justify-center bg-white rounded-full size-11"
-              >
-                <Ionicons name="chevron-back" size={24} color="#000" />
-              </TouchableOpacity>
+        <View
+          className="absolute z-50 inset-x-7"
+          style={{ top: Platform.OS === "ios" ? 70 : 20 }}
+        >
+          <View className="flex flex-row items-center justify-between w-full">
+            <TouchableOpacity
+              onPress={() => router.back()}
+              className="flex flex-row items-center justify-center bg-white rounded-full size-11"
+            >
+              <Ionicons name="chevron-back" size={24} color="#000" />
+            </TouchableOpacity>
 
-              <View className="flex flex-row items-center gap-3">
-                <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
-                  <Ionicons name="heart-outline" size={24} color="#191D31" />
-                </TouchableOpacity>
-                <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
-                  <Ionicons name="share-outline" size={24} color="#191D31" />
-                </TouchableOpacity>
-              </View>
+            <View className="flex flex-row items-center gap-3">
+              <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
+                <Ionicons name="share-outline" size={24} color="#191D31" />
+              </TouchableOpacity>
             </View>
           </View>
-      </View>
-
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <Ionicons name="search-outline" size={20} color="#9CA3AF" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search hostels..."
-            placeholderTextColor="#9CA3AF"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
         </View>
       </View>
 
-      {/* Section Header with View Toggle */}
+      <Search
+        value={query}
+        onChangeText={setQuery}
+        onSubmit={submitQuery}
+      />
+
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>All available hostels</Text>
-        <TouchableOpacity 
-          onPress={() => setViewMode(viewMode === 2 ? 1 : 2)}
-          style={styles.viewToggle}
-        >
-          <Ionicons 
-            name={viewMode === 2 ? 'grid-outline' : 'list-outline'} 
-            size={24} 
-            color="#000" 
+        <TouchableOpacity onPress={toggleViewMode} style={styles.viewToggle}>
+          <Ionicons
+            name={viewMode === 2 ? 'grid-outline' : 'list-outline'}
+            size={24}
+            color="#000"
           />
         </TouchableOpacity>
       </View>
     </>
+  );
+});
+
+const AllHostelsScreen = () => {
+  const navigation = useNavigation();
+  const params = useLocalSearchParams<{ query?: string }>();
+
+  // 1) Local state drives the input & filtering
+  const [query, setQuery] = useState(params.query ?? '');
+
+  // 2) Only push to URL when user submits (prevents remount on each keystroke)
+  const submitQuery = useCallback(() => {
+    router.setParams({ query: query || undefined}); // undefined removes the param when empty
+  }, [query]);
+
+  const [viewMode, setViewMode] = useState<1 | 2>(2);
+  const toggleViewMode = useCallback(() => {
+    setViewMode(v => (v === 2 ? 1 : 2));
+  }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
+  const filteredHostels = useMemo(() => {
+    if (!query) return dummyHostels;
+    const q = query.toLowerCase();
+    return dummyHostels.filter(h =>
+      h.name.toLowerCase().includes(q) || h.address.toLowerCase().includes(q)
+    );
+  }, [query]);
+
+  const renderItem = ({ item }: any) => (
+    <Card item={item} onPress={() => router.push(`/hostels/${item.id}`)} />
   );
 
   return (
@@ -182,10 +168,20 @@ const AllHostelsScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={viewMode}
-        ListHeaderComponent={renderListHeader}
+        // ✨ Use a stable element, not an inline function
+        ListHeaderComponent={
+          <Header
+            viewMode={viewMode}
+            toggleViewMode={toggleViewMode}
+            query={query}
+            setQuery={setQuery}
+            submitQuery={submitQuery}
+          />
+        }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
-        columnWrapperStyle={viewMode === 1 ? undefined : {gap: 5 , paddingHorizontal: 10}}
+        columnWrapperStyle={viewMode === 1 ? undefined : { gap: 5, paddingHorizontal: 10 }}
+        keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <Ionicons name="search-outline" size={64} color="#D1D5DB" />
@@ -199,117 +195,18 @@ const AllHostelsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  imageContainer: {
-    height: IMG_HEIGHT,
-    width: width,
-    position: 'relative',
-    backgroundColor: '#14B8A6',
-  },
-  image: {
-    height: IMG_HEIGHT,
-    width: width,
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
-  goBackButton: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  goBackText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  titleContainer: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    top: '50%',
-    transform: [{ translateY: -60 }],
-  },
-  title: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: '#fff',
-    letterSpacing: 2,
-  },
-  searchContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#F3F4F6',
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    gap: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: '#000',
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#000',
-  },
-  viewToggle: {
-    width: 40,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  listContent: {
-    paddingBottom: 100,
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 60,
-  },
-  emptyText: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#6B7280',
-    marginTop: 16,
-  },
-  emptySubtext: {
-    fontSize: 14,
-    color: '#9CA3AF',
-    marginTop: 8,
-  },
+  /* your existing styles… */
+  container: { flex: 1, backgroundColor: 'white' },
+  imageContainer: { height: IMG_HEIGHT, width, position: 'relative', backgroundColor: '#14B8A6' },
+  image: { height: IMG_HEIGHT, width },
+  overlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.2)' },
+  sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 16, backgroundColor: '#fff' },
+  sectionTitle: { fontSize: 18, fontWeight: '600', color: '#000' },
+  viewToggle: { width: 40, height: 40, alignItems: 'center', justifyContent: 'center' },
+  listContent: { paddingBottom: 100 },
+  emptyContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 60 },
+  emptyText: { fontSize: 20, fontWeight: '600', color: '#6B7280', marginTop: 16 },
+  emptySubtext: { fontSize: 14, color: '#9CA3AF', marginTop: 8 },
 });
 
 export default AllHostelsScreen;
