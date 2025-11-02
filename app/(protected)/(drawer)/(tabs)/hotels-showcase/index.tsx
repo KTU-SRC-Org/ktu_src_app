@@ -7,7 +7,8 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
-  FlatList
+  FlatList,
+  Pressable
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FlashList, FlashListProps } from '@shopify/flash-list';
@@ -20,6 +21,7 @@ import Animated, {
 import { Card } from '@/components/cards/hostels-showcase/Card';
 import { FeaturedCard } from '@/components/cards/hostels-showcase/FeaturedCard';
 import { dummyProperties } from '@/contants/dummy-data/properties';
+import { DrawerToggleButton } from '@react-navigation/drawer';
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
@@ -41,7 +43,6 @@ const AnimatedFlashList = Animated.createAnimatedComponent(
 
 
 const HostelsShowcase = () => {
-  const { id } = useLocalSearchParams();
   const navigation = useNavigation();
   
   // Use shared value for scroll offset
@@ -52,10 +53,7 @@ const HostelsShowcase = () => {
 
   const params = useLocalSearchParams<{ query?: string; filter?: string }>();
 
-  const handleCardPress = (id: string) => router.push(`/`);
-
-  // Get the listing data
-  const listing = dummyProperties;
+  const handleCardPress = (id: string) => router.push(`/hostels/1`);
 
   const shareListing = async () => {
     try {
@@ -119,9 +117,7 @@ const HostelsShowcase = () => {
         </View>
       ),
       headerLeft: () => (
-        <TouchableOpacity style={styles.roundButton} onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back" size={24} color={'#000'} />
-        </TouchableOpacity>
+        <DrawerToggleButton/>
       ),
     });
   }, []);
@@ -145,9 +141,9 @@ const HostelsShowcase = () => {
       <View style={styles.sectionContainer}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Featured</Text>
-          <TouchableOpacity>
+          <Pressable >
             <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {latestPropertiesLoading ? (
@@ -174,9 +170,9 @@ const HostelsShowcase = () => {
       <View style={styles.sectionContainer}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Our Recommendation</Text>
-          <TouchableOpacity>
+          <Pressable onPress={() => router.push('/hotels-showcase/all-hostels-screen')}>
             <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </>

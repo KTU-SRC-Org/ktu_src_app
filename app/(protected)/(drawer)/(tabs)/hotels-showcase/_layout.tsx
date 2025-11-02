@@ -10,6 +10,12 @@ const Layout = () => {
             headerShown: true,
           }}
         />
+        <Stack.Screen
+          name="all-hostels-screen"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     );
 }
