@@ -8,15 +8,17 @@ import {
   Platform,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { blurhash } from '@/contants';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import GallerySection from '@/features/hostelsShowcase/hostelDetails/GallerySection';
 
 // Dummy hostel data
 const dummyHostel = {
   id: '1',
-  name: 'Sunset Vista Hostel',
-  image: 'https://picsum.photos/seed/696/3000/2000',
+  name: 'Sunset Vista Hostels',
+  image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=400',
   type: 'Hostel',
   rating: 4.8,
   bedrooms: 12,
@@ -89,7 +91,7 @@ const Comment = ({ item }: { item: any }) => (
 );
 
 const HostelProperty = () => {
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  //const { id } = useLocalSearchParams<{ id?: string }>();
   const windowHeight = Dimensions.get('window').height;
   const property = dummyHostel;
 
@@ -101,7 +103,10 @@ const HostelProperty = () => {
         <View className="relative w-full" style={{ height: windowHeight / 2 }}>
           <Image
             source={property.image}
-            className="flex-1 w-full"
+            style={{
+              flex: 1,
+              width: '100%',
+            }}
             placeholder={{ blurhash }}
             contentFit="cover"
             transition={1000}
@@ -112,7 +117,8 @@ const HostelProperty = () => {
             className="absolute top-0 w-full h-32"
             style={{
               backgroundColor: 'transparent',
-              backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)',
+              experimental_backgroundImage:
+                'linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)',
             }}
           />
 
@@ -178,7 +184,12 @@ const HostelProperty = () => {
 
             <View className="flex flex-row items-center justify-between mt-4">
               <View className="flex flex-row items-center">
-                <Image source={{ uri: property.agent.avatar }} className="rounded-full size-14" />
+                <Avatar alt='Agent'>
+                  <AvatarImage source={{ uri: 'https://github.com/mrzachnugent.png' }} />
+                  <AvatarFallback>
+                    <Text>{property.agent.name.charAt(0)}</Text>
+                  </AvatarFallback>
+                </Avatar>
 
                 <View className="flex flex-col items-start justify-center ml-3">
                   <Text className="text-lg font-bold text-gray-800 text-start">
@@ -234,20 +245,7 @@ const HostelProperty = () => {
           </View>
 
           {property.gallery.length > 0 && (
-            <View className="mt-7">
-              <Text className="text-xl font-bold text-gray-800">Gallery</Text>
-              <FlatList
-                contentContainerStyle={{ paddingRight: 20 }}
-                data={property.gallery}
-                keyExtractor={(item) => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                  <Image source={{ uri: item.image }} className="mr-4 size-40 rounded-xl" />
-                )}
-                style={{ marginTop: 12 }}
-              />
-            </View>
+           <GallerySection gallery={property.gallery} />
           )}
 
           <View className="mt-7">
