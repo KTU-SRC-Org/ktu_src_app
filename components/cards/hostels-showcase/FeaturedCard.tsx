@@ -1,5 +1,6 @@
 import images from "@/contants/images";
 import { Image, Text, Pressable, View } from "react-native";
+import { Star } from "lucide-react-native";
 
 
 interface Props {
@@ -29,7 +30,7 @@ export const FeaturedCard = ({ item, onPress }: Props) => {
 
       <View className="flex flex-row items-center bg-white/90 px-3 py-1.5 rounded-full absolute top-5 right-5">
         {/* <Image source={icons.star} className="size-3.5" /> */}
-        <Text>Star</Text>
+        <Star size={15} fill={'#f9e406'} color='#f9e406' />
         <Text className="ml-1 text-xs font-rubik-bold text-primary-300">
           {item.rating}
         </Text>
@@ -51,7 +52,6 @@ export const FeaturedCard = ({ item, onPress }: Props) => {
             ${item.price}
           </Text>
           {/* <Image source={icons.heart} className="size-5" /> */}
-          <Text>heart</Text>
         </View>
       </View>
     </Pressable>

@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import GallerySection from '@/features/hostelsShowcase/hostelDetails/GallerySection';
@@ -57,34 +56,24 @@ const dummyHostel = {
   ],
 };
 
-// Facility icons mapping
-const facilityIcons: { [key: string]: keyof typeof Ionicons.glyphMap } = {
-  WiFi: 'wifi',
-  Parking: 'car',
-  Kitchen: 'restaurant',
-  Laundry: 'shirt',
-  Lounge: 'people',
-  '24/7 Security': 'shield-checkmark',
-};
-
-const Comment = ({ item }: { item: any }) => (
-  <View className="p-4 rounded-xl bg-gray-50">
-    <View className="flex flex-row items-center justify-between">
-      <View className="flex flex-row items-center">
-        <Image source={{ uri: item.avatar }} className="rounded-full size-12" />
-        <View className="ml-3">
-          <Text className="text-base font-medium text-gray-900">{item.user}</Text>
-          <View className="flex flex-row items-center mt-1">
-            <Ionicons name="star" size={14} color="#FFD700" />
-            <Text className="ml-1 text-sm text-gray-600">{item.rating}</Text>
-            <Text className="ml-2 text-sm text-gray-400">{item.date}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-    <Text className="mt-3 text-sm text-gray-700">{item.comment}</Text>
-  </View>
-);
+// const Comment = ({ item }: { item: any }) => (
+//   <View className="p-4 rounded-xl bg-gray-50">
+//     <View className="flex flex-row items-center justify-between">
+//       <View className="flex flex-row items-center">
+//         <Image source={{ uri: item.avatar }} className="rounded-full size-12" />
+//         <View className="ml-3">
+//           <Text className="text-base font-medium text-gray-900">{item.user}</Text>
+//           <View className="flex flex-row items-center mt-1">
+//             <Ionicons name="star" size={14} color="#FFD700" />
+//             <Text className="ml-1 text-sm text-gray-600">{item.rating}</Text>
+//             <Text className="ml-2 text-sm text-gray-400">{item.date}</Text>
+//           </View>
+//         </View>
+//       </View>
+//     </View>
+//     <Text className="mt-3 text-sm text-gray-700">{item.comment}</Text>
+//   </View>
+// );
 
 const HostelProperty = () => {
   //const { id } = useLocalSearchParams<{ id?: string }>();

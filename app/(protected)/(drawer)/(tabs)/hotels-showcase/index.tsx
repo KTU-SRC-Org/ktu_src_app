@@ -143,9 +143,9 @@ const HostelsShowcase = () => {
       <View style={styles.sectionContainer}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Featured</Text>
-          <Pressable >
+          {/* <Pressable >
             <Text style={styles.seeAllText}>See all</Text>
-          </Pressable>
+          </Pressable> */}
         </View>
 
         {latestPropertiesLoading ? (
@@ -170,7 +170,7 @@ const HostelsShowcase = () => {
 
       {/* Our Recommendation Section */}
       <View style={styles.sectionContainer}>
-        <View style={styles.sectionHeader}>
+        <View className='flex flex-row items-center justify-between mt-3 mb-2' >
           <Text style={styles.sectionTitle}>Our Recommendation</Text>
           <Pressable onPress={() => router.push('/hotels-showcase/all-hostels-screen')}>
             <Text style={styles.seeAllText}>See all</Text>
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   listContent: {
-    paddingBottom: 100,
+    paddingBottom: 50,
   },
   sectionContainer: {
     paddingHorizontal: 20,
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 18,
   },
   sectionTitle: {
     fontSize: 20,
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   },
     gridItem: {
     flex: 1,
-    margin: 8,
+    marginHorizontal: 8,
   },
 });
 
