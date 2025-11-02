@@ -3,7 +3,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Dimensions,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
@@ -21,7 +20,6 @@ const dummyHostel = {
   rating: 4.8,
   bedrooms: 12,
   bathrooms: 8,
-  area: 2500,
   price: 25,
   description:
     'Experience the perfect blend of comfort and community at Sunset Vista Hostel. Located in the heart of the city, our modern facilities and welcoming atmosphere make it the ideal choice for travelers seeking both adventure and relaxation.',
@@ -126,10 +124,6 @@ const HostelProperty = () => {
             <Text className="ml-2 text-sm font-medium text-gray-700">
               {property.bathrooms} Baths
             </Text>
-            <View className="flex flex-row items-center justify-center bg-blue-100 rounded-full ml-7 size-10">
-              <Ionicons name="expand-outline" size={20} color="#0061FF" />
-            </View>
-            <Text className="ml-2 text-sm font-medium text-gray-700">{property.area} sqft</Text>
           </View>
 
           <View className="w-full mt-5 border-t border-gray-200 pt-7">
@@ -194,7 +188,7 @@ const HostelProperty = () => {
             </View>
           </View>
 
-          {property.reviews.length > 0 && (
+          {/* {property.reviews.length > 0 && (
             <View className="mt-7">
               <View className="flex flex-row items-center justify-between">
                 <View className="flex flex-row items-center">
@@ -213,7 +207,7 @@ const HostelProperty = () => {
                 <Comment item={property.reviews[0]} />
               </View>
             </View>
-          )}
+          )} */}
         </View>
       </ScrollView>
 
