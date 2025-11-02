@@ -1,18 +1,16 @@
 import {
-  FlatList,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
   Dimensions,
-  Platform,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { blurhash } from '@/contants';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import GallerySection from '@/features/hostelsShowcase/hostelDetails/GallerySection';
+import HeaderSection from '@/features/hostelsShowcase/hostelDetails/HeaderSection';
+import FacilitiesSection from '@/features/hostelsShowcase/hostelDetails/FacilitiesSection';
 
 // Dummy hostel data
 const dummyHostel = {
@@ -92,7 +90,6 @@ const Comment = ({ item }: { item: any }) => (
 
 const HostelProperty = () => {
   //const { id } = useLocalSearchParams<{ id?: string }>();
-  const windowHeight = Dimensions.get('window').height;
   const property = dummyHostel;
 
   return (
@@ -100,51 +97,7 @@ const HostelProperty = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 120, backgroundColor: 'white' }}>
-        <View className="relative w-full" style={{ height: windowHeight / 2 }}>
-          <Image
-            source={property.image}
-            style={{
-              flex: 1,
-              width: '100%',
-            }}
-            placeholder={{ blurhash }}
-            contentFit="cover"
-            transition={1000}
-          />
-
-          {/* Gradient overlay */}
-          <View
-            className="absolute top-0 w-full h-32"
-            style={{
-              backgroundColor: 'transparent',
-              experimental_backgroundImage:
-                'linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)',
-            }}
-          />
-
-          <View
-            className="absolute z-50 inset-x-7"
-            style={{
-              top: Platform.OS === 'ios' ? 70 : 20,
-            }}>
-            <View className="flex flex-row items-center justify-between w-full">
-              <TouchableOpacity
-                onPress={() => router.back()}
-                className="flex flex-row items-center justify-center bg-white rounded-full size-11">
-                <Ionicons name="chevron-back" size={24} color="#000" />
-              </TouchableOpacity>
-
-              <View className="flex flex-row items-center gap-3">
-                <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
-                  <Ionicons name="heart-outline" size={24} color="#191D31" />
-                </TouchableOpacity>
-                <TouchableOpacity className="items-center justify-center bg-white rounded-full size-11">
-                  <Ionicons name="share-outline" size={24} color="#191D31" />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </View>
+        <HeaderSection image={property.image} />
 
         <View className="flex gap-2 px-5 mt-7">
           <Text className="text-2xl font-bold text-gray-900">{property.name}</Text>
@@ -219,28 +172,8 @@ const HostelProperty = () => {
 
           <View className="mt-7">
             <Text className="text-xl font-bold text-gray-800">Facilities</Text>
-
             {property.facilities.length > 0 && (
-              <View className="flex flex-row flex-wrap items-start justify-start gap-5 mt-2">
-                {property.facilities.map((item: string, index: number) => (
-                  <View key={index} className="flex flex-col items-center flex-1 min-w-16 max-w-20">
-                    <View className="flex items-center justify-center bg-blue-100 rounded-full size-14">
-                      <Ionicons
-                        name={facilityIcons[item] || 'information-circle-outline'}
-                        size={24}
-                        color="#0061FF"
-                      />
-                    </View>
-
-                    <Text
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                      className="mt-1.5 text-center text-sm font-normal text-gray-700">
-                      {item}
-                    </Text>
-                  </View>
-                ))}
-              </View>
+              <FacilitiesSection facilities={property.facilities} />
             )}
           </View>
 
