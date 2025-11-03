@@ -8,7 +8,7 @@ import { router, usePathname } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useColorScheme } from 'nativewind';
 import { StyleSheet } from 'react-native';
-// import { Avatar, Text as UiText, View as UiView } from 'react-native-ui-lib';
+import { Avatar, Text as UiText, View as UiView } from 'react-native-ui-lib';
 
 
 
@@ -55,10 +55,10 @@ const CustomDrawerContent = (props: any) => {
 
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: colorScheme === "dark" ? "#000" : "#fff", flex: 1, borderRightWidth: 1, borderRightColor: colorScheme === "dark" ? "#111" : "#fff", position: "relative"}}>
-            {/*<UiView paddingL-15 marginB-30 paddingV-15 className=' border-b-[1px]  border-gray-500 dark:border-gray-700 border-opacity-50'>*/}
-            {/*    <Avatar  {...example} onPress={() => console.log("avatar")}/>*/}
-            {/*    <UiText marginT-7 className="text-black dark:text-gray-400">@user1</UiText>*/}
-            {/*</UiView>*/}
+            <UiView paddingL-15 marginB-30 paddingV-15 className=' border-b-[1px]  border-gray-500 dark:border-gray-700 border-opacity-50'>
+                <Avatar  {...example} onPress={() => console.log("avatar")}/>
+                <UiText marginT-7 className="text-black dark:text-gray-400">@user1</UiText>
+            </UiView>
 
 
             {/*<DrawerItem*/}
