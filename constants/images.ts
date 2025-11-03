@@ -1,3 +1,4 @@
+// @ts-ignore
 import cardGradient from '@/assets/images/card-gradient.png';
 
 export default {

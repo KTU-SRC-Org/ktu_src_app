@@ -20,7 +20,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Card } from '@/components/cards/hostels-showcase/Card';
 import { FeaturedCard } from '@/components/cards/hostels-showcase/FeaturedCard';
-import { dummyProperties } from '@/contants/dummy-data/properties';
+import { dummyProperties } from '@/constants/dummy-data/properties';
 import { DrawerToggleButton } from '@react-navigation/drawer';
 
 const { width } = Dimensions.get('window');
