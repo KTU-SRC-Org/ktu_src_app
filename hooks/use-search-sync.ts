@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useDebounce, useDebouncedCallback } from "use-debounce";
-import { router, useLocalSearchParams } from "expo-router";
+import { useState } from 'react';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { router, useLocalSearchParams } from 'expo-router';
 
 export function useSearchSync() {
   const params = useLocalSearchParams<{ query?: string }>();
-  const [search, setSearch] = useState(params.query ?? "");
+  const [search, setSearch] = useState(params.query ?? '');
 
   // ① Debounce local state — used for API fetching
   const [debouncedSearch] = useDebounce(search, 600);
@@ -20,8 +20,8 @@ export function useSearchSync() {
   };
 
   return {
-    search,            // immediate typing value
-    debouncedSearch,   // stable value to feed into API or useQuery
+    search, // immediate typing value
+    debouncedSearch, // stable value to feed into API or useQuery
     handleChange,
   };
 }

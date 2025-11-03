@@ -1,9 +1,4 @@
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import GallerySection from '@/features/hostelsShowcase/hostelDetails/GallerySection';
@@ -86,11 +81,11 @@ const HostelProperty = () => {
         contentContainerStyle={{ paddingBottom: 120, backgroundColor: 'white' }}>
         <HeaderSection image={property.image} />
 
-        <View className="flex gap-2 px-5 mt-7">
+        <View className="mt-7 flex gap-2 px-5">
           <Text className="text-2xl font-bold text-gray-900">{property.name}</Text>
 
           <View className="flex flex-row items-center gap-3">
-            <View className="flex flex-row items-center px-4 py-2 bg-blue-100 rounded-full">
+            <View className="flex flex-row items-center rounded-full bg-blue-100 px-4 py-2">
               <Text className="text-xs font-bold text-blue-600">{property.type}</Text>
             </View>
 
@@ -102,12 +97,12 @@ const HostelProperty = () => {
             </View>
           </View>
 
-          <View className="flex flex-row items-center mt-5">
-            <View className="flex flex-row items-center justify-center bg-blue-100 rounded-full size-10">
+          <View className="mt-5 flex flex-row items-center">
+            <View className="flex size-10 flex-row items-center justify-center rounded-full bg-blue-100">
               <Ionicons name="bed-outline" size={20} color="#0061FF" />
             </View>
             <Text className="ml-2 text-sm font-medium text-gray-700">{property.bedrooms} Beds</Text>
-            <View className="flex flex-row items-center justify-center bg-blue-100 rounded-full ml-7 size-10">
+            <View className="ml-7 flex size-10 flex-row items-center justify-center rounded-full bg-blue-100">
               <Ionicons name="water-outline" size={20} color="#0061FF" />
             </View>
             <Text className="ml-2 text-sm font-medium text-gray-700">
@@ -115,33 +110,33 @@ const HostelProperty = () => {
             </Text>
           </View>
 
-          <View className="w-full mt-5 border-t border-gray-200 pt-7">
+          <View className="mt-5 w-full border-t border-gray-200 pt-7">
             <Text className="text-xl font-bold text-gray-800">Agent</Text>
 
-            <View className="flex flex-row items-center justify-between mt-4">
+            <View className="mt-4 flex flex-row items-center justify-between">
               <View className="flex flex-row items-center">
-                <Avatar alt='Agent'>
+                <Avatar alt="Agent">
                   <AvatarImage source={{ uri: 'https://github.com/mrzachnugent.png' }} />
                   <AvatarFallback>
                     <Text>{property.agent.name.charAt(0)}</Text>
                   </AvatarFallback>
                 </Avatar>
 
-                <View className="flex flex-col items-start justify-center ml-3">
-                  <Text className="text-lg font-bold text-gray-800 text-start">
+                <View className="ml-3 flex flex-col items-start justify-center">
+                  <Text className="text-start text-lg font-bold text-gray-800">
                     {property.agent.name}
                   </Text>
-                  <Text className="text-sm font-medium text-gray-600 text-start">
+                  <Text className="text-start text-sm font-medium text-gray-600">
                     {property.agent.email}
                   </Text>
                 </View>
               </View>
 
               <View className="flex flex-row items-center gap-3">
-                <TouchableOpacity className="items-center justify-center bg-blue-100 rounded-full size-10">
+                <TouchableOpacity className="size-10 items-center justify-center rounded-full bg-blue-100">
                   <Ionicons name="chatbubble-outline" size={20} color="#0061FF" />
                 </TouchableOpacity>
-                <TouchableOpacity className="items-center justify-center bg-blue-100 rounded-full size-10">
+                <TouchableOpacity className="size-10 items-center justify-center rounded-full bg-blue-100">
                   <Ionicons name="call-outline" size={20} color="#0061FF" />
                 </TouchableOpacity>
               </View>
@@ -160,18 +155,16 @@ const HostelProperty = () => {
             )}
           </View>
 
-          {property.gallery.length > 0 && (
-           <GallerySection gallery={property.gallery} />
-          )}
+          {property.gallery.length > 0 && <GallerySection gallery={property.gallery} />}
 
           <View className="mt-7">
             <Text className="text-xl font-bold text-gray-800">Location</Text>
-            <View className="flex flex-row items-center justify-start gap-2 mt-4">
+            <View className="mt-4 flex flex-row items-center justify-start gap-2">
               <Ionicons name="location-outline" size={28} color="#0061FF" />
               <Text className="flex-1 text-sm font-medium text-gray-600">{property.address}</Text>
             </View>
 
-            <View className="items-center justify-center w-full mt-5 bg-gray-200 h-52 rounded-xl">
+            <View className="mt-5 h-52 w-full items-center justify-center rounded-xl bg-gray-200">
               <Ionicons name="map-outline" size={48} color="#9CA3AF" />
               <Text className="mt-2 text-gray-500">Map view</Text>
             </View>
@@ -200,17 +193,17 @@ const HostelProperty = () => {
         </View>
       </ScrollView>
 
-      <View className="absolute bottom-0 w-full bg-white border-t border-l border-r border-gray-200 rounded-t-2xl p-7">
+      <View className="absolute bottom-0 w-full rounded-t-2xl border-l border-r border-t border-gray-200 bg-white p-7">
         <View className="flex flex-row items-center justify-between gap-10">
           <View className="flex flex-col items-start">
             <Text className="text-xs font-medium text-gray-500">Price per night</Text>
-            <Text numberOfLines={1} className="text-2xl font-bold text-blue-600 text-start">
+            <Text numberOfLines={1} className="text-start text-2xl font-bold text-blue-600">
               ${property.price}
             </Text>
           </View>
 
-          <TouchableOpacity className="flex flex-row items-center justify-center flex-1 py-3 bg-blue-600 rounded-full shadow-md shadow-zinc-400">
-            <Text className="text-lg font-bold text-center text-white">Book Now</Text>
+          <TouchableOpacity className="flex flex-1 flex-row items-center justify-center rounded-full bg-blue-600 py-3 shadow-md shadow-zinc-400">
+            <Text className="text-center text-lg font-bold text-white">Book Now</Text>
           </TouchableOpacity>
         </View>
       </View>

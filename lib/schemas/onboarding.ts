@@ -7,9 +7,7 @@ export const CompleteProfileSchema = z.object({
     .max(50, 'Full name cannot exceed 50 characters')
     .regex(/^[A-Za-z\s]+$/, 'Full name must contain only letters and spaces'),
 
-  program: z
-    .string()
-    .min(1, 'Please select your program of study'),
+  program: z.string().min(1, 'Please select your program of study'),
 
   indexNumber: z
     .string()
@@ -23,9 +21,7 @@ export const CompleteProfileSchema = z.object({
     .max(15, 'Phone number cannot exceed 15 digits')
     .regex(/^\+?\d+$/, 'Enter a valid phone number (only numbers, optional +)'),
 
-  level: z
-    .string()
-    .min(1, 'Please select your level of study'),
+  level: z.string().min(1, 'Please select your level of study'),
 });
 
 export type CompleteProfileFormType = z.infer<typeof CompleteProfileSchema>;

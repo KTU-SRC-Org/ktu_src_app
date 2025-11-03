@@ -44,7 +44,7 @@ export function ImageField<T extends FieldValues>({
           <Pressable
             onPress={() => pickImage(onChange, value || [])}
             disabled={disabled}
-            className="flex items-center justify-center p-4 border border-gray-400 border-dashed rounded-lg">
+            className="flex items-center justify-center rounded-lg border border-dashed border-gray-400 p-4">
             <Text className="text-gray-600">
               {Array.isArray(value) && value.length > 0
                 ? 'Add more images'
@@ -53,13 +53,13 @@ export function ImageField<T extends FieldValues>({
           </Pressable>
 
           {Array.isArray(value) && value.length > 0 && (
-            <View className="flex-row flex-wrap gap-3 mt-3">
+            <View className="mt-3 flex-row flex-wrap gap-3">
               {value.map((uri: string, index: Key | null | undefined) => (
                 <View key={index} className="relative">
-                  <Image source={{ uri }} className="w-20 h-20 rounded-md" />
+                  <Image source={{ uri }} className="h-20 w-20 rounded-md" />
                   <Pressable
                     onPress={() => removeImage(index, onChange, value)}
-                    className="absolute p-1 bg-red-500 rounded-full -right-2 -top-2">
+                    className="absolute -right-2 -top-2 rounded-full bg-red-500 p-1">
                     <X size={14} color="white" />
                   </Pressable>
                 </View>

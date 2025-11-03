@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
-  Pressable
+  Pressable,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { FlashList, FlashListProps } from '@shopify/flash-list';
@@ -41,13 +41,12 @@ const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList
 ) as unknown as React.ComponentType<FlashListProps<Property>>;
 
-
 const HostelsShowcase = () => {
   const navigation = useNavigation();
-  
+
   // Use shared value for scroll offset
   const scrollOffset = useSharedValue(0);
-  
+
   const latestPropertiesLoading = false;
   const loading = false;
 
@@ -80,11 +79,7 @@ const HostelsShowcase = () => {
           ),
         },
         {
-          scale: interpolate(
-            scrollOffset.value, 
-            [-IMG_HEIGHT, 0, IMG_HEIGHT], 
-            [2, 1, 1]
-          ),
+          scale: interpolate(scrollOffset.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [2, 1, 1]),
         },
       ],
     };
@@ -101,9 +96,7 @@ const HostelsShowcase = () => {
     navigation.setOptions({
       headerTitle: '',
       headerTransparent: true,
-      headerBackground: () => (
-        <Animated.View style={[headerAnimatedStyle, styles.header]} />
-      ),
+      headerBackground: () => <Animated.View style={[headerAnimatedStyle, styles.header]} />,
       headerRight: () => (
         <View style={styles.bar}>
           <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
@@ -114,16 +107,14 @@ const HostelsShowcase = () => {
           </TouchableOpacity>
         </View>
       ),
-      headerLeft: () => (
-        <DrawerToggleButton/>
-      ),
+      headerLeft: () => <DrawerToggleButton />,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderItem = ({ item }: { item: Property }) => (
     <View style={styles.gridItem}>
-        <Card item={item} onPress={() => handleCardPress(item.id)} />
+      <Card item={item} onPress={() => handleCardPress(item.id)} />
     </View>
   );
 
@@ -169,7 +160,7 @@ const HostelsShowcase = () => {
 
       {/* Our Recommendation Section */}
       <View style={styles.sectionContainer}>
-        <View className='flex flex-row items-center justify-between mt-3 mb-2' >
+        <View className="mb-2 mt-3 flex flex-row items-center justify-between">
           <Text style={styles.sectionTitle}>Our Recommendation</Text>
           <Pressable onPress={() => router.push('/hotels-showcase/all-hostels-screen')}>
             <Text style={styles.seeAllText}>See all</Text>
@@ -270,7 +261,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: 'grey',
   },
-    gridItem: {
+  gridItem: {
     flex: 1,
     marginHorizontal: 8,
   },

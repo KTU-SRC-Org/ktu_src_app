@@ -27,10 +27,7 @@ const ProductSearchBar = ({
 
   return (
     <View
-      className={clsx(
-        'flex-row items-center rounded-xl bg-[#F5F5F5] px-4 py-3',
-        className
-      )}
+      className={clsx('flex-row items-center rounded-xl bg-[#F5F5F5] px-4 py-3', className)}
       {...props}>
       <Ionicons name="search-outline" size={20} color="#999" style={{ marginTop: 2 }} />
 

@@ -12,7 +12,7 @@ interface RepresentativeData {
   imageUrl: string;
 }
 
-type RepresentativeCardProps = RepresentativeData
+type RepresentativeCardProps = RepresentativeData;
 
 // Representative Card Component
 export function RepresentativeCard({
@@ -44,7 +44,7 @@ export function RepresentativeCard({
             </View>
 
             {/* Content Section */}
-            <View className="justify-between flex-1 ">
+            <View className="flex-1 justify-between ">
               <View>
                 <Text className="mb-2 text-xl font-bold text-[#FFEDAC]">{name}</Text>
                 <Text className="text-xs leading-5 text-[#FFEDAC]/90">{description}</Text>

@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { AuthButton } from '@/components/shared/auth-button';
-import {CompleteProfileFormType, CompleteProfileSchema} from '@/lib/schemas/onboarding';
-import {zodResolver} from "@hookform/resolvers/zod";
-import {TextInputField} from "@/components/builders/text-input-field";
-import {SelectInputField} from "@/components/builders/select-input-field";
+import { CompleteProfileFormType, CompleteProfileSchema } from '@/lib/schemas/onboarding';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TextInputField } from '@/components/builders/text-input-field';
+import { SelectInputField } from '@/components/builders/select-input-field';
 
 interface CompleteProfileFormProps {
   onSubmitPress: (data: CompleteProfileFormType) => void;
@@ -53,7 +53,6 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
     { label: 'Diploma in Software Engineering', value: 'dip_softeng' },
   ];
 
-
   const levelOptions = [
     { label: 'Level 100', value: 'l100' },
     { label: 'Level 200', value: 'l200' },
@@ -68,8 +67,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        className={"pt-8"}
-      >
+        className={'pt-8'}>
         <View style={styles.header}>
           <Text style={styles.title}>Complete Your Profile</Text>
           <Text style={styles.subtitle}>

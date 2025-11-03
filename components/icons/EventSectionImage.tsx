@@ -1,35 +1,13 @@
-import Svg, {
-  SvgProps,
-  G,
-  Path,
-  Defs,
-  Pattern,
-  Use,
-  Image,
-} from "react-native-svg"
+import Svg, { SvgProps, G, Path, Defs, Pattern, Use, Image } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
-import { memo } from "react"
+import { memo } from 'react';
 const EventSectionImage = (props: SvgProps) => (
-  <Svg
-    width={190}
-    height={154}
-    fill="none"
-    {...props}
-  >
+  <Svg width={190} height={154} fill="none" {...props}>
     <G filter="url(#a)">
-      <Path
-        fill="url(#b)"
-        d="M0 0h176v146H0z"
-        transform="matrix(-1 0 0 1 190 0)"
-      />
+      <Path fill="url(#b)" d="M0 0h176v146H0z" transform="matrix(-1 0 0 1 190 0)" />
     </G>
     <Defs>
-      <Pattern
-        id="b"
-        width={1}
-        height={1}
-        patternContentUnits="objectBoundingBox"
-      >
+      <Pattern id="b" width={1} height={1} patternContentUnits="objectBoundingBox">
         <Use xlinkHref="#c" transform="matrix(.00353 0 0 .00426 0 0)" />
       </Pattern>
       <Image
@@ -41,6 +19,6 @@ const EventSectionImage = (props: SvgProps) => (
       />
     </Defs>
   </Svg>
-)
-const MemoEventSectionImage = memo(EventSectionImage)
-export default MemoEventSectionImage
+);
+const MemoEventSectionImage = memo(EventSectionImage);
+export default MemoEventSectionImage;

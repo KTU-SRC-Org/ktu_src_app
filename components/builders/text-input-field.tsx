@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInputProps, TextInput} from 'react-native';
+import { View, Text, TextInputProps, TextInput } from 'react-native';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -75,7 +75,9 @@ export function TextInputField<T extends FieldValues>({
                 onChange(text);
               }
             }}
-            value={Array.isArray(value) ? value.join(', ') : value !== undefined ? String(value) : ''}
+            value={
+              Array.isArray(value) ? value.join(', ') : value !== undefined ? String(value) : ''
+            }
             placeholder={placeholder}
             editable={!disabled}
             returnKeyType={nextRef ? 'next' : 'done'}

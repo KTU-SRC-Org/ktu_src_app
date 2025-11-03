@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 
 import { ScreenContent } from '@/components/ScreenContent';
 
-import { InternalizationExample } from 'components/InternalizationExample';
+import { InternalizationExample } from '@/components/InternalizationExample';
 
 export default function Modal() {
   return (

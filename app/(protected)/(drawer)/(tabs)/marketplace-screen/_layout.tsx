@@ -3,11 +3,7 @@ import { Stack } from 'expo-router';
 export default function MarketplaceStack() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="index"
-        options={{
-        }}
-      />
+      <Stack.Screen name="index" options={{}} />
       {/*<Stack.Screen*/}
       {/*  name="categories/index"*/}
       {/*  options={{*/}

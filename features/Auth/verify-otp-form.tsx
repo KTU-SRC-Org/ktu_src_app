@@ -1,11 +1,11 @@
-import {Keyboard, Text, View} from "react-native";
-import {Controller, useForm} from "react-hook-form";
-import OTPInput from "@/components/builders/otp-input";
-import {AuthButton} from "@/components/shared/auth-button";
-import React, {useEffect, useState} from "react";
-import {OTPFormType, OTPSchema} from "@/lib/schemas/auth";
-import {zodResolver} from "@hookform/resolvers/zod";
-import { router} from "expo-router";
+import { Keyboard, Text, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
+import OTPInput from '@/components/builders/otp-input';
+import { AuthButton } from '@/components/shared/auth-button';
+import React, { useEffect, useState } from 'react';
+import { OTPFormType, OTPSchema } from '@/lib/schemas/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { router } from 'expo-router';
 
 const VerifyOtpForm = () => {
   const [timer, setTimer] = useState(180); //180 => 3min
@@ -18,8 +18,10 @@ const VerifyOtpForm = () => {
 
   // Helper for timer count down
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
-    const s = (seconds % 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
@@ -33,7 +35,7 @@ const VerifyOtpForm = () => {
     if (data.otpCode === '1234') {
       console.log('OTP Verified Successfully');
       Keyboard.dismiss();
-      router.push("/(protected)/complete-profile-screen")
+      router.push('/(protected)/complete-profile-screen');
     } else {
       form.setError('otpCode', { message: 'Invalid PIN' });
       Keyboard.dismiss();
@@ -41,12 +43,11 @@ const VerifyOtpForm = () => {
   };
 
   const handleOtpResend = () => {
-    setTimer(180)
-    form.reset({'otpCode': ''});
-  }
+    setTimer(180);
+    form.reset({ otpCode: '' });
+  };
 
-
-  return(
+  return (
     <View className="flex flex-col items-center justify-center gap-12 pt-16">
       <View className="w-full items-center">
         <Text className="text-center text-2xl font-bold text-white">Check your email.</Text>
@@ -74,7 +75,7 @@ const VerifyOtpForm = () => {
             {form.formState.errors.otpCode.message}
           </Text>
         ) : (
-          <Text className={`mt-2 text-center ${timer < 10 ? "text-red-500" : "text-white"}`}>
+          <Text className={`mt-2 text-center ${timer < 10 ? 'text-red-500' : 'text-white'}`}>
             Code expires in {formatTime(timer)}
           </Text>
         )}
@@ -93,6 +94,6 @@ const VerifyOtpForm = () => {
         />
       </View>
     </View>
-  )
-}
+  );
+};
 export default VerifyOtpForm;

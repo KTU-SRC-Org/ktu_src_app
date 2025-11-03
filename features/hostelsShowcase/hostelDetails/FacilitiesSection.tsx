@@ -16,10 +16,10 @@ interface FacilitiesSectionProps {
 
 const FacilitiesSection = ({ facilities }: FacilitiesSectionProps) => {
   return (
-    <View className="flex flex-row flex-wrap items-start justify-start gap-5 mt-2">
+    <View className="mt-2 flex flex-row flex-wrap items-start justify-start gap-5">
       {facilities.map((item: string, index: number) => (
-        <View key={index} className="flex flex-col items-center flex-1 min-w-16 max-w-20">
-          <View className="flex items-center justify-center bg-blue-100 rounded-full size-14">
+        <View key={index} className="flex min-w-16 max-w-20 flex-1 flex-col items-center">
+          <View className="flex size-14 items-center justify-center rounded-full bg-blue-100">
             <Ionicons
               name={facilityIcons[item] || 'information-circle-outline'}
               size={24}

@@ -3,10 +3,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { NewsItemData } from '../home/CampusNewsSection';
 
-
 interface NewsItemCardProps extends NewsItemData {
-    onReadMore?: () => void;
-  }
+  onReadMore?: () => void;
+}
 
 export function NewsItemCard({
   title,
@@ -15,18 +14,12 @@ export function NewsItemCard({
   onReadMore,
 }: NewsItemCardProps) {
   return (
-    <Card className="bg-[#F5E6D3] border-0 rounded-[5px] mb-3 py-3 px-2">
+    <Card className="mb-3 rounded-[5px] border-0 bg-[#F5E6D3] px-2 py-3">
       <CardContent className="px-2 ">
-        <Text className="mb-1 text-[13px] font-semibold leading-tight text-black">
-          {title}
-        </Text>
-        <Text className="mb-1 text-xs leading-relaxed text-gray-700">
-          {description}
-        </Text>
+        <Text className="mb-1 text-[13px] font-semibold leading-tight text-black">{title}</Text>
+        <Text className="mb-1 text-xs leading-relaxed text-gray-700">{description}</Text>
         <TouchableOpacity onPress={onReadMore}>
-          <Text className="text-[#984D29] font-semibold text-sm">
-            {readMoreLink}
-          </Text>
+          <Text className="text-sm font-semibold text-[#984D29]">{readMoreLink}</Text>
         </TouchableOpacity>
       </CardContent>
     </Card>

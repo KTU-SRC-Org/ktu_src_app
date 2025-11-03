@@ -8,11 +8,20 @@ interface ProjectProgressProps {
   indicatorColor?: string;
   gradientColors?: [string, string] | [string, string, string];
 }
-const ProjectProgress = ({ progress = 33, title, indicatorColor, gradientColors }: ProjectProgressProps) => {
+const ProjectProgress = ({
+  progress = 33,
+  title,
+  indicatorColor,
+  gradientColors,
+}: ProjectProgressProps) => {
   return (
     <View>
       <Text>{title}</Text>
-      <Progress indicatorClassName={`${indicatorColor}`} value={progress}  gradientColors={gradientColors} />
+      <Progress
+        indicatorClassName={`${indicatorColor}`}
+        value={progress}
+        gradientColors={gradientColors}
+      />
     </View>
   );
 };

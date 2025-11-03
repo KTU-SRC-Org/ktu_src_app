@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import {View, ScrollView, Image, Dimensions, ImageSourcePropType} from "react-native";
+import React, { useState } from 'react';
+import { View, ScrollView, Image, Dimensions, ImageSourcePropType } from 'react-native';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export const ProductImageCarousel = ({ images }: { images: ImageSourcePropType[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -20,8 +20,7 @@ export const ProductImageCarousel = ({ images }: { images: ImageSourcePropType[]
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
-        scrollEventThrottle={16}
-      >
+        scrollEventThrottle={16}>
         {images.map((img, index) => (
           <Image
             key={index}
@@ -37,7 +36,7 @@ export const ProductImageCarousel = ({ images }: { images: ImageSourcePropType[]
       </ScrollView>
 
       {/* Pagination dots */}
-      <View className="absolute bottom-2 self-center flex-row">
+      <View className="absolute bottom-2 flex-row self-center">
         {images.map((_, index) => (
           <View
             key={index}
@@ -46,8 +45,7 @@ export const ProductImageCarousel = ({ images }: { images: ImageSourcePropType[]
               height: 8,
               borderRadius: 4,
               marginHorizontal: 4,
-              backgroundColor:
-                index === activeIndex ? "#FF8C42" : "rgba(255,140,66,0.3)",
+              backgroundColor: index === activeIndex ? '#FF8C42' : 'rgba(255,140,66,0.3)',
             }}
           />
         ))}

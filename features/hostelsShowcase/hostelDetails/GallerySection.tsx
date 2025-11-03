@@ -17,11 +17,8 @@ const GallerySection = ({ gallery }: GalleryProps) => {
         keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (     
-                  <Image
-                    source={{uri: item.image }}
-                   className="mr-4 size-40 rounded-xl"
-                  />
+        renderItem={({ item }) => (
+          <Image source={{ uri: item.image }} className="mr-4 size-40 rounded-xl" />
         )}
         style={{ marginTop: 12 }}
       />

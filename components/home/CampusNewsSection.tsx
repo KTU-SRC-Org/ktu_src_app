@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Image } from 'expo-image';
@@ -6,29 +5,31 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Text } from '@/components/ui/text';
 import { NewsItemCard } from '../cards/NewsItemCard';
 
-
 export interface NewsItemData {
-    id: string;
-    title: string;
-    description: string;
-    readMoreLink?: string;
-  }
-  
+  id: string;
+  title: string;
+  description: string;
+  readMoreLink?: string;
+}
+
 const dummyNewsItems: NewsItemData[] = [
   {
     id: '1',
     title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description: 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
+    description:
+      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
   },
   {
     id: '2',
     title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description: 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
+    description:
+      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
   },
   {
     id: '3',
     title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description: 'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
+    description:
+      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
   },
 ];
 
@@ -42,19 +43,19 @@ export function CampusNewsSection() {
   };
 
   return (
-    <View className='px-2 mb-10'>      
-    <View className="w-full bg-[#CD8606] rounded-3xl overflow-hidden">
-      {/* Header Image Section */}
-      <AspectRatio ratio={16 / 10} className="relative w-full overflow-hidden">
-        <Image
-          source={require('@/assets/images/Campus-1.png')}
-          style={{ width: '100%', height: '100%' }}
-          contentFit="cover"
-          transition={300}
-        />
-        
-        {/* Overlay Text */}
-        {/* <View className="absolute inset-0 flex items-center justify-center px-4">
+    <View className="mb-10 px-2">
+      <View className="w-full overflow-hidden rounded-3xl bg-[#CD8606]">
+        {/* Header Image Section */}
+        <AspectRatio ratio={16 / 10} className="relative w-full overflow-hidden">
+          <Image
+            source={require('@/assets/images/Campus-1.png')}
+            style={{ width: '100%', height: '100%' }}
+            contentFit="cover"
+            transition={300}
+          />
+
+          {/* Overlay Text */}
+          {/* <View className="absolute inset-0 flex items-center justify-center px-4">
           <View className="items-end w-full pr-8">
             <Text className="text-4xl font-bold leading-tight text-white">
               Campus
@@ -77,28 +78,19 @@ export function CampusNewsSection() {
           </View>
         </View> */}
 
-        {/* View All Button */}
-        <TouchableOpacity 
-          onPress={handleViewAll}
-          className="absolute bottom-3 right-4"
-        >
-          <Text className="text-[#974E17] font-semibold text-sm">
-            View All
-          </Text>
-        </TouchableOpacity>
-      </AspectRatio>
+          {/* View All Button */}
+          <TouchableOpacity onPress={handleViewAll} className="absolute bottom-3 right-4">
+            <Text className="text-sm font-semibold text-[#974E17]">View All</Text>
+          </TouchableOpacity>
+        </AspectRatio>
 
-      {/* News Items List */}
-      <View className="p-4">
-        {dummyNewsItems.map((item) => (
-          <NewsItemCard
-            key={item.id}
-            {...item}
-            onReadMore={() => handleReadMore(item.id)}
-          />
-        ))}
+        {/* News Items List */}
+        <View className="p-4">
+          {dummyNewsItems.map((item) => (
+            <NewsItemCard key={item.id} {...item} onReadMore={() => handleReadMore(item.id)} />
+          ))}
+        </View>
       </View>
-    </View>
     </View>
   );
 }
