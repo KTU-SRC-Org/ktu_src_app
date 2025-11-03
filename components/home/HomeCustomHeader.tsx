@@ -1,9 +1,9 @@
 import { DrawerToggleButton } from '@react-navigation/drawer';
-import { StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import { BellRing } from 'lucide-react-native';
-
 import { View as UiView } from 'react-native-ui-lib';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useRouter } from 'expo-router';
 
 const example = {
   title: 'Image with fade in animation',
@@ -14,6 +14,7 @@ const example = {
 };
 
 const HomeCustomHeader = () => {
+  const router = useRouter();
   return (
     <View style={{ backgroundColor: '#fff' }}>
       <View style={styles.container}>
@@ -23,7 +24,17 @@ const HomeCustomHeader = () => {
           </View>
 
           <View>
-            <BellRing color={'blue'} fill={'blue'} />
+            <Pressable
+              style={({ pressed }) => [
+                { opacity: pressed ? 0.6 : 1, borderRadius: 50, padding: 6 },
+              ]}
+              onPress={() => router.push({
+                pathname: "/info-center",
+                params: { type: "notifications" }
+              })}
+            >
+              <BellRing color="blue" fill="blue" />
+            </Pressable>
           </View>
         </View>
 
