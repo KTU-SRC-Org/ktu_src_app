@@ -5,8 +5,8 @@ import ProjectProgress from '../shared/project-progress';
 const ActiveProjectsSection = () => {
   return (
     <View className="px-2">
-      <View style={styles.container} className="px-3 pt-5 pb-10 mb-10 bg-white rounded-lg">
-        <View className="flex flex-row items-center justify-between mb-5">
+      <View style={styles.container} className="mb-10 rounded-lg bg-white px-3 pb-10 pt-5">
+        <View className="mb-5 flex flex-row items-center justify-between">
           <Text className="text-lg font-bold ">ACTIVE PROJECTS</Text>
           <Link href="/">
             <Text className="text-sm text-blue-500">View All</Text>

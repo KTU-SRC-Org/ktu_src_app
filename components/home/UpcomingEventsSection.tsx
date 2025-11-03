@@ -7,9 +7,7 @@ import MemoEventSectionImage from '../icons/EventSectionImage';
 const UpcomingEventsSection = () => {
   return (
     <View className="relative mt-24">
-      <View
-        style={styles.container}
-        className="z-10 px-3 py-5 mx-2 mb-10 bg-white rounded-lg ">
+      <View style={styles.container} className="z-10 mx-2 mb-10 rounded-lg bg-white px-3 py-5 ">
         <View className="flex flex-row items-center justify-between">
           <Text className="text-lg font-bold ">UPCOMING EVENTS</Text>
           <Link href="/">
@@ -17,7 +15,7 @@ const UpcomingEventsSection = () => {
           </Link>
         </View>
 
-        <View className="gap-4 mt-4">
+        <View className="mt-4 gap-4">
           <UpcomingEventCard />
           <UpcomingEventCard />
           <UpcomingEventCard />
@@ -61,8 +59,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    zIndex: 1
-  }
+    zIndex: 1,
+  },
 });
 
 export default UpcomingEventsSection;

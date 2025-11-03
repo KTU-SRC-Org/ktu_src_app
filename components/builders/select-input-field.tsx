@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, LayoutChangeEvent, TextInput} from 'react-native';
+import { View, Text, LayoutChangeEvent, TextInput } from 'react-native';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import {
@@ -33,7 +33,7 @@ export function SelectInputField<T extends FieldValues>({
   placeholder,
   options,
   disabled,
-  nextRef
+  nextRef,
 }: SelectInputFieldProps<T>) {
   const [width, setWidth] = useState(0);
 
@@ -71,11 +71,7 @@ export function SelectInputField<T extends FieldValues>({
             </Select>
           </View>
 
-          {error &&
-            <Text className="mt-1 text-sm text-red-500">
-            {error.message}
-          </Text>
-          }
+          {error && <Text className="mt-1 text-sm text-red-500">{error.message}</Text>}
         </View>
       )}
     />

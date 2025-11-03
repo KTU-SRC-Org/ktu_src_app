@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,18 +10,18 @@ import {
   Linking,
   Modal,
 } from 'react-native';
-import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { MOCK_ITEMS } from "@/features/marketplace/index";
-import {ProductImageCarousel} from "@/features/marketplace/product-image-carousel";
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { MOCK_ITEMS } from '@/features/marketplace/index';
+import { ProductImageCarousel } from '@/features/marketplace/product-image-carousel';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
-const ProductDetails = ({ id, category }: { id: string, category?: string }) => {
+const ProductDetails = ({ id, category }: { id: string; category?: string }) => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  console.log("category from product details : ?",category); //Query from category
+  console.log('category from product details : ?', category); //Query from category
   //Dummy fetch data sample
   const product = MOCK_ITEMS.find((item) => item.id === id);
 
@@ -39,17 +39,17 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
     if (!hasPhone && !hasWhatsApp) return;
 
     // For iOS
-    if (Platform.OS === "ios") {
-      const options = ["Cancel"];
+    if (Platform.OS === 'ios') {
+      const options = ['Cancel'];
       const actions: (() => void)[] = [() => {}];
 
       if (hasWhatsApp) {
-        options.push("Chat on WhatsApp");
+        options.push('Chat on WhatsApp');
         actions.push(() => Linking.openURL(whatsappLink));
       }
 
       if (hasPhone) {
-        options.push("Voice Call");
+        options.push('Voice Call');
         actions.push(() => Linking.openURL(telLink));
       }
 
@@ -68,7 +68,6 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
     }
   };
 
-
   // For android user chat on whatsapp button click
   const handleChatOnWhatsApp = () => {
     setShowModal(false);
@@ -83,7 +82,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
   if (!product) {
     return (
-      <View className="items-center justify-center flex-1">
+      <View className="flex-1 items-center justify-center">
         <Text className="text-gray-500">Product not found.</Text>
       </View>
     );
@@ -92,14 +91,14 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
   return (
     <>
       <View className="flex-1 bg-white">
-        <View className="absolute top-0 left-0 right-0 z-10 flex-row justify-between p-4 pb-2">
+        <View className="absolute left-0 right-0 top-0 z-10 flex-row justify-between p-4 pb-2">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
+            className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
             <Ionicons name="arrow-back" size={24} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
+          <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
             <Ionicons name="share-social-outline" size={24} color="#000" />
           </TouchableOpacity>
         </View>
@@ -118,7 +117,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
             }}>
             <ProductImageCarousel images={product.images} />
             <TouchableOpacity
-              className="absolute items-center justify-center w-12 h-12 bg-white rounded-full shadow-md bottom-5 right-5"
+              className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"
               style={{
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
@@ -132,7 +131,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
           <View className="px-4 pt-4">
             <Text className="mb-2 text-3xl font-bold text-[#FF8C42]">₵{product.price}</Text>
-            <Text className="flex-row mb-3 text-lg font-semibold text-gray-800">
+            <Text className="mb-3 flex-row text-lg font-semibold text-gray-800">
               {product.name}{' '}
               <Text
                 className={`text-xs font-semibold ${
@@ -141,8 +140,7 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
                     : (product.stock ?? 0) <= 5
                       ? 'text-yellow-600'
                       : 'text-green-600'
-                }`}
-              >
+                }`}>
                 {(product.stock ?? 0) === 0
                   ? '- [ Out of stock ]'
                   : (product.stock ?? 0) <= 5
@@ -150,8 +148,8 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
                     : '- [ In stock ]'}
               </Text>
             </Text>
-            <View className="flex-row items-center mb-4">
-              <View className="flex-row mr-2">
+            <View className="mb-4 flex-row items-center">
+              <View className="mr-2 flex-row">
                 {[1, 2, 3, 4, 5].map((star, index) => (
                   <Ionicons
                     key={index}
@@ -168,16 +166,13 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
 
             {product.sizes && product.sizes.length > 0 && (
               <View className="mb-4">
-                <Text className="mb-2 text-base font-semibold text-gray-800">
-                  Available Sizes
-                </Text>
+                <Text className="mb-2 text-base font-semibold text-gray-800">Available Sizes</Text>
 
                 <View className="flex-row flex-wrap gap-2">
                   {product.sizes.map((size) => (
                     <View
                       key={size}
-                      className="px-4 py-2 border border-gray-300 rounded-full bg-gray-50"
-                    >
+                      className="rounded-full border border-gray-300 bg-gray-50 px-4 py-2">
                       <Text className="text-sm font-medium text-gray-700">{size}</Text>
                     </View>
                   ))}
@@ -193,8 +188,8 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
             </View>
 
             {product.seller && (
-              <TouchableOpacity className="flex-row items-center p-4 mb-8 bg-gray-100 rounded-xl">
-                <View className="items-center justify-center w-12 h-12 mr-3 bg-gray-200 rounded-full">
+              <TouchableOpacity className="mb-8 flex-row items-center rounded-xl bg-gray-100 p-4">
+                <View className="mr-3 h-12 w-12 items-center justify-center rounded-full bg-gray-200">
                   <Ionicons name="person" size={24} color="#666" />
                 </View>
                 <View className="flex-1">
@@ -210,11 +205,10 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
           </View>
         </ScrollView>
 
-        <View className="absolute bottom-0 left-0 right-0 flex-row px-4 pt-4 pb-2">
+        <View className="absolute bottom-0 left-0 right-0 flex-row px-4 pb-2 pt-4">
           <TouchableOpacity
-            className="flex-row items-center justify-center flex-1 py-4 bg-gray-800 rounded-xl"
-            onPress={handleContactPress}
-          >
+            className="flex-1 flex-row items-center justify-center rounded-xl bg-gray-800 py-4"
+            onPress={handleContactPress}>
             <Ionicons name="call-outline" size={20} color="#fff" />
             <Text className="ml-2 text-base font-semibold text-white">Contact Seller</Text>
           </TouchableOpacity>
@@ -226,42 +220,30 @@ const ProductDetails = ({ id, category }: { id: string, category?: string }) => 
         visible={showModal}
         transparent
         animationType="slide"
-        onRequestClose={() => setShowModal(false)}
-      >
-        <View className="justify-end flex-1 bg-black/40">
-          <View className="p-6 bg-white rounded-t-2xl">
-            <Text className="mb-4 text-lg font-semibold text-center">
-              Contact Seller
-            </Text>
+        onRequestClose={() => setShowModal(false)}>
+        <View className="flex-1 justify-end bg-black/40">
+          <View className="rounded-t-2xl bg-white p-6">
+            <Text className="mb-4 text-center text-lg font-semibold">Contact Seller</Text>
 
             {whatsappNumber && (
               <TouchableOpacity
-                className="flex-row items-center justify-center py-3 mb-3 bg-green-600 rounded-xl"
-                onPress={handleChatOnWhatsApp}
-              >
+                className="mb-3 flex-row items-center justify-center rounded-xl bg-green-600 py-3"
+                onPress={handleChatOnWhatsApp}>
                 <Ionicons name="logo-whatsapp" size={22} color="#fff" />
-                <Text className="ml-2 text-base font-semibold text-white">
-                  WhatsApp
-                </Text>
+                <Text className="ml-2 text-base font-semibold text-white">WhatsApp</Text>
               </TouchableOpacity>
             )}
 
             {phoneNumber && (
               <TouchableOpacity
-                className="flex-row items-center justify-center py-3 mb-3 bg-blue-600 rounded-xl"
-                onPress={handlePhoneCall}
-              >
+                className="mb-3 flex-row items-center justify-center rounded-xl bg-blue-600 py-3"
+                onPress={handlePhoneCall}>
                 <Ionicons name="call" size={22} color="#fff" />
-                <Text className="ml-2 text-base font-semibold text-white">
-                  Voice Call
-                </Text>
+                <Text className="ml-2 text-base font-semibold text-white">Voice Call</Text>
               </TouchableOpacity>
             )}
 
-            <TouchableOpacity
-              className="items-center mt-3"
-              onPress={() => setShowModal(false)}
-            >
+            <TouchableOpacity className="mt-3 items-center" onPress={() => setShowModal(false)}>
               <Text className="font-medium text-gray-500">Cancel</Text>
             </TouchableOpacity>
           </View>

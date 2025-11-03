@@ -53,12 +53,12 @@
 //
 // BackButton.displayName = "BackButton";
 
-import { forwardRef } from "react";
-import { Text, TouchableOpacity, TouchableOpacityProps, View, StyleSheet } from "react-native";
-import { clsx } from "clsx";
-import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+import { forwardRef } from 'react';
+import { Text, TouchableOpacity, TouchableOpacityProps, View, StyleSheet } from 'react-native';
+import { clsx } from 'clsx';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 type BackButtonProps = {
   title?: string;
@@ -71,9 +71,9 @@ type BackButtonProps = {
 export const BackButton = forwardRef<View, BackButtonProps>(
   (
     {
-      title = "Go Back",
-      textColor = "text-white",
-      iconColor = "#FFFFFF",
+      title = 'Go Back',
+      textColor = 'text-white',
+      iconColor = '#FFFFFF',
       showLabel = true,
       className,
       onPress,
@@ -88,25 +88,18 @@ export const BackButton = forwardRef<View, BackButtonProps>(
         ref={ref}
         onPress={onPress || (() => router.back())}
         activeOpacity={0.8}
-        className={clsx("rounded-full text-sm overflow-hidden", className)}
-        {...props}
-      >
+        className={clsx('overflow-hidden rounded-full text-sm', className)}
+        {...props}>
         <LinearGradient
-          colors={["#F5882B", "#8A3324"]}
+          colors={['#F5882B', '#8A3324']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={styles.gradientContainer}
-        >
-          <Ionicons
-            name="arrow-back-circle-outline"
-            size={18}
-            color={iconColor}
-          />
+          style={styles.gradientContainer}>
+          <Ionicons name="arrow-back-circle-outline" size={18} color={iconColor} />
           {showLabel && (
             <Text
-              className={clsx("ml-1 font-semibold text-sm", textColor)}
-              style={{ includeFontPadding: false, textAlignVertical: "center" }}
-            >
+              className={clsx('ml-1 text-sm font-semibold', textColor)}
+              style={{ includeFontPadding: false, textAlignVertical: 'center' }}>
               {title}
             </Text>
           )}
@@ -116,13 +109,13 @@ export const BackButton = forwardRef<View, BackButtonProps>(
   }
 );
 
-BackButton.displayName = "BackButton";
+BackButton.displayName = 'BackButton';
 
 const styles = StyleSheet.create({
   gradientContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 9999,

@@ -1,31 +1,29 @@
-import React from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import {ALL_CATEGORIES, CategoryInterface} from "@/features/marketplace/index";
+import React from 'react';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { ALL_CATEGORIES, CategoryInterface } from '@/features/marketplace/index';
 
 export default function AllCategories() {
   const router = useRouter();
 
   const renderCategory = ({ item }: { item: CategoryInterface }) => (
     <TouchableOpacity
-      className="flex-row items-center bg-gray-100 p-4 rounded-xl my-2"
+      className="my-2 flex-row items-center rounded-xl bg-gray-100 p-4"
       onPress={() =>
         router.push({
-          pathname: "/marketplace/category/[id]",
+          pathname: '/marketplace/category/[id]',
           params: { id: item.id },
         })
-      }
-    >
+      }>
       <View
-        className="w-14 h-14 rounded-full justify-center items-center mr-4"
-        style={{ backgroundColor: item.color }}
-      >
+        className="mr-4 h-14 w-14 items-center justify-center rounded-full"
+        style={{ backgroundColor: item.color }}>
         <Text className="text-2xl">{item.icon}</Text>
       </View>
 
       <View className="flex-1">
-        <Text className="text-base font-semibold mb-1">{item.name}</Text>
+        <Text className="mb-1 text-base font-semibold">{item.name}</Text>
       </View>
 
       <Ionicons name="chevron-forward" size={24} color="#999" />

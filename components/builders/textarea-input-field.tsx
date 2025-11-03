@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
-import {Textarea} from "@/components/ui/textarea";
+import { Textarea } from '@/components/ui/textarea';
 
 interface TextareaInputFieldProps<T extends FieldValues> {
   control: Control<T>;
@@ -19,7 +19,7 @@ export function TextareaInputField<T extends FieldValues>({
   label,
   placeholder,
   disabled,
-  nextRef
+  nextRef,
 }: TextareaInputFieldProps<T>) {
   return (
     <Controller

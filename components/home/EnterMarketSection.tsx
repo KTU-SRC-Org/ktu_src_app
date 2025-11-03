@@ -6,16 +6,16 @@ import { ArrowRight } from 'lucide-react-native';
 
 const EnterMarketSection = () => {
   return (
-    <View className="px-2 mb-10">
+    <View className="mb-10 px-2">
       <View className="relative">
         <Image
           source={require('@/assets/images/Enter-student-market-1.png')}
           style={styles.image}
         />
 
-        <View className="absolute rounded-full right-4 top-2">
+        <View className="absolute right-4 top-2 rounded-full">
           <Link className="" href={'/marketplace-screen'}>
-            <View className="flex flex-row items-center justify-center p-2 px-3 rounded-full bg-gray-500/20">
+            <View className="flex flex-row items-center justify-center rounded-full bg-gray-500/20 p-2 px-3">
               <Text className="text-[15px] text-white">Enter</Text>
               <ArrowRight size={17} color={'white'} />
             </View>

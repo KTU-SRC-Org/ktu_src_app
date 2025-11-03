@@ -1,49 +1,42 @@
-import React, {useMemo, useState} from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import ProductCard from "@/features/marketplace/product-card";
-import {MOCK_ITEMS, ProductCardInterface} from "@/features/marketplace/index";
-import BackNavigationHeader from "@/features/marketplace/back-navigation-header";
-import ProductSearchBar from "@/features/marketplace/product-search-bar";
+import { useMemo, useState } from 'react';
+import { View, Text, FlatList } from 'react-native';
+import ProductCard from '@/features/marketplace/product-card';
+import { MOCK_ITEMS, ProductCardInterface } from '@/features/marketplace/index';
+import BackNavigationHeader from '@/features/marketplace/back-navigation-header';
+import ProductSearchBar from '@/features/marketplace/product-search-bar';
 
-const CategoryItems = ({id}: { id: string }) => {
-  const [selectedFilter, setSelectedFilter] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+const CategoryItems = ({ id }: { id: string }) => {
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filters = ["All", "Popular", "New", "Price: Low", "Price: High"];
+  //const filters = ["All", "Popular", "New", "Price: Low", "Price: High"];
 
-  const categoryItems = useMemo(
-    () => MOCK_ITEMS.filter((item) => item.category === id),
-    [id]
-  );
+  const categoryItems = useMemo(() => MOCK_ITEMS.filter((item) => item.category === id), [id]);
 
   const filteredItems = useMemo(() => {
     let items = [...categoryItems];
 
     switch (selectedFilter) {
-      case "popular":
+      case 'popular':
         items.sort((a, b) => (b.reviews ?? 0) - (a.reviews ?? 0));
         break;
-      case "new":
-       items.sort(
-          (a, b) =>
-            new Date(b.createdAt ?? "").getTime() -
-            new Date(a.createdAt ?? "").getTime()
+      case 'new':
+        items.sort(
+          (a, b) => new Date(b.createdAt ?? '').getTime() - new Date(a.createdAt ?? '').getTime()
         );
         break;
-      case "price: low":
-       items.sort((a, b) => a.price - b.price);
+      case 'price: low':
+        items.sort((a, b) => a.price - b.price);
         break;
-      case "price: high":
+      case 'price: high':
         items.sort((a, b) => b.price - a.price);
         break;
     }
 
     if (searchQuery.trim().length > 0) {
-      items = items.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      items = items.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
     }
-    return items
+    return items;
   }, [categoryItems, searchQuery, selectedFilter]);
 
   const renderItem = ({ item }: { item: ProductCardInterface }) => (
@@ -85,7 +78,7 @@ const CategoryItems = ({id}: { id: string }) => {
       {/*</View>*/}
 
       <FlatList
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         data={filteredItems}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
@@ -94,17 +87,16 @@ const CategoryItems = ({id}: { id: string }) => {
         contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
-        <ProductSearchBar
-          editable
-          placeholder="Search for product..."
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />}
+          <ProductSearchBar
+            editable
+            placeholder="Search for product..."
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        }
         ListEmptyComponent={
-          <Text className="text-center text-gray-400 mt-10">
-            {searchQuery ? "No product found in this search"
-              : "No product found in this category."
-            }
+          <Text className="mt-10 text-center text-gray-400">
+            {searchQuery ? 'No product found in this search' : 'No product found in this category.'}
           </Text>
         }
       />

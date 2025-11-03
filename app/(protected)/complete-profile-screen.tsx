@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CompleteProfileForm from '@/features/onboarding/complete-profile-form';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
-import {router} from "expo-router";
+import { router } from 'expo-router';
 
 const CompleteProfileScreen = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,12 +23,8 @@ const CompleteProfileScreen = () => {
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.keyboardView}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
-      >
-        <CompleteProfileForm
-          onSubmitPress={handleSubmit}
-          isSubmitting={isSubmitting}
-        />
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}>
+        <CompleteProfileForm onSubmitPress={handleSubmit} isSubmitting={isSubmitting} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
