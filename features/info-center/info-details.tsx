@@ -50,6 +50,17 @@ const InfoDetails = ({id}: {id: string}) => {
           </Text>
         )}
 
+        {info.message && (
+          <View className={"px-4"}>
+            <View className="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-lg">
+              <Text className="text-sm text-amber-800 font-semibold mb-1">
+                Notice!!!
+              </Text>
+              <Text className="text-sm text-gray-700">{info.message}</Text>
+            </View>
+          </View>
+        )}
+
         <View className="flex-row gap-2 px-4">
           <Pressable className="flex-1 bg-neutral-900 py-3 rounded-xl active:opacity-90">
             <Text className="text-white text-center font-semibold text-sm">
