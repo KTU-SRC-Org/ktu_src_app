@@ -19,7 +19,7 @@ export interface InfoDetailsInterface extends InfoCardInterface {
   address?: string;
   contact?: string;
   quickFacts?: { label: string; value: string }[];
-  attachments?: { name: string }[];
+  attachments?: { name: string, url: string }[];
 }
 
 export const infoData: InfoDetailsInterface[] = [
@@ -38,7 +38,20 @@ export const infoData: InfoDetailsInterface[] = [
       { label: "Version", value: "3.2.0" },
       { label: "Size", value: "45 MB" },
     ],
-    attachments: [{ name: "Update Guide.pdf" }],
+    attachments: [
+      {
+        name: "Event Schedule",
+        url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        name: "Meeting Notes",
+        url: "https://file-examples.com/storage/fe2e0ec9e8b4f4b57f3a0bc/2017/02/file-sample_100kB.docx"
+      },
+      {
+        name: "Budget Summary",
+        url: "https://file-examples.com/storage/febc9dc2e1c81e8e44ce1dc/2017/02/file_example_XLSX_10.xlsx"
+      },
+    ],
   },
   {
     id: "2",
@@ -60,7 +73,20 @@ export const infoData: InfoDetailsInterface[] = [
       { label: "Last Trip", value: "10:00 PM" },
       { label: "Fee", value: "Free for Students" },
     ],
-    attachments: [{ name: "New Timetable.pdf" }],
+    attachments: [
+      {
+        name: "Event Schedule",
+        url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        name: "Meeting Notes",
+        url: "https://file-examples.com/storage/fe2e0ec9e8b4f4b57f3a0bc/2017/02/file-sample_100kB.docx"
+      },
+      {
+        name: "Budget Summary",
+        url: "https://file-examples.com/storage/febc9dc2e1c81e8e44ce1dc/2017/02/file_example_XLSX_10.xlsx"
+      },
+    ],
   },
   {
     id: "3",
@@ -102,8 +128,14 @@ export const infoData: InfoDetailsInterface[] = [
       { label: "Security", value: "SRC Volunteers + Campus Patrol" },
     ],
     attachments: [
-      { name: "Event Schedule.pdf" },
-      { name: "Performer List.pdf" },
+      {
+        name: "Budget Summary",
+        url: "https://file-examples.com/storage/febc9dc2e1c81e8e44ce1dc/2017/02/file_example_XLSX_10.xlsx"
+      },
+      {
+        name: "Event Poster",
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
+      },
     ],
   },
   {
@@ -130,7 +162,16 @@ export const infoData: InfoDetailsInterface[] = [
     timestamp: "2025-11-03T12:15:00Z",
     details:
       "To enable, go to Settings → Display → Dark Mode. Your preference will sync across all devices linked to your student account.",
-    attachments: [{ name: "Feature Overview.pdf" }],
+    attachments: [
+      {
+        name: "Budget Summary",
+        url: "https://file-examples.com/storage/febc9dc2e1c81e8e44ce1dc/2017/02/file_example_XLSX_10.xlsx"
+      },
+      {
+        name: "Event Poster",
+        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
+      },
+    ],
   },
   {
     id: "7",
@@ -156,6 +197,15 @@ export const infoData: InfoDetailsInterface[] = [
       { label: "Date", value: "November 10, 2025" },
       { label: "Offices Closed", value: "All Academic & Admin" },
     ],
-    attachments: [{ name: "Holiday Circular.pdf" }],
+    attachments: [
+      {
+        name: "Event Schedule",
+        url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        name: "Meeting Notes",
+        url: "https://file-examples.com/storage/fe2e0ec9e8b4f4b57f3a0bc/2017/02/file-sample_100kB.docx"
+      },
+    ],
   },
 ];

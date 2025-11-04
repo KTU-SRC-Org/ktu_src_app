@@ -2,6 +2,7 @@ import {FlatList, Pressable, Text, View} from "react-native";
 import {useState} from "react";
 import {InfoCardInterface, infoData} from "@/features/info-center/index";
 import InfoCard from "@/features/info-center/info-card";
+import InfoCenterHeader from "@/features/info-center/info-center-header";
 
 export type InfoCenterType = "notifications" | "announcements"
 
@@ -27,7 +28,8 @@ const InfoList = ({type} : {type: InfoCenterType}) => {
 
   return(
     <View className="flex-1 bg-white">
-      <View className="flex-row items-center justify-start pb-4 gap-4 ">
+      <InfoCenterHeader title={"Notification & Announcements"}/>
+      <View className="flex-row items-center justify-start px-4 py-2 gap-4 ">
         <Pressable
           onPress={() => setActiveTab("notifications")}
           className={`px-4 py-2 rounded-full ${
@@ -67,7 +69,7 @@ const InfoList = ({type} : {type: InfoCenterType}) => {
         data={data}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 0, paddingVertical: 20 }}
+        contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
         renderItem={renderList}
       />
     </View>

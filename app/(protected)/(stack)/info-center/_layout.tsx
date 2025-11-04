@@ -1,6 +1,7 @@
 import {Stack, useRouter} from "expo-router";
-import {Pressable} from "react-native";
+import {Pressable, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
+import React from "react";
 
 export default function InfoCenterLayout() {
   const router = useRouter();
@@ -9,19 +10,11 @@ export default function InfoCenterLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Notification & Announcements",
-          headerShown: true,
-          headerLeft: () => (
-            <Pressable onPress={() => router.back()}>
-              <Ionicons name="chevron-back" size={24} color={"black"} />
-            </Pressable>
-          ),
+          headerShown: false,
         }}
       />
       <Stack.Screen
-        name="info/[id]"
-        options={{ headerShown: false }}
-      />
+        name="info/[id]" options={{ headerShown: false }} />
     </Stack>
   );
 }

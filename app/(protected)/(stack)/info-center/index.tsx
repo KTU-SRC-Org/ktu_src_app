@@ -6,7 +6,7 @@ export default function InfoCenterScreen() {
   const { type } = useLocalSearchParams<{ type: string }>();
 
   return (
-    <SafeAreaView className="flex-1 bg-white px-4">
+    <SafeAreaView className="flex-1 bg-white">
       <InfoList type={type as InfoCenterType}/>
     </SafeAreaView>
   );
