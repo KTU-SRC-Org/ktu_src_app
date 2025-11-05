@@ -4,6 +4,8 @@ import { Image } from 'expo-image';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Text } from '@/components/ui/text';
 import { NewsItemCard } from '../cards/NewsItemCard';
+import {infoData} from "@/features/info-center";
+import {useRouter} from "expo-router";
 
 export interface NewsItemData {
   id: string;
@@ -34,12 +36,20 @@ const dummyNewsItems: NewsItemData[] = [
 ];
 
 export function CampusNewsSection() {
+  const router = useRouter();
+
   const handleReadMore = (newsId: string) => {
-    console.log(`Read more pressed for news item: ${newsId}`);
+    router.push({
+      pathname: "/info-center/info/[id]",
+      params: {id: newsId}
+    })
   };
 
   const handleViewAll = () => {
-    console.log('View All pressed');
+    router.push({
+      pathname: "/info-center",
+      params: { type: "announcements" }
+    })
   };
 
   return (
@@ -86,8 +96,15 @@ export function CampusNewsSection() {
 
         {/* News Items List */}
         <View className="p-4">
-          {dummyNewsItems.map((item) => (
-            <NewsItemCard key={item.id} {...item} onReadMore={() => handleReadMore(item.id)} />
+          {infoData.filter((item) => item.type = "announcement")
+            .slice(0,3).map((item) => (
+            <NewsItemCard
+              id={item.id}
+              key={item.id}
+              title={item.title}
+              description={item.message}
+              onReadMore={() => handleReadMore(item.id)}
+            />
           ))}
         </View>
       </View>
