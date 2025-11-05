@@ -1,8 +1,7 @@
 import { Link, Tabs } from 'expo-router';
 
 import { HeaderButton } from '@/components/HeaderButton';
-import { TabBarIcon } from '@/components/TabBarIcon';
-import { Store, House, Hotel } from 'lucide-react-native';
+import { Store, House, Hotel, Settings } from 'lucide-react-native';
 import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
@@ -43,10 +42,10 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="two"
+        name="settings"
         options={{
-          title: '',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Settings',
+          tabBarIcon: ({ color }) => <Settings color={color} style={styles.tabBarIcon} size={28} />,
         }}
       />
     </Tabs>
