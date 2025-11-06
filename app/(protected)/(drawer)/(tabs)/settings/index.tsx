@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
-// import { useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { SettingSection } from '@/features/settings/setting-section';
 import { ExternalServicesSection } from '@/features/settings/external-services-section';
 import { DeveloperCredits } from '@/features/settings/developer-credits';
@@ -7,6 +7,7 @@ import { settingsSections, externalServices } from '@/config/settings.config';
 import { SettingItem, ExternalService } from '@/types/settings.types';
 
 const SettingsScreen = () => {
+  const router = useRouter()
   const handleItemPress = (item: SettingItem) => {
     if (item.disabled || item.comingSoon) return;
 
@@ -14,7 +15,7 @@ const SettingsScreen = () => {
       item.onPress();
     } else if (item.link) {
       console.log('Navigate to:', item.link);
-      // router.push(item.link);
+      router.push(item.link);
     }
   };
 

@@ -9,7 +9,7 @@ export const settingsSections: SettingSection[] = [
         name: 'Profile & Account',
         icon: 'person-circle',
         backgroundColor: '#3B82F6',
-        link: '/settings/profile',
+        link: '/settings/profile-account',
       },
       {
         id: 'auth',
