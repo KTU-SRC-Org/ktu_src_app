@@ -19,10 +19,7 @@ const EventCard = ({ date, title, location, id }: EventCardProps) => {
 
   return (
     <Pressable
-      onPress={() => router.push({
-        pathname: "/events/[id]",
-        params: {id: id}
-      })}
+      onPress={() => router.push(`/events/${id}`)}
       style={styles.container}
       className="flex flex-row items-center justify-between gap-3 rounded-md bg-slate-100 px-3 py-2 active:opacity-70"
     >

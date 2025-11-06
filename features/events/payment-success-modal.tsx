@@ -5,10 +5,11 @@ import FormModal from "@/components/builders/form.modal";
 import ReceiptModal from "@/features/events/reciept-modal";
 import {BookingsInterface} from "@/types/events.types";
 
-export default function PaymentSuccessModal({visible, onClose, data,}: {
+export default function PaymentSuccessModal({visible, onClose, data, receiptId}: {
   visible: boolean;
   onClose: () => void;
   data?: BookingsInterface
+  receiptId: string
 }) {
   const [showReceipt, setShowReceipt] = useState<boolean>(false);
 
@@ -21,6 +22,7 @@ export default function PaymentSuccessModal({visible, onClose, data,}: {
           onClose();
         }}
         data={data}
+        receiptId={receiptId}
       />
     );
 
