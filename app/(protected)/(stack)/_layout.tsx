@@ -2,9 +2,10 @@ import { Stack } from 'expo-router';
 
 const StackLayout = () => {
   return (
-    <Stack>
-      <Stack.Screen name="marketplace" options={{ headerShown: false }} />
-      <Stack.Screen name="info-center" options={{ headerShown: false }} />
+    <Stack screenOptions={{headerShown: false}}>
+      <Stack.Screen name="marketplace"/>
+      <Stack.Screen name="info-center"/>
+      <Stack.Screen name="events" />
     </Stack>
   );
 };
