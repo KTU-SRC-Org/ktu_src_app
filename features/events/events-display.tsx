@@ -1,10 +1,11 @@
 import {useRef, useState} from "react";
-import { View, Text, Animated } from "react-native";
+import { View, Animated } from "react-native";
 import EventsHeader from "@/features/events/events-header";
 import EventsTabs from "@/features/events/events-tabs";
 import EventCard from "@/features/events/event-card";
 import {eventsData} from "@/features/events/index";
 import {TabKeys, Event} from "@/types/events.types";
+import TabsTopNav from "@/components/shared/tabs-top-nav";
 
 const EventsDisplay = () => {
   const [selectedTab, setSelectedTab] = useState<TabKeys>("featured");
@@ -39,17 +40,12 @@ const EventsDisplay = () => {
           top: 0,
           left: 0,
           right: 0,
-          height: 60,
           backgroundColor: "white",
-          justifyContent: "center",
-          paddingHorizontal: 16,
-          borderBottomWidth: 1,
-          borderColor: "rgba(0,0,0,0.05)",
           zIndex: 30,
           opacity: topBarOpacity,
         }}
       >
-        <Text className="text-2xl font-bold text-neutral-900">Events</Text>
+        <TabsTopNav id={'events-header'} title={"Events"}/>
       </Animated.View>
 
       <Animated.FlatList
@@ -69,7 +65,7 @@ const EventsDisplay = () => {
             <EventsTabs selected={selectedTab} setSelected={setSelectedTab} />
           </>
         }
-        contentContainerStyle={{ paddingBottom: 20, paddingTop: 16 }}
+        contentContainerStyle={{ paddingBottom: 20}}
       />
     </View>
   );
