@@ -1,4 +1,3 @@
-import React from "react";
 import {View, Text, useWindowDimensions, Platform, ImageBackground, Pressable} from "react-native";
 import {ArrowRight, MapPin} from "lucide-react-native";
 import { Image } from "expo-image";

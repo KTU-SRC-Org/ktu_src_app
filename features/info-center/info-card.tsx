@@ -1,6 +1,5 @@
 import { Text, View, Pressable } from "react-native";
 import { Link, LinkProps } from "expo-router";
-import React from "react";
 import {formatTime} from "@/lib/utils";
 
 interface InfoCardProps {

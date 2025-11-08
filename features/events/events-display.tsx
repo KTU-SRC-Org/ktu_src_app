@@ -1,10 +1,10 @@
-import React, {useRef, useState} from "react";
+import {useRef, useState} from "react";
 import { View, Text, Animated } from "react-native";
 import EventsHeader from "@/features/events/events-header";
 import EventsTabs from "@/features/events/events-tabs";
 import EventCard from "@/features/events/event-card";
 import {eventsData} from "@/features/events/index";
-import {TabKeys} from "@/types/events.types";
+import {TabKeys, Event} from "@/types/events.types";
 
 const EventsDisplay = () => {
   const [selectedTab, setSelectedTab] = useState<TabKeys>("featured");
@@ -18,6 +18,17 @@ const EventsDisplay = () => {
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
+
+  const renderItem = ({ item }: { item: Event }) => (
+   <View className={"px-4"}>
+     <EventCard
+       id={item.id}
+       title={item.title}
+       date={item.date}
+       location={item.location}
+     />
+   </View>
+  );
 
   return (
     <View className="flex-1 bg-white">
@@ -41,33 +52,25 @@ const EventsDisplay = () => {
         <Text className="text-2xl font-bold text-neutral-900">Events</Text>
       </Animated.View>
 
-      <Animated.ScrollView
+      <Animated.FlatList
+        data={eventsData}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        ItemSeparatorComponent={() => <View className="h-4" />}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: false }
         )}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      >
-        <EventsHeader />
-        <EventsTabs
-          selected={selectedTab}
-          setSelected={setSelectedTab}
-        />
-
-        <View className="px-4 gap-4 py-4 bg-neutral-100">
-          {eventsData.map(event => (
-            <EventCard
-              id={event.id}
-              key={event.id}
-              title={event.title}
-              date={event.date}
-              location={event.location}
-            />
-            ))}
-        </View>
-      </Animated.ScrollView>
+        ListHeaderComponent={
+          <>
+            <EventsHeader />
+            <EventsTabs selected={selectedTab} setSelected={setSelectedTab} />
+          </>
+        }
+        contentContainerStyle={{ paddingBottom: 20, paddingTop: 16 }}
+      />
     </View>
   );
 };

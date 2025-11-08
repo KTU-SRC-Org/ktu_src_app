@@ -16,7 +16,7 @@ export const eventsData: Event[] = [
   {
     id: "1",
     title: "S.R.C First Year’s Orientation at The Aba Bentil Hall",
-    date: "2025-05-01T20:00:00Z",
+    date: "2026-05-01T20:00:00Z",
     location: "Aba Bentil Hall",
     category: "Educational",
     description:
@@ -29,7 +29,7 @@ export const eventsData: Event[] = [
   {
     id: "2",
     title: "Freshers Welcome Concert",
-    date: "2025-05-03T18:30:00Z",
+    date: "2026-01-03T18:30:00Z",
     location: "Campus Main Arena",
     category: "Entertainment",
     description:
@@ -42,7 +42,7 @@ export const eventsData: Event[] = [
   {
     id: "3",
     title: "Tech Innovators Meetup",
-    date: "2025-05-06T15:00:00Z",
+    date: "2026-02-06T15:00:00Z",
     location: "Innovation Hub",
     category: "Technology",
     description:
@@ -55,7 +55,7 @@ export const eventsData: Event[] = [
   {
     id: "4",
     title: "Career and Internship Fair 2025",
-    date: "2025-05-10T09:00:00Z",
+    date: "2026-03-10T09:00:00Z",
     location: "Auditorium Block B",
     category: "Career",
     description:
@@ -68,7 +68,7 @@ export const eventsData: Event[] = [
   {
     id: "5",
     title: "Cultural Night: A Celebration of Heritage",
-    date: "2025-05-15T19:00:00Z",
+    date: "2026-01-18T19:00:00Z",
     location: "Campus Amphitheater",
     category: "Cultural",
     description:
@@ -81,7 +81,7 @@ export const eventsData: Event[] = [
   {
     id: "6",
     title: "Sports Festival: Unity Through Games",
-    date: "2025-05-20T08:00:00Z",
+    date: "2026-04-20T08:00:00Z",
     location: "University Sports Complex",
     category: "Sports",
     description:
@@ -94,7 +94,7 @@ export const eventsData: Event[] = [
   {
     id: "7",
     title: "Music & Art Exhibition",
-    date: "2025-05-25T17:00:00Z",
+    date: "2026-02-25T17:00:00Z",
     location: "Arts Gallery",
     category: "Art",
     description:
@@ -107,7 +107,7 @@ export const eventsData: Event[] = [
   {
     id: "8",
     title: "Campus Innovation Challenge Finals",
-    date: "2025-05-30T14:00:00Z",
+    date: "2026-05-30T14:00:00Z",
     location: "Auditorium Hall A",
     category: "Competition",
     description:

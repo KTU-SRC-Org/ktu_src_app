@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { AuthButton } from '@/components/shared/auth-button';

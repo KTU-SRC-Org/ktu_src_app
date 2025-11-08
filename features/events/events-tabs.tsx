@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Pressable, Text } from "react-native";
 import {TabKeys} from "@/types/events.types";
 

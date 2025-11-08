@@ -1,4 +1,3 @@
-import React from "react";
 import {View, Text, StyleSheet, Pressable, Platform} from "react-native";
 import { Calendar, MapPin } from "lucide-react-native";
 import { useRouter } from "expo-router";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { CheckCircle2 } from "lucide-react-native";
 import FormModal from "@/components/builders/form.modal";

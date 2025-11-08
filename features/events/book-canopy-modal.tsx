@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Text, Pressable, Image, ScrollView } from "react-native";
 import { Minus, Plus } from "lucide-react-native";
 import FormModal from "@/components/builders/form.modal";

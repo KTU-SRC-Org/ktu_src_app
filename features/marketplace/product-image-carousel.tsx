@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, ScrollView, Image, Dimensions, ImageSourcePropType } from 'react-native';
 
 const { width } = Dimensions.get('window');
