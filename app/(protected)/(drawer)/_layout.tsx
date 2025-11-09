@@ -69,7 +69,7 @@ const CustomDrawerContent = (props: any) => {
               <MaterialIcons name="verified" size={20} color="#007AFF" />
             )}
           </UiView>
-          <UiText className="items-center text-gray-500 text-sm">
+          <UiText className="items-center text-sm text-gray-500">
             {student.indexNumber}
           </UiText>
         </UiView>
@@ -127,7 +127,7 @@ export default function DrawerLayout() {
   return (
     <Drawer
       drawerContent={(props) => <CustomDrawerContent {...props} />}
-      screenOptions={{ headerShown: false, swipeEdgeWidth: 0 }}
+      screenOptions={{ headerShown: false, swipeEdgeWidth: 0, drawerType: 'front' }}
     />
   );
 }
