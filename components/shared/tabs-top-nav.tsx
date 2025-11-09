@@ -14,7 +14,7 @@ const TabsTopNav = ({ id, title, leftContent, rightContent, children }: Props) =
   return (
     <View
       key={id}
-      className="bg-white z-50"
+      className="bg-white z-50 py-1"
     >
       <View className="relative flex-row items-center justify-between px-4 min-h-[48px]">
         <View className="items-start">
