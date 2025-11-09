@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 interface FormModalProps {
   visible: boolean;
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   closeRow: {
-    paddingVertical: 20,
-    paddingHorizontal: 16,
+    paddingVertical: height * 0.03,
+    paddingHorizontal: width * 0.04,
     alignItems: 'flex-start',
   },
   content: {

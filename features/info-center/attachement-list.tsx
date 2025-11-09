@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, Pressable, Linking } from "react-native";
 import {
   FileText,

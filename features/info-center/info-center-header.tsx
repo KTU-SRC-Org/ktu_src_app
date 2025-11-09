@@ -1,6 +1,5 @@
 import {Pressable, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
-import React from "react";
 import {useRouter} from "expo-router";
 
 const InfoCenterHeader = ({title} : {title?: string}) => {

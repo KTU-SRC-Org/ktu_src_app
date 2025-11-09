@@ -21,3 +21,20 @@ export const formatTime = (date: Date | string) => {
     year: "numeric",
   });
 };
+
+export const getFormattedDate = (inputDate: Date | string) => {
+  const date =  new Date(inputDate)
+
+  const month = date
+    .toLocaleString("en-US", { month: "short" })
+    .toUpperCase();
+
+  const day = date.getDate().toString().padStart(2, "0");
+
+  const time = date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return { month, day, time };
+};

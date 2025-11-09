@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -9,7 +8,7 @@ interface CategoryCardProps {
   color: string;
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ id, name, icon, color }) => {
+const CategoryCard = ({ id, name, icon, color }: CategoryCardProps) => {
   const router = useRouter();
 
   return (

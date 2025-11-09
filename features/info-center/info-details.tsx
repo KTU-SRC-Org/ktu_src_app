@@ -1,7 +1,6 @@
-import React from "react";
 import { View, Text, ScrollView, Pressable } from "react-native";
 import { infoData } from "@/features/info-center/index";
-import { AlertCircle, MapPin, Phone } from "lucide-react-native";
+import { AlertCircle, MapPin } from "lucide-react-native";
 import { Card, CardContent } from '@/components/ui/card';
 import {formatTime} from "@/lib/utils";
 import InfoCenterHeader from "@/features/info-center/info-center-header";

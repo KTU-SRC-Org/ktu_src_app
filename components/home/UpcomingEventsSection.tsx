@@ -1,26 +1,51 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 import { Link } from 'expo-router';
-import UpcomingEventCard from '../cards/UpcomingEventCard';
 import MemoEventSectionImage from '../icons/EventSectionImage';
+import {Event} from "@/types/events.types";
+import EventCard from "@/features/events/event-card";
+import {eventsData} from "@/features/events";
 
 const UpcomingEventsSection = () => {
+
+  //Future events and nearest first 5 events
+  const upcomingEvents = eventsData
+    .filter(event => new Date(event.date) >= new Date())
+    .sort((a, b) => new Date(a.date)
+      .getTime() - new Date(b.date).getTime())
+    .slice(0, 5);
+
+
   return (
     <View className="relative mt-24">
       <View style={styles.container} className="z-10 mx-2 mb-10 rounded-lg bg-white px-3 py-5 ">
         <View className="flex flex-row items-center justify-between">
           <Text className="text-lg font-bold ">UPCOMING EVENTS</Text>
-          <Link href="/">
-            <Text className="text-sm text-blue-500">View All</Text>
+          <Link href={'/events'}>
+            <Text className="text-sm text-blue-500 bg-transparent">View All</Text>
           </Link>
         </View>
 
-        <View className="mt-4 gap-4">
-          <UpcomingEventCard />
-          <UpcomingEventCard />
-          <UpcomingEventCard />
-          <UpcomingEventCard />
-          <UpcomingEventCard />
+        <View className="bg-white mt-4">
+          {upcomingEvents.length > 0 ? (
+            <View className={"flex flex-col gap-4"}>
+              {upcomingEvents.map((event: Event) => (
+                <EventCard
+                  key={event.id}
+                  id={event.id}
+                  title={event.title}
+                  date={event.date}
+                  location={event.location}
+                />
+              ))}
+            </View>
+          ): (
+           <View>
+             <Text className="text-lg">
+               No upcoming events found.
+             </Text>
+           </View>
+          )}
         </View>
       </View>
 

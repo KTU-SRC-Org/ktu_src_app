@@ -1,5 +1,4 @@
 import { Text, View } from 'react-native';
-import React from 'react';
 import { BackButton } from '@/components/shared/back-button';
 
 const BackNavigationHeader = ({ title, itemCount }: { title: string; itemCount?: number }) => {
