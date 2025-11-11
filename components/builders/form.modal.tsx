@@ -37,11 +37,9 @@ const FormModal = ({
   return (
     <Modal visible={visible} animationType={animationType} transparent onRequestClose={onClose}>
       <View style={styles.centered}>
-        {closeOnTouchOutside && (
-          <TouchableWithoutFeedback onPress={onClose}>
-            <View style={styles.background} />
-          </TouchableWithoutFeedback>
-        )}
+        <TouchableWithoutFeedback onPress={closeOnTouchOutside ? onClose : undefined}>
+          <View style={styles.background} />
+        </TouchableWithoutFeedback>
 
         <Animated.View
           style={[
@@ -77,7 +75,9 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
+
   container: {
     backgroundColor: '#fff',
     position: 'absolute',

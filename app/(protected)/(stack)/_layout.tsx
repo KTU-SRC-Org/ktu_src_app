@@ -6,6 +6,7 @@ const StackLayout = () => {
       <Stack.Screen name="marketplace"/>
       <Stack.Screen name="info-center"/>
       <Stack.Screen name="events" />
+      <Stack.Screen name={"src-news"}/>
     </Stack>
   );
 };
