@@ -1,0 +1,94 @@
+import {FlatList, Pressable, View, Text} from "react-native";
+import BackNavigationHeader from "@/features/marketplace/back-navigation-header";
+import {SrcNewsInterface} from "@/types/src-news.types";
+import {srcNewsData} from "@/features/src-news/index";
+import SrcNewsCard from "@/features/src-news/src-news-card";
+import {useState} from "react";
+import FormModal from "@/components/builders/form.modal";
+import SrcNewsDetails from "@/features/src-news/src-news-details";
+
+const FILTERS = ["All", "Tech", "Business"];
+
+const SrcNewsList = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedNews, setSelectedNews] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<string>("All");
+
+  // Helper to add src news to collection
+  const handleSave = (newsId: string) => {
+    console.log(newsId);
+  }
+
+  //Helper to share src news
+  const handleShare = (newsId: string) => {
+    console.log(newsId);
+  }
+
+  // Handle read more
+  const handleReadMore = (newsId: string) => {
+    setSelectedNews(newsId);
+    setOpenModal(true);
+  }
+
+  // Filtering logic
+  const filteredData = srcNewsData.filter((item) => {
+    if (activeFilter === "All") return true;
+    return item.title === activeFilter;
+  });
+
+  const renderNewsItem = ({ item }: {item: SrcNewsInterface }) => (
+    <SrcNewsCard
+      source={item.source}
+      publisher={item.publisher}
+      publisherImage={item.publisherImage}
+      body={item.body}
+      onSave={() => handleSave(item.id)}
+      onShare={() => handleShare(item.id)}
+      onReadMore={() => handleReadMore(item.id)}
+    />
+  );
+
+  return(
+   <>
+     <View className="flex-1">
+       <BackNavigationHeader title={"SRC News"}/>
+       <View>
+
+         <FlatList
+           data={filteredData}
+           keyExtractor={(item) => item.id}
+           showsVerticalScrollIndicator={false}
+           contentContainerStyle={{ paddingHorizontal: 14, paddingTop: 14, paddingBottom: 30 }}
+           renderItem={renderNewsItem}
+           ItemSeparatorComponent={() => <View className="h-4" />}
+           ListHeaderComponent={
+             <View className="flex-row justify-start gap-4 py-4">
+               {FILTERS.map((filter) => (
+                 <Pressable
+                   key={filter}
+                   className={`px-6 py-2 rounded-2xl border border-neutral-400 ${
+                     activeFilter === filter && "bg-blue-600"
+                   }`}
+                   onPress={() => setActiveFilter(filter)}
+                 >
+                   <Text
+                     className={`font-medium ${
+                       activeFilter === filter ? "text-white" : "text-black"
+                     }`}
+                   >
+                     {filter}
+                   </Text>
+                 </Pressable>
+               ))}
+             </View>
+           }
+         />
+       </View>
+     </View>
+     <FormModal visible={openModal} onClose={() => setOpenModal(false)}>
+       <SrcNewsDetails id={selectedNews}/>
+     </FormModal>
+   </>
+  )
+}
+export default SrcNewsList;
