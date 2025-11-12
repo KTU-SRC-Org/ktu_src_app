@@ -10,7 +10,7 @@ import SrcNewsDetails from "@/features/src-news/src-news-details";
 
 type FilterType = CategoryType | "All";
 
-const FILTERS: FilterType[] = ["All", "tech", "business", "campus"];
+const FILTERS: FilterType[] = ["All", "tech", "business"];
 
 const SrcNewsList = () => {
   const [openModal, setOpenModal] = useState(false);
