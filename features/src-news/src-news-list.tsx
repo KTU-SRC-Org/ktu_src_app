@@ -19,11 +19,6 @@ const SrcNewsList = () => {
     console.log(newsId);
   }
 
-  //Helper to share src news
-  const handleShare = (newsId: string) => {
-    console.log(newsId);
-  }
-
   // Handle read more
   const handleReadMore = (newsId: string) => {
     setSelectedNews(newsId);
@@ -38,12 +33,14 @@ const SrcNewsList = () => {
 
   const renderNewsItem = ({ item }: {item: SrcNewsInterface }) => (
     <SrcNewsCard
+      newsId={item.id}
       source={item.source}
+      title={item.title}
       publisher={item.publisher}
+      publishedAt={item.publishedAt}
       publisherImage={item.publisherImage}
       body={item.body}
       onSave={() => handleSave(item.id)}
-      onShare={() => handleShare(item.id)}
       onReadMore={() => handleReadMore(item.id)}
     />
   );
