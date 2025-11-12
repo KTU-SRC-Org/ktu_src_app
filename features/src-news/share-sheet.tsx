@@ -13,6 +13,7 @@ import {
   Copy, Upload,
 } from "lucide-react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
 
 interface ShareOption {
   id: string;
@@ -187,7 +188,7 @@ const ShareSheet: React.FC<ShareSheetProps> = ({visible, onClose, shareUrl, titl
           <Pressable onPress={(e) => e.stopPropagation()}>
             <View className="flex-row items-center justify-center py-4 px-5 relative">
               <View className={"flex-row items-center gap-1"}>
-                <Upload color={"#000"} size={14}/>
+                <Upload color={"#000"} size={16}/>
                 <Text className="font-semibold">Share</Text>
               </View>
               <Pressable onPress={onClose} className="absolute right-5 p-1">
@@ -204,7 +205,12 @@ const ShareSheet: React.FC<ShareSheetProps> = ({visible, onClose, shareUrl, titl
                     {body}
                   </Text>
                 ) : null}
-                <Text className="text-xs text-blue-600 mt-2">
+                <Text
+                  className="text-xs text-blue-600 mt-2"
+                  onPress={() => {
+                    onClose();
+                    Linking.openURL(shareUrl)
+                  }}>
                   {shareUrl}
                 </Text>
               </View>

@@ -25,8 +25,9 @@ const SrcNewsCard = ({newsId, publisher,publishedAt, source,title, body, publish
     setShowShareSheet(true);
   };
 
-  const shareUrl = Linking.createURL(`/src-news/${newsId}`, {
+  const shareUrl = Linking.createURL(`/src-news`, {
     queryParams: {
+      newsId: newsId,
       title: title,
       publisher: publisher,
       publishedAt: new Date(publishedAt).toISOString(),

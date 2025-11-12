@@ -3,8 +3,9 @@ import BackNavigationHeader from "@/features/marketplace/back-navigation-header"
 import {SrcNewsInterface} from "@/types/src-news.types";
 import {srcNewsData} from "@/features/src-news/index";
 import SrcNewsCard from "@/features/src-news/src-news-card";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FormModal from "@/components/builders/form.modal";
+import * as Linking from 'expo-linking';
 import SrcNewsDetails from "@/features/src-news/src-news-details";
 
 const FILTERS = ["All", "Tech", "Business"];
@@ -45,6 +46,25 @@ const SrcNewsList = () => {
     />
   );
 
+  useEffect(() => {
+    const handleDeepLink = ({ url }: { url: string }) => {
+      const { queryParams } = Linking.parse(url);
+      if (queryParams?.newsId) {
+        setSelectedNews(queryParams.newsId as string);
+        setOpenModal(true);
+      }
+    };
+
+    const subscription = Linking.addEventListener("url", handleDeepLink);
+
+    (async () => {
+      const initialUrl = await Linking.getInitialURL();
+      if (initialUrl) handleDeepLink({ url: initialUrl });
+    })();
+
+    return () => subscription.remove();
+  }, []);
+
   return(
    <>
      <View className="flex-1">
@@ -82,9 +102,14 @@ const SrcNewsList = () => {
          />
        </View>
      </View>
-     <FormModal visible={openModal} onClose={() => setOpenModal(false)}>
-       <SrcNewsDetails id={selectedNews}/>
-     </FormModal>
+     {openModal && (
+       <FormModal
+         visible={openModal}
+         onClose={() => setOpenModal(false)}
+       >
+         <SrcNewsDetails id={selectedNews}/>
+       </FormModal>
+     )}
    </>
   )
 }
