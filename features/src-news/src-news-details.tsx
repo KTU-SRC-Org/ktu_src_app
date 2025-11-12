@@ -2,6 +2,7 @@ import { ScrollView, Text, View } from "react-native";
 import { Image } from "expo-image";
 import { srcNewsData } from "@/features/src-news/index";
 import {formatTime} from "@/lib/utils";
+import RichTextEditor from "@/features/src-news/rich-text-editor";
 
 const SrcNewsDetails = ({ id }: { id: string | null }) => {
   const news = srcNewsData.find((item) => item.id === id);
@@ -47,10 +48,7 @@ const SrcNewsDetails = ({ id }: { id: string | null }) => {
       </View>
 
       <View className={"flex-col gap-2"}>
-        <Text className="text-lg font-semibold text-gray-800 capitalize">
-          {news?.title}
-        </Text>
-        <Text className="">{news.body}</Text>
+        <RichTextEditor body={news.body}/>
       </View>
     </ScrollView>
   );

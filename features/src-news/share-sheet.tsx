@@ -206,7 +206,7 @@ const ShareSheet: React.FC<ShareSheetProps> = ({visible, onClose, shareUrl, titl
                   </Text>
                 ) : null}
                 <Text
-                  className="text-xs text-blue-600 mt-2"
+                  className="text-xs text-blue-600 mt-1"
                   onPress={() => {
                     onClose();
                     Linking.openURL(shareUrl)

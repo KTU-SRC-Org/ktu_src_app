@@ -46,7 +46,10 @@ const FormModal = ({
             styles.container,
             {
               height: modalHeight,
-              borderRadius: fullScreen ? 0 : 16,
+              borderTopLeftRadius: fullScreen ? 0 : 16,
+              borderTopRightRadius: fullScreen ? 0 : 16,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
               top: fullScreen ? 0 : undefined,
               bottom: fullScreen ? undefined : 0,
             },
