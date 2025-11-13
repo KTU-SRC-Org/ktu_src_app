@@ -37,18 +37,19 @@ const FormModal = ({
   return (
     <Modal visible={visible} animationType={animationType} transparent onRequestClose={onClose}>
       <View style={styles.centered}>
-        {closeOnTouchOutside && (
-          <TouchableWithoutFeedback onPress={onClose}>
-            <View style={styles.background} />
-          </TouchableWithoutFeedback>
-        )}
+        <TouchableWithoutFeedback onPress={closeOnTouchOutside ? onClose : undefined}>
+          <View style={styles.background} />
+        </TouchableWithoutFeedback>
 
         <Animated.View
           style={[
             styles.container,
             {
               height: modalHeight,
-              borderRadius: fullScreen ? 0 : 16,
+              borderTopLeftRadius: fullScreen ? 0 : 16,
+              borderTopRightRadius: fullScreen ? 0 : 16,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
               top: fullScreen ? 0 : undefined,
               bottom: fullScreen ? undefined : 0,
             },
@@ -77,7 +78,9 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
+
   container: {
     backgroundColor: '#fff',
     position: 'absolute',
