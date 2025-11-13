@@ -3,16 +3,13 @@ import '../global.css';
 import '../translation';
 
 import { Stack } from 'expo-router';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { StyleSheet } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { PortalHost } from '@rn-primitives/portal';
+import { RootProvider } from '@/providers/root-provider';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -47,30 +44,20 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   const isLoggedIn = true;
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Protected guard={isLoggedIn}>
-            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack.Protected>
-          <Stack.Protected guard={!isLoggedIn}>
-            <Stack.Screen name="auth" options={{ headerShown: false }} />
-          </Stack.Protected>
-        </Stack>
-        <PortalHost />
-      </ThemeProvider>
-    </GestureHandlerRootView>
+    <RootProvider>
+      <Stack>
+        <Stack.Protected guard={isLoggedIn}>
+          <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        </Stack.Protected>
+        <Stack.Protected guard={!isLoggedIn}>
+          <Stack.Screen name="auth" options={{ headerShown: false }} />
+        </Stack.Protected>
+      </Stack>
+      <PortalHost />
+    </RootProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
