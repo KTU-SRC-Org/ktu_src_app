@@ -10,6 +10,9 @@ import 'react-native-reanimated';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { PortalHost } from '@rn-primitives/portal';
 import { RootProvider } from '@/providers/root-provider';
+import { useAuthSyncStore } from '@/hooks/auth/use-auth-sync-store';
+import { useAuthSession } from '@/hooks/auth/use-auth-session';
+import { useRegisterAutoRefresh } from '@/lib/supabase/use-register-auto-refresh';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -40,24 +43,32 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <RootProvider>
+      <RootLayoutNav />
+    </RootProvider>
+  );
 }
 
 function RootLayoutNav() {
-  const isLoggedIn = true;
+  useRegisterAutoRefresh();
+  useAuthSyncStore();
+
+  const { isAuthenticated } = useAuthSession();
+  // const isLoggedIn = true;
 
   return (
-    <RootProvider>
+    <>
       <Stack>
-        <Stack.Protected guard={isLoggedIn}>
+        <Stack.Protected guard={isAuthenticated}>
           <Stack.Screen name="(protected)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack.Protected>
-        <Stack.Protected guard={!isLoggedIn}>
+        <Stack.Protected guard={!isAuthenticated}>
           <Stack.Screen name="auth" options={{ headerShown: false }} />
         </Stack.Protected>
       </Stack>
       <PortalHost />
-    </RootProvider>
+    </>
   );
 }

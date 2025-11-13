@@ -12,6 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthButton } from '@/components/shared/auth-button';
 import { router } from 'expo-router';
 
+import { useSignUpWithEmail } from '@/hooks/auth/use-signup-with-email-password';
+
 // interface SignupFormTypes {
 //     email: string,
 //     password: string,
@@ -32,16 +34,37 @@ export default function SignUpForm() {
       password: '',
       confirmPassword: '',
     },
+    mode: 'onChange',
   });
+
+  const signUp = useSignUpWithEmail({ onError: () => {} });
 
   function onCheckedChange(checked: boolean) {
     impactAsync(ImpactFeedbackStyle.Light);
     setChecked(checked);
   }
 
-  const onSubmit = (data: SignupFormType) => {
+  const onSubmit = async (data: SignupFormType) => {
     console.log(data);
-    router.push('/auth/verify-screen');
+
+    try {
+      const res = await signUp.mutateAsync({
+        email: data.email,
+        password: data.password,
+        // you can pass email redirect if you use magic links verification like:
+        // options: { emailRedirectTo: 'myapp://auth/callback' }
+      });
+
+      if (signUp.isSuccess || res.user) {
+        console.log('navigation')
+        // otp code screen
+        router.push('/auth/verify-screen');
+      } else {
+        console.log(signUp.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -118,7 +141,7 @@ export default function SignUpForm() {
       </View>
 
       <View className="flex flex-col items-center">
-        <View className="mb-2 flex-row items-center gap-2">
+        <View className="flex-row items-center gap-2 mb-2">
           <Checkbox
             aria-labelledby="terms-checkbox"
             id="terms-checkbox"
@@ -143,7 +166,7 @@ export default function SignUpForm() {
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
           disabled={!isValid || isSubmitting || !checked}
-          className="rounded-sm p-0 py-2"
+          className="p-0 py-2 rounded-sm"
         />
       </View>
     </View>
