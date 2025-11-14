@@ -1,19 +1,20 @@
+import React from 'react';
 import { Text, View } from 'react-native';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
-import { useForm, Controller } from 'react-hook-form';
-import { SigninSchema, SigninFormType } from '@/lib/schemas/auth';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthButton } from '@/components/shared/auth-button';
-import React from 'react';
+
+import { SigninSchema, SigninFormType } from '@/lib/schemas/auth';
+import { useSignInWithEmailPassword } from '@/hooks/auth/use-signin-with-email-password';
 
 export default function SignInForm() {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isValid },
   } = useForm<SigninFormType>({
     resolver: zodResolver(SigninSchema),
     defaultValues: {
@@ -21,39 +22,48 @@ export default function SignInForm() {
       password: '',
     },
   });
-  const onSubmit = (data: SigninFormType) => console.log(data);
+
+  // 🟢 Initialize mutation
+  const { mutateAsync: signIn, isPending, error } = useSignInWithEmailPassword();
+
+  // 🟢 Handle sign-in
+  const onSubmit = async (data: SigninFormType) => {
+    try {
+      await signIn(data);
+      // Example:
+      // router.replace("/(app)/home");
+    } catch (err) {
+      console.log("Sign in failed:", err);
+    }
+  };
 
   return (
     <View>
       <View className="mb-10">
+        {/* Email */}
         <Controller
           control={control}
-          rules={{
-            required: true,
-          }}
+          name="email"
           render={({ field: { onChange, onBlur, value } }) => (
             <View className="mb-5">
-              <Label className={'mb-2'}>Institution Email</Label>
+              <Label className="mb-2">Institution Email</Label>
               <Input
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
                 keyboardType="email-address"
-                textContentType="emailAddress"
                 autoComplete="email"
                 placeholder="example234d@ktu.edu.gh"
               />
+              {errors.email && <Text className="text-red-500">{errors.email.message}</Text>}
             </View>
           )}
-          name="email"
         />
-        {errors.email && <Text>This is required.</Text>}
 
+        {/* Password */}
         <Controller
           control={control}
-          rules={{
-            maxLength: 100,
-          }}
+          name="password"
           render={({ field: { onChange, onBlur, value } }) => (
             <View>
               <Label className="mb-2">Password</Label>
@@ -64,24 +74,29 @@ export default function SignInForm() {
                 value={value}
                 secureTextEntry
               />
-              {errors.password?.message && (
-                <Text className="text-rose-500">{errors.password.message}</Text>
+              {errors.password && (
+                <Text className="text-red-500">{errors.password.message}</Text>
               )}
             </View>
           )}
-          name="password"
         />
       </View>
 
-      <View>
-        <AuthButton
-          title="Sign in"
-          onPress={handleSubmit(onSubmit)}
-          loading={isSubmitting}
-          disabled={!isValid || isSubmitting}
-          className="rounded-sm p-0 py-2"
-        />
-      </View>
+      {/* Backend Error */}
+      {error && (
+        <Text className="mb-4 text-red-500">
+          {error.message || "Failed to sign in."}
+        </Text>
+      )}
+
+      {/* Submit */}
+      <AuthButton
+        title="Sign in"
+        onPress={handleSubmit(onSubmit)}
+        loading={isPending}
+        disabled={!isValid || isPending}
+        className="p-0 py-2 rounded-sm"
+      />
     </View>
   );
 }
