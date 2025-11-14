@@ -58,7 +58,10 @@ export default function SignUpForm() {
       if (signUp.isSuccess || res.user) {
         console.log('navigation')
         // otp code screen
-        router.push('/auth/verify-screen');
+        router.push({
+          pathname: '/auth/verify-screen',
+          params: {email: data.email}
+        });
       } else {
         console.log(signUp.error);
       }
