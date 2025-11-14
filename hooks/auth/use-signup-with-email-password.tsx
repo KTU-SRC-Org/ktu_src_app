@@ -1,4 +1,3 @@
-// hooks/use-auth-actions.ts
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 

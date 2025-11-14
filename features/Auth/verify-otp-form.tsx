@@ -86,7 +86,7 @@ const VerifyOtpForm = () => {
             length={6}
             value={(field.value ?? '').split('')}
             setValue={(val) => field.onChange(val.join(''))}
-            isValid={fieldState.error ? false : field.value.length === 4 ? true : null}
+            isValid={fieldState.error ? false : field.value.length === 6 ? true : null}
           />
         )}
       />
