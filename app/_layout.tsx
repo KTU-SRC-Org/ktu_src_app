@@ -13,6 +13,7 @@ import { RootProvider } from '@/providers/root-provider';
 import { useAuthSyncStore } from '@/hooks/auth/use-auth-sync-store';
 import { useAuthSession } from '@/hooks/auth/use-auth-session';
 import { useRegisterAutoRefresh } from '@/lib/supabase/use-register-auto-refresh';
+import { useAuthChangeListener } from '@/lib/supabase/use-auth-change-listener';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -53,6 +54,10 @@ export default function RootLayout() {
 function RootLayoutNav() {
   useRegisterAutoRefresh();
   useAuthSyncStore();
+
+  useAuthChangeListener({
+    appHomePath: '/',
+  });
 
   const { isAuthenticated } = useAuthSession();
   // const isLoggedIn = true;
