@@ -7,7 +7,7 @@ export type SmallProfileSummary = {
   username?: string | null;
   full_name?: string | null;
   avatar_url?: string | null;
-  completed?: boolean | null;
+  completed: boolean | null;
 };
 
 type AuthSlice = {
