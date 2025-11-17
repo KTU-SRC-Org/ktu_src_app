@@ -1,7 +1,7 @@
 import { Link, Tabs } from 'expo-router';
 
 import { HeaderButton } from '@/components/HeaderButton';
-import {Store, House, Hotel, Settings, Calendar} from 'lucide-react-native';
+import { Store, House, Hotel, Settings, Calendar } from 'lucide-react-native';
 import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {

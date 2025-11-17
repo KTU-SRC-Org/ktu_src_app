@@ -1,6 +1,6 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { DrawerToggleButton } from "@react-navigation/drawer";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { DrawerToggleButton } from '@react-navigation/drawer';
 
 interface Props {
   id: string;
@@ -12,14 +12,9 @@ interface Props {
 
 const TabsTopNav = ({ id, title, leftContent, rightContent, children }: Props) => {
   return (
-    <View
-      key={id}
-      className="bg-white z-50 py-1"
-    >
-      <View className="relative flex-row items-center justify-between px-4 min-h-[48px]">
-        <View className="items-start">
-          {leftContent || <DrawerToggleButton />}
-        </View>
+    <View key={id} className="z-50 bg-white py-1">
+      <View className="relative min-h-[48px] flex-row items-center justify-between px-4">
+        <View className="items-start">{leftContent || <DrawerToggleButton />}</View>
 
         {title && (
           <View className="absolute inset-0 items-center justify-center">
@@ -30,7 +25,7 @@ const TabsTopNav = ({ id, title, leftContent, rightContent, children }: Props) =
         <View className="items-end">{rightContent || <View />}</View>
       </View>
 
-      {children && <View className={"px-4"}>{children}</View>}
+      {children && <View className={'px-4'}>{children}</View>}
     </View>
   );
 };

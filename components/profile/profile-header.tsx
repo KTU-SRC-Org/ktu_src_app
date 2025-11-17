@@ -12,51 +12,37 @@ type ProfileHeaderProps = {
   level: string;
 };
 
-export const ProfileHeader = ({ 
-  imageUri, 
-  fullName, 
-  indexNumber,
-  level 
-}: ProfileHeaderProps) => {
+export const ProfileHeader = ({ imageUri, fullName, indexNumber, level }: ProfileHeaderProps) => {
   return (
     <View className="mb-6">
       <LinearGradient
         colors={['#6366F1', '#8B5CF6']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="px-6 pt-8 pb-20 rounded-b-3xl"
-      >
+        className="rounded-b-3xl px-6 pb-20 pt-8">
         <View className="items-center">
-          <View className="mt-2 mb-3">
-            <Avatar alt='avatar' className="border-4 h-28 w-28 border-white/30">
-              {imageUri ? (
-                <AvatarImage source={{ uri: imageUri }} />
-              ) : null}
+          <View className="mb-3 mt-2">
+            <Avatar alt="avatar" className="h-28 w-28 border-4 border-white/30">
+              {imageUri ? <AvatarImage source={{ uri: imageUri }} /> : null}
               <AvatarFallback className="bg-white/20">
-                <Text className="text-2xl font-bold text-white">
-                  {getInitials(fullName)}
-                </Text>
+                <Text className="text-2xl font-bold text-white">{getInitials(fullName)}</Text>
               </AvatarFallback>
             </Avatar>
-            <View className="absolute bottom-0 right-0 p-1.5 bg-green-500 border-3 border-white rounded-full">
-              <View className="w-3 h-3" />
+            <View className="border-3 absolute bottom-0 right-0 rounded-full border-white bg-green-500 p-1.5">
+              <View className="h-3 w-3" />
             </View>
           </View>
-          
+
           {/* <Text className="text-2xl font-bold text-center text-white mb-0.5">
             {fullName || 'Student Name'}
           </Text> */}
           <View className="flex-row items-center gap-2">
             <View className="flex-row items-center gap-1">
               <Ionicons name="school" size={14} color="rgba(255,255,255,0.8)" />
-              <Text className="text-sm text-white/80">
-                {indexNumber || 'Index Number'}
-              </Text>
+              <Text className="text-sm text-white/80">{indexNumber || 'Index Number'}</Text>
             </View>
             <Text className="text-white/50">•</Text>
-            <Text className="text-sm text-white/80">
-              {level || 'Level'}
-            </Text>
+            <Text className="text-sm text-white/80">{level || 'Level'}</Text>
           </View>
         </View>
       </LinearGradient>

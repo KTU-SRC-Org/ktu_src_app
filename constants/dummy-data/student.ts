@@ -1,6 +1,5 @@
-
 interface Student {
-  id: string,
+  id: string;
   fullName: string;
   email: string;
   phone: string;
@@ -10,19 +9,19 @@ interface Student {
   createdAt: Date;
   updatedAt: Date;
   isVerified: boolean;
-  session: "regular" | "weekend"
+  session: 'regular' | 'weekend';
 }
 
 export const student: Student = {
-  id: "emn",
-  fullName: "Emmanuel Somuah",
-  indexNumber: "B20224136D",
+  id: 'emn',
+  fullName: 'Emmanuel Somuah',
+  indexNumber: 'B20224136D',
   isVerified: true,
-  email: "emmanuel@gmail.com",
-  level: "L300",
-  programOfStudy: "Btech Comp Science",
+  email: 'emmanuel@gmail.com',
+  level: 'L300',
+  programOfStudy: 'Btech Comp Science',
   createdAt: new Date(),
   updatedAt: new Date(),
-  session: "regular",
-  phone: "+233559286073",
-}
+  session: 'regular',
+  phone: '+233559286073',
+};

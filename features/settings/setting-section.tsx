@@ -14,9 +14,9 @@ type SettingSectionProps = {
 
 export const SettingSection = ({ section, onItemPress }: SettingSectionProps) => {
   return (
-    <View className="mx-4 mt-5 bg-white rounded-xl">
+    <View className="mx-4 mt-5 rounded-xl bg-white">
       {section.title && (
-        <Text className="px-4 pt-3 pb-1 text-sm font-semibold text-gray-500">{section.title}</Text>
+        <Text className="px-4 pb-1 pt-3 text-sm font-semibold text-gray-500">{section.title}</Text>
       )}
 
       {section.items.map((item, index) => (

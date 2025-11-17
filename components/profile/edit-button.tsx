@@ -9,13 +9,10 @@ export const EditButton = ({ onPress }: EditButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex-row items-center justify-center gap-2 px-6 py-3 mx-6 mb-6 bg-indigo-600 rounded-xl"
-      activeOpacity={0.8}
-    >
+      className="mx-6 mb-6 flex-row items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3"
+      activeOpacity={0.8}>
       <Ionicons name="create-outline" size={20} color="#fff" />
-      <Text className="text-base font-semibold text-white">
-        Edit Profile
-      </Text>
+      <Text className="text-base font-semibold text-white">Edit Profile</Text>
     </TouchableOpacity>
   );
 };

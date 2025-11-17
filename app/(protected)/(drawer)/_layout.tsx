@@ -1,23 +1,19 @@
 import { StyleSheet } from 'react-native';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import {usePathname, router, Href} from 'expo-router';
+import { usePathname, router, Href } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 import { Avatar, Text as UiText, View as UiView } from 'react-native-ui-lib';
 import { MaterialIcons, Feather } from '@expo/vector-icons';
-import {DrawerItemProps, drawerItems} from "@/constants/drawer-items";
-import {student} from "@/constants/dummy-data/student";
+import { DrawerItemProps, drawerItems } from '@/constants/drawer-items';
+import { student } from '@/constants/dummy-data/student';
 
 const CustomDrawerContent = (props: any) => {
   const path = usePathname();
   const { colorScheme } = useColorScheme();
 
   const getBackgroundColor = (target: string) =>
-    path === target
-      ? colorScheme === 'dark'
-        ? '#333'
-        : '#e6f0ff'
-      : 'transparent';
+    path === target ? (colorScheme === 'dark' ? '#333' : '#e6f0ff') : 'transparent';
 
   const getLabelColor = (target: string) =>
     path === target
@@ -37,7 +33,7 @@ const CustomDrawerContent = (props: any) => {
       console.log(`No action`);
     }
   };
-  
+
   return (
     <DrawerContentScrollView
       {...props}
@@ -45,8 +41,7 @@ const CustomDrawerContent = (props: any) => {
         backgroundColor: colorScheme === 'dark' ? '#000' : '#fff',
         flex: 1,
         paddingBottom: 40,
-      }}
-    >
+      }}>
       <UiView paddingH-14 paddingV-14 className="flex flex-row items-center gap-4">
         <Avatar
           size={65}
@@ -54,24 +49,20 @@ const CustomDrawerContent = (props: any) => {
           label={student.fullName
             .trim()
             .split(/\s+/)
-            .map(word => word[0])
+            .map((word) => word[0])
             .join('')
             .toUpperCase()}
           labelColor="#111"
           onPress={() => console.log('avatar')}
         />
-        <UiView className={"flex flex-col justify-center"}>
+        <UiView className={'flex flex-col justify-center'}>
           <UiView centerV marginT-8 className="flex flex-row items-center gap-2">
-            <UiText text70 className="items-center font-bold truncate">
+            <UiText text70 className="items-center truncate font-bold">
               {student.fullName}
             </UiText>
-            {student.isVerified && (
-              <MaterialIcons name="verified" size={20} color="#007AFF" />
-            )}
+            {student.isVerified && <MaterialIcons name="verified" size={20} color="#007AFF" />}
           </UiView>
-          <UiText className="items-center text-sm text-gray-500">
-            {student.indexNumber}
-          </UiText>
+          <UiText className="items-center text-sm text-gray-500">{student.indexNumber}</UiText>
         </UiView>
       </UiView>
 
@@ -83,21 +74,27 @@ const CustomDrawerContent = (props: any) => {
             <DrawerItem
               key={item.label}
               icon={() => (
-                <IconSet name={item.icon as any} size={22} color={getLabelColor(item.route || "")} />
+                <IconSet
+                  name={item.icon as any}
+                  size={22}
+                  color={getLabelColor(item.route || '')}
+                />
               )}
               label={item.label}
-              labelStyle={[styles.navItemLabel, { color: getLabelColor(item.route || "") }]}
-              style={[{
-                backgroundColor: getBackgroundColor(item.route || ""),
-                borderRadius: 8
-              }]}
+              labelStyle={[styles.navItemLabel, { color: getLabelColor(item.route || '') }]}
+              style={[
+                {
+                  backgroundColor: getBackgroundColor(item.route || ''),
+                  borderRadius: 8,
+                },
+              ]}
               onPress={() => handleDrawerItemPress(item)}
             />
           );
         })}
       </UiView>
 
-      <UiView paddingH-14 className={"absolute left-0 right-0 bottom-8 border-t border-gray-200"}>
+      <UiView paddingH-14 className={'absolute bottom-8 left-0 right-0 border-t border-gray-200'}>
         {drawerItems
           .filter((item) => item.position === 'bottom')
           .map((item) => {
@@ -106,14 +103,20 @@ const CustomDrawerContent = (props: any) => {
               <DrawerItem
                 key={`bottom-${item.label}`}
                 icon={() => (
-                  <IconSet name={item.icon as any} size={22} color={getLabelColor(item.route || "")} />
+                  <IconSet
+                    name={item.icon as any}
+                    size={22}
+                    color={getLabelColor(item.route || '')}
+                  />
                 )}
                 label={item.label}
-                labelStyle={[styles.navItemLabel, { color: getLabelColor(item.route || "") }]}
-                style={[{
-                  backgroundColor: getBackgroundColor(item.route || ''),
-                  borderRadius: 8
-                }]}
+                labelStyle={[styles.navItemLabel, { color: getLabelColor(item.route || '') }]}
+                style={[
+                  {
+                    backgroundColor: getBackgroundColor(item.route || ''),
+                    borderRadius: 8,
+                  },
+                ]}
                 onPress={() => handleDrawerItemPress(item)}
               />
             );

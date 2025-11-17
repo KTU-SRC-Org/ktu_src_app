@@ -1,10 +1,10 @@
-import {View, Text, StyleSheet, Pressable, Platform} from "react-native";
-import { Calendar, MapPin } from "lucide-react-native";
-import { useRouter } from "expo-router";
-import {getFormattedDate} from "@/lib/utils";
+import { View, Text, StyleSheet, Pressable, Platform } from 'react-native';
+import { Calendar, MapPin } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
+import { getFormattedDate } from '@/lib/utils';
 
 export interface EventCardProps {
-  id: string
+  id: string;
   date: Date | string;
   title: string;
   location: string;
@@ -14,18 +14,17 @@ const EventCard = ({ date, title, location, id }: EventCardProps) => {
   const router = useRouter();
 
   //Destruct the date into day, time, month
-  const {day, time, month} = getFormattedDate(date);
+  const { day, time, month } = getFormattedDate(date);
 
   return (
     <Pressable
       onPress={() => router.push(`/events/${id}`)}
       style={styles.container}
-      className="flex flex-row items-center justify-between gap-3 rounded-md bg-slate-100 px-3 py-2 active:opacity-70"
-    >
-      <View className="rounded-md bg-blue-400 px-2 py-1 w-14">
+      className="flex flex-row items-center justify-between gap-3 rounded-md bg-slate-100 px-3 py-2 active:opacity-70">
+      <View className="w-14 rounded-md bg-blue-400 px-2 py-1">
         <Text className="text-center text-base font-bold text-white">{month}</Text>
         <Text
-          className="text-center text-3xl font-extrabold text-white leading-none"
+          className="text-center text-3xl font-extrabold leading-none text-white"
           style={{
             fontVariant: ['tabular-nums'],
             fontFamily: Platform.select({
@@ -33,17 +32,13 @@ const EventCard = ({ date, title, location, id }: EventCardProps) => {
               android: 'monospace',
               default: 'monospace',
             }),
-          }}
-        >
+          }}>
           {day}
         </Text>
       </View>
 
       <View style={{ flex: 1 }}>
-        <Text
-          className="mb-1 text-base font-semibold text-neutral-900"
-          numberOfLines={1}
-        >
+        <Text className="mb-1 text-base font-semibold text-neutral-900" numberOfLines={1}>
           {title}
         </Text>
 
@@ -68,7 +63,7 @@ const EventCard = ({ date, title, location, id }: EventCardProps) => {
 const styles = StyleSheet.create({
   container: {
     elevation: 2,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOpacity: 0.22,
     shadowRadius: 8,
     shadowOffset: {

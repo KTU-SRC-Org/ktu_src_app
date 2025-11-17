@@ -12,6 +12,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthButton } from '@/components/shared/auth-button';
 import { router } from 'expo-router';
 
+import { useSignUpWithEmail } from '@/hooks/auth/use-signup-with-email-password';
+
 // interface SignupFormTypes {
 //     email: string,
 //     password: string,
@@ -32,16 +34,40 @@ export default function SignUpForm() {
       password: '',
       confirmPassword: '',
     },
+    mode: 'onChange',
   });
+
+  const signUp = useSignUpWithEmail({ onError: () => {} });
 
   function onCheckedChange(checked: boolean) {
     impactAsync(ImpactFeedbackStyle.Light);
     setChecked(checked);
   }
 
-  const onSubmit = (data: SignupFormType) => {
+  const onSubmit = async (data: SignupFormType) => {
     console.log(data);
-    router.push('/auth/verify-screen');
+
+    try {
+      const res = await signUp.mutateAsync({
+        email: data.email,
+        password: data.password,
+        // you can pass email redirect if you use magic links verification like:
+        // options: { emailRedirectTo: 'myapp://auth/callback' }
+      });
+
+      if (signUp.isSuccess || res.user) {
+        console.log('navigation');
+        // otp code screen
+        router.push({
+          pathname: '/auth/verify-screen',
+          params: { email: data.email },
+        });
+      } else {
+        console.log(signUp.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
