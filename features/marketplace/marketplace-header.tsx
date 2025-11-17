@@ -3,7 +3,7 @@ import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import NewProductForms from '@/features/marketplace/new-product-forms';
 import FormModal from '@/components/builders/form.modal';
-import TabsTopNav from "@/components/shared/tabs-top-nav";
+import TabsTopNav from '@/components/shared/tabs-top-nav';
 
 const MarketplaceHeader = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -11,8 +11,8 @@ const MarketplaceHeader = () => {
   return (
     <>
       <TabsTopNav
-        id={"marketplace-header"}
-        title={"Marketplace"}
+        id={'marketplace-header'}
+        title={'Marketplace'}
         rightContent={
           <Pressable
             className="h-10 w-10 items-center justify-center rounded-full bg-[#FF8C42] shadow-lg"
@@ -27,12 +27,8 @@ const MarketplaceHeader = () => {
             <Ionicons name="add" size={30} color="#fff" />
           </Pressable>
         }
-        />
-      <FormModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        fullScreen
-      >
+      />
+      <FormModal visible={modalVisible} onClose={() => setModalVisible(false)} fullScreen>
         <NewProductForms />
       </FormModal>
     </>

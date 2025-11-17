@@ -20,7 +20,7 @@ const ProtectedLayout = () => {
         <Stack.Screen name="complete-profile-screen" options={{ headerShown: false }} />
       </Stack.Protected>
 
-     <Stack.Protected guard={completed}>
+      <Stack.Protected guard={completed}>
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen name="(stack)" options={{ headerShown: false }} />
         <Stack.Screen name="hostels/[id]" options={{ headerShown: false }} />

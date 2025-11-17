@@ -1,4 +1,4 @@
-import {Feather, MaterialIcons} from "@expo/vector-icons";
+import { Feather, MaterialIcons } from '@expo/vector-icons';
 
 export interface DrawerItemProps {
   label: string;

@@ -19,11 +19,11 @@ export const SettingItem = ({ item, onPress }: SettingItemProps) => {
       activeOpacity={0.7}>
       <BoxedIcon name={item.icon} backgroundColor={item.backgroundColor} />
 
-      <View className="flex-row items-center flex-1 ml-3">
+      <View className="ml-3 flex-1 flex-row items-center">
         <Text className="flex-1 text-lg">{item.name}</Text>
 
         {item.comingSoon && (
-          <View className="px-2 py-1 mr-2 bg-yellow-100 rounded">
+          <View className="mr-2 rounded bg-yellow-100 px-2 py-1">
             <Text className="text-xs font-semibold text-yellow-700">Coming Soon</Text>
           </View>
         )}

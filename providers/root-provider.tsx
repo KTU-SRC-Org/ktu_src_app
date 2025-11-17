@@ -28,7 +28,6 @@ export function RootProvider({ children }: { children: ReactNode }) {
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

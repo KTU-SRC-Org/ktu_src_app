@@ -1,4 +1,3 @@
-
 // types/profile.types.ts
 export type ProfileData = {
   imageUri: string;

@@ -12,9 +12,9 @@ export const ExternalServicesSection = ({
   onServicePress,
 }: ExternalServicesSectionProps) => {
   return (
-    <View className="mt-8 mb-4">
-      <Text className="px-4 mb-3 text-sm font-semibold text-gray-500">Student Services</Text>
-      <View className="mx-4 bg-white rounded-xl">
+    <View className="mb-4 mt-8">
+      <Text className="mb-3 px-4 text-sm font-semibold text-gray-500">Student Services</Text>
+      <View className="mx-4 rounded-xl bg-white">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}

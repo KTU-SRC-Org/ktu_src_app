@@ -1,5 +1,5 @@
 import { DrawerToggleButton } from '@react-navigation/drawer';
-import {StyleSheet, View, Text, Pressable} from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { BellRing } from 'lucide-react-native';
 import { View as UiView } from 'react-native-ui-lib';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -28,11 +28,12 @@ const HomeCustomHeader = () => {
               style={({ pressed }) => [
                 { opacity: pressed ? 0.6 : 1, borderRadius: 50, padding: 6 },
               ]}
-              onPress={() => router.push({
-                pathname: "/info-center",
-                params: { type: "notifications" }
-              })}
-            >
+              onPress={() =>
+                router.push({
+                  pathname: '/info-center',
+                  params: { type: 'notifications' },
+                })
+              }>
               <BellRing color="blue" fill="blue" />
             </Pressable>
           </View>

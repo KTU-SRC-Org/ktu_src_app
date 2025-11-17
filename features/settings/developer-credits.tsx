@@ -17,21 +17,21 @@ export const DeveloperCredits = ({ onPress }: DeveloperCreditsProps) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         className="px-6 py-5">
-        <View className="flex-row items-center justify-between px-4 pt-2 mb-3">
+        <View className="mb-3 flex-row items-center justify-between px-4 pt-2">
           <View className="flex-row items-center gap-2">
-            <View className="items-center justify-center p-2 rounded-lg bg-white/20">
+            <View className="items-center justify-center rounded-lg bg-white/20 p-2">
               <Ionicons name="code-slash" size={18} color="#fff" />
             </View>
-            <View className="items-center justify-center p-2 rounded-lg bg-white/20">
+            <View className="items-center justify-center rounded-lg bg-white/20 p-2">
               <Ionicons name="rocket" size={18} color="#fff" />
             </View>
-            <View className="items-center justify-center p-2 rounded-lg bg-white/20">
+            <View className="items-center justify-center rounded-lg bg-white/20 p-2">
               <Ionicons name="bulb" size={18} color="#fff" />
             </View>
           </View>
 
           {onPress && (
-            <View className="items-center justify-center p-2 rounded-full bg-white/25">
+            <View className="items-center justify-center rounded-full bg-white/25 p-2">
               <Ionicons name="chevron-forward" size={16} color="#fff" />
             </View>
           )}

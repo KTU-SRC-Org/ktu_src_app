@@ -30,7 +30,7 @@ const ProfileScreen = () => {
   const loadProfileData = async () => {
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       // Fetch profile data from API
       setLoading(false);
     } catch (error) {
@@ -58,11 +58,7 @@ const ProfileScreen = () => {
     <ScrollView
       className="flex-1 bg-gray-50"
       showsVerticalScrollIndicator={false}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-      }
-    >
-
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
       <Stack.Screen
         options={{
           title: profileData.fullName,

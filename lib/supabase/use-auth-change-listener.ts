@@ -28,13 +28,13 @@ export function useAuthChangeListener({
       if (onEvent) {
         onEvent(event, user);
       }
-      console.log("listener ", event )
-      console.log('listener session ', user)
+      console.log('listener ', event);
+      console.log('listener session ', user);
 
       if (event === 'SIGNED_IN') {
-      console.log('SIGNED_IN – refreshing user...');
-      queryClient.invalidateQueries({ queryKey: ['supabase', 'user'] });
-    }
+        console.log('SIGNED_IN – refreshing user...');
+        queryClient.invalidateQueries({ queryKey: ['supabase', 'user'] });
+      }
 
       // revalidate user session when user signs in or out
       if (event === 'SIGNED_OUT') {

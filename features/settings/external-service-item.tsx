@@ -12,10 +12,10 @@ export const ExternalServiceItem = ({ service, onPress }: ExternalServiceItemPro
     <TouchableOpacity
       onPress={onPress}
       disabled={!service.link}
-      className="items-center w-20"
+      className="w-20 items-center"
       activeOpacity={0.7}>
       <View
-        className="items-center justify-center mb-2 rounded-full h-14 w-14"
+        className="mb-2 h-14 w-14 items-center justify-center rounded-full"
         style={{ backgroundColor: service.backgroundColor || '#6B7280' }}>
         {typeof service.icon === 'string' ? (
           <Ionicons name={service.icon as any} size={28} color="#fff" />
@@ -23,7 +23,7 @@ export const ExternalServiceItem = ({ service, onPress }: ExternalServiceItemPro
           service.icon
         )}
       </View>
-      <Text className="text-xs text-center text-gray-700" numberOfLines={2}>
+      <Text className="text-center text-xs text-gray-700" numberOfLines={2}>
         {service.name}
       </Text>
     </TouchableOpacity>

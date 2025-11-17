@@ -7,13 +7,11 @@ type InfoSectionProps = {
 
 export const InfoSection = ({ title, children }: InfoSectionProps) => {
   return (
-    <View className="px-6 mb-6">
-      <Text className="mb-3 text-sm font-semibold tracking-wide text-gray-400 uppercase">
+    <View className="mb-6 px-6">
+      <Text className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">
         {title}
       </Text>
-      <View className="bg-white shadow-sm rounded-2xl">
-        {children}
-      </View>
+      <View className="rounded-2xl bg-white shadow-sm">{children}</View>
     </View>
   );
 };

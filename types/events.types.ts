@@ -1,4 +1,4 @@
-export type TabKeys = "featured" | "popular" | "upcoming"
+export type TabKeys = 'featured' | 'popular' | 'upcoming';
 
 export interface Event {
   id: string;
@@ -37,6 +37,5 @@ export type CanopyModalProps = {
 
 export type ShowSuccessData = {
   visible: boolean;
-  data?: BookingsInterface
+  data?: BookingsInterface;
 };
-

@@ -1,9 +1,9 @@
-import { ImageSourcePropType } from "react-native";
-import { SrcNewsInterface } from "@/types/src-news.types";
+import { ImageSourcePropType } from 'react-native';
+import { SrcNewsInterface } from '@/types/src-news.types';
 
 export const srcNewsData: SrcNewsInterface[] = [
   {
-    id: "1",
+    id: '1',
     body: `
 # SRC Launches Digital ID System
 
@@ -24,16 +24,16 @@ Many students expressed excitement about the new initiative. *"It’s about time
 
 Check more details on the [KTU SRC Portal](https://ktu.edu.gh/src).
 `,
-    publisher: "SRC President",
-    publisherImage: require("@/assets/images/Campus-1.png") as ImageSourcePropType,
-    source: "SRC Office",
+    publisher: 'SRC President',
+    publisherImage: require('@/assets/images/Campus-1.png') as ImageSourcePropType,
+    source: 'SRC Office',
     category: ['business'],
-    publishedAt: new Date("2025-09-12T10:30:00Z"),
+    publishedAt: new Date('2025-09-12T10:30:00Z'),
     isDraft: false,
-    createAt: "2025-09-10T14:45:00Z",
+    createAt: '2025-09-10T14:45:00Z',
   },
   {
-    id: "2",
+    id: '2',
     body: `
 # KTU Introduces Green Campus Initiative
 
@@ -51,16 +51,16 @@ The SRC partnered with **Eco Ghana Foundation** to provide recycling equipment a
 
 Students are encouraged to join the #GoGreenKTU movement and contribute ideas via the [official forum](https://ktu.edu.gh/gogreen).
 `,
-    publisher: "SRC Pro",
-    publisherImage: require("@/assets/images/Campus-1.png") as ImageSourcePropType,
-    source: "Tech Department",
+    publisher: 'SRC Pro',
+    publisherImage: require('@/assets/images/Campus-1.png') as ImageSourcePropType,
+    source: 'Tech Department',
     category: ['tech', 'business'],
-    publishedAt: new Date("2025-10-01T09:00:00Z"),
+    publishedAt: new Date('2025-10-01T09:00:00Z'),
     isDraft: false,
-    createAt: "2025-09-28T16:15:00Z",
+    createAt: '2025-09-28T16:15:00Z',
   },
   {
-    id: "3",
+    id: '3',
     body: `
 # KTU Research Team Develops AI-Powered Exam Monitoring System
 
@@ -76,18 +76,17 @@ The project was led by **Samuel Cobinnah**, with contributions from **Joseph Owu
 
 ### Future Plans
 The SRC is currently in talks with university management to pilot the technology in the upcoming mid-semester exams.
-`
-,
-    publisher: "Wocom Office",
-    publisherImage: require("@/assets/images/Campus-1.png") as ImageSourcePropType,
-    source: "UX Team",
-    publishedAt: new Date("2025-08-15T12:00:00Z"),
+`,
+    publisher: 'Wocom Office',
+    publisherImage: require('@/assets/images/Campus-1.png') as ImageSourcePropType,
+    source: 'UX Team',
+    publishedAt: new Date('2025-08-15T12:00:00Z'),
     isDraft: false,
-    category: ['tech',],
-    createAt: "2025-08-12T08:30:00Z",
+    category: ['tech'],
+    createAt: '2025-08-12T08:30:00Z',
   },
   {
-    id: "4",
+    id: '4',
     body: `
 # SRC Week 2025: A Celebration of Innovation
 
@@ -107,12 +106,12 @@ For the first time, SRC Week will include a **Tech Startup Pitch**, where studen
 
 Stay updated on schedules at [srcweek.ktu.edu.gh](https://srcweek.ktu.edu.gh).
 `,
-    publisher: "SRC Admin",
-    publisherImage: require("@/assets/images/Campus-1.png") as ImageSourcePropType,
-    source: "Development Office",
-    publishedAt: new Date("2025-11-01T18:20:00Z"),
+    publisher: 'SRC Admin',
+    publisherImage: require('@/assets/images/Campus-1.png') as ImageSourcePropType,
+    source: 'Development Office',
+    publishedAt: new Date('2025-11-01T18:20:00Z'),
     isDraft: true,
     category: ['business', 'tech'],
-    createAt: "2025-10-29T10:10:00Z",
+    createAt: '2025-10-29T10:10:00Z',
   },
 ];

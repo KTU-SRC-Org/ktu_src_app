@@ -7,7 +7,7 @@ import { settingsSections, externalServices } from '@/config/settings.config';
 import { SettingItem, ExternalService } from '@/types/settings.types';
 
 const SettingsScreen = () => {
-  const router = useRouter()
+  const router = useRouter();
   const handleItemPress = (item: SettingItem) => {
     if (item.disabled || item.comingSoon) return;
 
@@ -52,12 +52,12 @@ const SettingsScreen = () => {
       <DeveloperCredits onPress={handleDeveloperCreditsPress} />
 
       {/* Sign Out Button */}
-      <TouchableOpacity onPress={handleSignOut} className="mt-4 mb-2" activeOpacity={0.7}>
-        <Text className="py-4 text-lg font-semibold text-center text-blue-600">Log Out</Text>
+      <TouchableOpacity onPress={handleSignOut} className="mb-2 mt-4" activeOpacity={0.7}>
+        <Text className="py-4 text-center text-lg font-semibold text-blue-600">Log Out</Text>
       </TouchableOpacity>
 
       {/* Version Info */}
-      <Text className="mt-2 text-xs text-center text-gray-400">Version 1.0.0 (Build 100)</Text>
+      <Text className="mt-2 text-center text-xs text-gray-400">Version 1.0.0 (Build 100)</Text>
     </ScrollView>
   );
 };

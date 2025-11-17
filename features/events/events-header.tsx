@@ -1,7 +1,14 @@
-import {View, Text, useWindowDimensions, Platform, ImageBackground, Pressable} from "react-native";
-import {ArrowRight, MapPin} from "lucide-react-native";
-import { Image } from "expo-image";
-import { getFormattedDate } from "@/lib/utils";
+import {
+  View,
+  Text,
+  useWindowDimensions,
+  Platform,
+  ImageBackground,
+  Pressable,
+} from 'react-native';
+import { ArrowRight, MapPin } from 'lucide-react-native';
+import { Image } from 'expo-image';
+import { getFormattedDate } from '@/lib/utils';
 
 const EventsHeader = () => {
   const { width } = useWindowDimensions();
@@ -15,62 +22,57 @@ const EventsHeader = () => {
   const { day, month } = getFormattedDate(new Date(Date.now())); //Hard coded
 
   return (
-    <View className="flex flex-col w-full bg-white">
+    <View className="flex w-full flex-col bg-white">
       <ImageBackground
-        source={require("@/assets/images/events/event-bg.png")}
+        source={require('@/assets/images/events/event-bg.png')}
         resizeMode="cover"
-        style={{ width: "100%", paddingTop: 16, paddingBottom: 80 }}
-      >
+        style={{ width: '100%', paddingTop: 16, paddingBottom: 80 }}>
         <View className="relative px-4">
           <Text className="text-4xl font-extrabold text-white">Events</Text>
 
           <View className="mt-2">
-            <Text className="text-white/90 text-base font-medium">
-              Upcoming Events
-            </Text>
+            <Text className="text-base font-medium text-white/90">Upcoming Events</Text>
 
-            <View className="flex-row items-center mt-1">
+            <View className="mt-1 flex-row items-center">
               <MapPin size={18} color="#fff" />
-              <Text className="text-white ml-2">On Campus</Text>
+              <Text className="ml-2 text-white">On Campus</Text>
             </View>
           </View>
         </View>
       </ImageBackground>
 
-      <View className="relative px-4 z-10" style={{ marginTop: -overlap }}>
+      <View className="relative z-10 px-4" style={{ marginTop: -overlap }}>
         <Image
-          source={require("@/assets/images/events/img.png")}
+          source={require('@/assets/images/events/img.png')}
           style={{
-            width: "100%",
+            width: '100%',
             height: imageHeight,
             borderRadius: 16,
-            shadowColor: "#000",
+            shadowColor: '#000',
             shadowOpacity: 0.15,
             shadowRadius: 6,
             shadowOffset: { width: 0, height: 4 },
           }}
           contentFit="cover"
         />
-        <View className="absolute top-4 left-8 bg-[#0B151EBD] rounded-md p-2 items-center shadow border-2 border-[#F5882B]">
-          <Text className="text-white text-sm font-bold">{month}</Text>
+        <View className="absolute left-8 top-4 items-center rounded-md border-2 border-[#F5882B] bg-[#0B151EBD] p-2 shadow">
+          <Text className="text-sm font-bold text-white">{month}</Text>
           <Text
-            className="text-center text-3xl font-extrabold text-white leading-none"
+            className="text-center text-3xl font-extrabold leading-none text-white"
             style={{
-              fontVariant: ["tabular-nums"],
+              fontVariant: ['tabular-nums'],
               fontFamily: Platform.select({
-                ios: "Menlo",
-                android: "monospace",
-                default: "monospace",
+                ios: 'Menlo',
+                android: 'monospace',
+                default: 'monospace',
               }),
-            }}
-          >
+            }}>
             {day}
           </Text>
         </View>
         <Pressable
-          onPress={() => ""}
-          className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-[#0B151EBD] items-center justify-center rounded-full w-12 h-12 p-2"
-        >
+          onPress={() => ''}
+          className="absolute bottom-2 left-1/2 h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-[#0B151EBD] p-2">
           <ArrowRight size={24} color="#fff" />
         </Pressable>
       </View>

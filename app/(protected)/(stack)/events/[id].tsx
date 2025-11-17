@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet } from 'react-native';
-import EventDetails from "@/features/events/event-details";
+import EventDetails from '@/features/events/event-details';
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -9,7 +9,7 @@ const EventDetailsScreen = () => {
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
-      <EventDetails id={eventId}/>
+      <EventDetails id={eventId} />
     </SafeAreaView>
   );
 };

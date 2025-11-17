@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useSupabase} from '../../lib/supabase/use-supabase'
+import { useSupabase } from '../../lib/supabase/use-supabase';
 
 type Credentials = {
   email: string;

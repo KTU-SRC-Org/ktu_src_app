@@ -13,7 +13,7 @@ const SettingsLayout = () => {
           headerStyle: { backgroundColor: 'white' },
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="profile-account/index"
         options={{
           title: 'Profile',
@@ -22,7 +22,7 @@ const SettingsLayout = () => {
           headerLargeTitle: false,
           headerShadowVisible: false,
           headerStyle: { backgroundColor: 'white' },
-          headerBackButtonDisplayMode: 'minimal'
+          headerBackButtonDisplayMode: 'minimal',
         }}
       />
     </Stack>

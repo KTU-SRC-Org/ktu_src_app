@@ -33,7 +33,7 @@ export default function SignInForm() {
       // Example:
       // router.replace("/(app)/home");
     } catch (err) {
-      console.log("Sign in failed:", err);
+      console.log('Sign in failed:', err);
     }
   };
 
@@ -74,20 +74,14 @@ export default function SignInForm() {
                 value={value}
                 secureTextEntry
               />
-              {errors.password && (
-                <Text className="text-red-500">{errors.password.message}</Text>
-              )}
+              {errors.password && <Text className="text-red-500">{errors.password.message}</Text>}
             </View>
           )}
         />
       </View>
 
       {/* Backend Error */}
-      {error && (
-        <Text className="mb-4 text-red-500">
-          {error.message || "Failed to sign in."}
-        </Text>
-      )}
+      {error && <Text className="mb-4 text-red-500">{error.message || 'Failed to sign in.'}</Text>}
 
       {/* Submit */}
       <AuthButton
@@ -95,7 +89,7 @@ export default function SignInForm() {
         onPress={handleSubmit(onSubmit)}
         loading={isPending}
         disabled={!isValid || isPending}
-        className="p-0 py-2 rounded-sm"
+        className="rounded-sm p-0 py-2"
       />
     </View>
   );

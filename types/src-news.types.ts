@@ -1,6 +1,6 @@
-import {ImageSourcePropType} from "react-native";
+import { ImageSourcePropType } from 'react-native';
 
-export type CategoryType = "tech" | 'business';
+export type CategoryType = 'tech' | 'business';
 
 export interface SrcNewsInterface {
   id: string;
@@ -8,7 +8,7 @@ export interface SrcNewsInterface {
   publisherImage: ImageSourcePropType;
   publishedAt: Date;
   publisher: string;
-  category: CategoryType[]
+  category: CategoryType[];
   source: string;
   isDraft?: boolean;
   createAt?: string;

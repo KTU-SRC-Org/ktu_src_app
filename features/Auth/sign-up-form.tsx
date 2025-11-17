@@ -56,11 +56,11 @@ export default function SignUpForm() {
       });
 
       if (signUp.isSuccess || res.user) {
-        console.log('navigation')
+        console.log('navigation');
         // otp code screen
         router.push({
           pathname: '/auth/verify-screen',
-          params: {email: data.email}
+          params: { email: data.email },
         });
       } else {
         console.log(signUp.error);
@@ -144,7 +144,7 @@ export default function SignUpForm() {
       </View>
 
       <View className="flex flex-col items-center">
-        <View className="flex-row items-center gap-2 mb-2">
+        <View className="mb-2 flex-row items-center gap-2">
           <Checkbox
             aria-labelledby="terms-checkbox"
             id="terms-checkbox"
@@ -169,7 +169,7 @@ export default function SignUpForm() {
           onPress={handleSubmit(onSubmit)}
           loading={isSubmitting}
           disabled={!isValid || isSubmitting || !checked}
-          className="p-0 py-2 rounded-sm"
+          className="rounded-sm p-0 py-2"
         />
       </View>
     </View>

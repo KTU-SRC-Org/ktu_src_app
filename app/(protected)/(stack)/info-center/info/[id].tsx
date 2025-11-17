@@ -1,7 +1,7 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { StyleSheet } from 'react-native';
-import InfoDetails from "@/features/info-center/info-details";
+import InfoDetails from '@/features/info-center/info-details';
 
 const InfoScreen = () => {
   const { id } = useLocalSearchParams();
@@ -9,7 +9,7 @@ const InfoScreen = () => {
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
-      <InfoDetails id={infoId}/>
+      <InfoDetails id={infoId} />
     </SafeAreaView>
   );
 };

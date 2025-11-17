@@ -58,7 +58,13 @@ export const useAppStore = create<AppState>()(
         userId: null,
         email: null,
         isAuthenticated: false,
-        profileSummary: { id: null, username: null, full_name: null, avatar_url: null, completed: null },
+        profileSummary: {
+          id: null,
+          username: null,
+          full_name: null,
+          avatar_url: null,
+          completed: null,
+        },
         setAuth: ({ userId, email }) =>
           set({
             userId,
@@ -71,11 +77,26 @@ export const useAppStore = create<AppState>()(
             userId: null,
             email: null,
             isAuthenticated: false,
-            profileSummary: { id: null, username: null, full_name: null, avatar_url: null, completed: null },
+            profileSummary: {
+              id: null,
+              username: null,
+              full_name: null,
+              avatar_url: null,
+              completed: null,
+            },
           }),
-        setProfileSummary: (s) => set((st) => ({ profileSummary: { ...(st.profileSummary || {}), ...s } })),
+        setProfileSummary: (s) =>
+          set((st) => ({ profileSummary: { ...(st.profileSummary || {}), ...s } })),
         clearProfileSummary: () =>
-          set({ profileSummary: { id: null, username: null, full_name: null, avatar_url: null, completed: null } }),
+          set({
+            profileSummary: {
+              id: null,
+              username: null,
+              full_name: null,
+              avatar_url: null,
+              completed: null,
+            },
+          }),
 
         // THEME (persisted)
         theme: 'system',
@@ -93,7 +114,7 @@ export const useAppStore = create<AppState>()(
         setToggle: (key, value) => set((s) => ({ toggles: { ...s.toggles, [key]: value } })),
         resetToggles: () => set({ toggles: {} }),
 
-         // hydration
+        // hydration
         _hasHydrated: false,
         _setHasHydrated: (v) => set({ _hasHydrated: v }),
       }),
@@ -105,10 +126,10 @@ export const useAppStore = create<AppState>()(
           theme: s.theme,
           toggles: s.toggles,
         }),
-         onRehydrateStorage: () => (state) => {
+        onRehydrateStorage: () => (state) => {
           state?._setHasHydrated?.(true);
         },
-      },
-    ),
-  ),
+      }
+    )
+  )
 );

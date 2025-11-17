@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createClient , SupabaseClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
 const { supabaseUrl, supabaseAnonKey } = z
@@ -12,7 +12,7 @@ const { supabaseUrl, supabaseAnonKey } = z
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
   });
 
-  let client: SupabaseClient | null = null;
+let client: SupabaseClient | null = null;
 
 export function getSupabaseBrowserClient<Db = unknown>(): SupabaseClient<Db> {
   if (!client) {
@@ -27,7 +27,3 @@ export function getSupabaseBrowserClient<Db = unknown>(): SupabaseClient<Db> {
   }
   return client as SupabaseClient<Db>;
 }
-
-
-
-

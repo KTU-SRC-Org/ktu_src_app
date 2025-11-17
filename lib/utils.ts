@@ -15,25 +15,23 @@ export const formatTime = (date: Date | string) => {
   if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
   if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
 
-  return target.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
+  return target.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
   });
 };
 
 export const getFormattedDate = (inputDate: Date | string) => {
-  const date =  new Date(inputDate)
+  const date = new Date(inputDate);
 
-  const month = date
-    .toLocaleString("en-US", { month: "short" })
-    .toUpperCase();
+  const month = date.toLocaleString('en-US', { month: 'short' }).toUpperCase();
 
-  const day = date.getDate().toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, '0');
 
-  const time = date.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
+  const time = date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
   });
 
   return { month, day, time };

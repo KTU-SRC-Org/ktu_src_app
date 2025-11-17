@@ -33,7 +33,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
   };
 
   return (
-    <View className="flex flex-row justify-between w-full gap-2">
+    <View className="flex w-full flex-row justify-between gap-2">
       {Array.from({ length }).map((_, i) => {
         let borderColor = 'transparent';
         let textColor = '#FFFFFF';
