@@ -7,6 +7,10 @@ export const CompleteProfileSchema = z.object({
     .max(50, 'Full name cannot exceed 50 characters')
     .regex(/^[A-Za-z\s]+$/, 'Full name must contain only letters and spaces'),
 
+  faculty: z.string().min(1, 'Please select your faculty'),
+
+  department: z.string().min(1, 'Please select your department'),
+
   program: z.string().min(1, 'Please select your program of study'),
 
   indexNumber: z

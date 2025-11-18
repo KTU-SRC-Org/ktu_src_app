@@ -9,7 +9,21 @@
     "prebuild": "expo prebuild",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "supabase:update": "pnpm update supabase --save-dev",
+    "supabase:start": "pnpx supabase start",
+    "supabase:stop": "pnpx supabase stop",
+    "supabase:status": "pnpx supabase status",
+    "supabase:restart": "npm run supabase:stop && npm run supabase:start",
+    "supabase:reset": "npx supabase db reset",
+    "supabase:link": "npx supabase link",
+    "supabase:generate-types": "pnpx supabase gen types typescript --local --schema public > types_db.ts",
+    "supabase:generate-migration": "pnpx supabase db diff | npx supabase migration new",
+    "supabase:generate-seed": "pnpx supabase db dump --data-only -f supabase/seed.sql",
+    "supabase:push": "pnpx supabase db push",
+    "supabase:pull": "pnpx supabase db pull",
+    "supabase:migration-up": "pnpx supabase migration up",
+    "supabase:migration-list": "pnpx supabase migration list"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
@@ -67,6 +81,7 @@
     "react-native-worklets": "0.5.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
+    "toastify-react-native": "^7.2.3",
     "use-debounce": "^10.0.6",
     "zod": "^4.1.12",
     "zustand": "^4.5.1"

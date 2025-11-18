@@ -5,6 +5,10 @@ import { CompleteProfileFormType, CompleteProfileSchema } from '@/lib/schemas/on
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TextInputField } from '@/components/builders/text-input-field';
 import { SelectInputField } from '@/components/builders/select-input-field';
+import { useFaculties } from '@/hooks/onboarding/use-faculties';
+import { useDepartments } from '@/hooks/onboarding/use-departments';
+import { usePrograms } from '@/hooks/onboarding/use-programs';
+import { LEVEL_OPTIONS } from '@/constants/profile.constants';
 
 interface CompleteProfileFormProps {
   onSubmitPress: (data: CompleteProfileFormType) => void;
@@ -16,12 +20,15 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
     control,
     handleSubmit,
     formState: { isValid },
+    watch,
   } = useForm<CompleteProfileFormType>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
     resolver: zodResolver(CompleteProfileSchema),
     defaultValues: {
       fullName: '',
+      faculty: '',
+      department: '',
       program: '',
       indexNumber: '',
       phoneNumber: '',
@@ -29,35 +36,16 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
     },
   });
 
-  const programOptions = [
-    { label: 'BTech Computer Science', value: 'btech_cs' },
-    { label: 'BTech Information Technology', value: 'btech_it' },
-    { label: 'BTech Cyber Security', value: 'btech_cybersec' },
-    { label: 'BTech Data Science', value: 'btech_datasci' },
-    { label: 'BTech Electrical & Electronic Engineering', value: 'btech_eee' },
-    { label: 'BTech Mechanical Engineering', value: 'btech_mecheng' },
-    { label: 'BTech Civil Engineering', value: 'btech_civileng' },
-    { label: 'BTech Accounting with Computing', value: 'btech_acccomp' },
-    { label: 'BTech Marketing', value: 'btech_marketing' },
-    { label: 'BTech Procurement & Supply Chain Management', value: 'btech_pscm' },
-    { label: 'HND Computer Science', value: 'hnd_cs' },
-    { label: 'HND Information Technology', value: 'hnd_it' },
-    { label: 'HND Statistics', value: 'hnd_stats' },
-    { label: 'HND Building Technology', value: 'hnd_buildingtech' },
-    { label: 'HND Fashion Design & Textiles', value: 'hnd_fashion' },
-    { label: 'HND Hospitality Management', value: 'hnd_hospitality' },
-    { label: 'Diploma in Business Studies (Accounting)', value: 'dip_business_acc' },
-    { label: 'Diploma in Computer Networking', value: 'dip_networking' },
-    { label: 'Diploma in Graphic Design', value: 'dip_graphicdesign' },
-    { label: 'Diploma in Software Engineering', value: 'dip_softeng' },
-  ];
+  const selectedFaculty = watch('faculty');
+  const selectedDepartment = watch('department');
 
-  const levelOptions = [
-    { label: 'Level 100', value: 'l100' },
-    { label: 'Level 200', value: 'l200' },
-    { label: 'Level 300', value: 'l300' },
-    { label: 'Level 400', value: 'l400' },
-  ];
+  const { data: faculties, isLoading: isLoadingFaculties } = useFaculties();
+  const { data: departments, isLoading: isLoadingDepartments } = useDepartments(selectedFaculty);
+  const { data: programs, isLoading: isLoadingPrograms } = usePrograms(selectedDepartment);
+
+  const facultyOptions = faculties?.map((f) => ({ label: f.name, value: f.id })) || [];
+  const departmentOptions = departments?.map((d) => ({ label: d.name, value: d.id })) || [];
+  const programOptions = programs?.map((p) => ({ label: p.name, value: p.id.toString() })) || [];
 
   return (
     <View style={styles.container}>
@@ -101,10 +89,29 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
 
           <SelectInputField
             control={control}
+            name="faculty"
+            label="Faculty"
+            placeholder="Select your faculty"
+            options={facultyOptions}
+            disabled={isLoadingFaculties}
+          />
+
+          <SelectInputField
+            control={control}
+            name="department"
+            label="Department"
+            placeholder="Select your department"
+            options={departmentOptions}
+            disabled={!selectedFaculty || isLoadingDepartments}
+          />
+
+          <SelectInputField
+            control={control}
             name="program"
             label="Program of Study"
             placeholder="Select your program"
             options={programOptions}
+            disabled={!selectedDepartment || isLoadingPrograms}
           />
 
           <SelectInputField
@@ -112,7 +119,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
             name="level"
             label="Level"
             placeholder="Select your level"
-            options={levelOptions}
+            options={LEVEL_OPTIONS}
           />
         </View>
       </ScrollView>
@@ -123,7 +130,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
           onPress={handleSubmit(onSubmitPress)}
           loading={isSubmitting}
           disabled={!isValid || isSubmitting}
-          className="rounded-sm p-0 py-2"
+          className="p-0 py-2 rounded-sm"
         />
       </View>
     </View>

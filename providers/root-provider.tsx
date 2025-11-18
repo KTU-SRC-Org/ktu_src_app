@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import ToastManager from 'toastify-react-native';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -22,6 +23,7 @@ export function RootProvider({ children }: { children: ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           {children}
+          <ToastManager />
         </ThemeProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
