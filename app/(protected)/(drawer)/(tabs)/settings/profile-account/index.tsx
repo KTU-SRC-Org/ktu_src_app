@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Stack } from 'expo-router';
-import { ScrollView, View, RefreshControl, TextInput } from 'react-native';
+import {ScrollView, View, RefreshControl, TextInput, Text} from 'react-native';
 import { ProfileHeader } from '@/components/profile/profile-header';
 import { InfoSection } from '@/components/profile/info-section';
 import { InfoField } from '@/components/profile/info-field';
@@ -9,12 +9,14 @@ import { ProfileSkeleton } from '@/components/profile/profile-skeleton';
 import { ProfileData } from '@/types/profile.types';
 import { getProgramLabel, getLevelLabel, formatPhoneNumber } from '@/utils/profile.utils';
 import EditModal from "@/components/builders/edit-modal";
+import {Controller, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {EditPhoneNumberFormType, EditPhoneNumberSchema} from "@/lib/schemas/settings";
 
 const ProfileScreen = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [openEditModal, setOpenEditModal] = useState<boolean>(false);
-  const [disabledSave, setDisabledSave] = useState<boolean>(true);
   const [profileData, setProfileData] = useState<ProfileData>({
     imageUri: '',
     fullName: 'John Kwame Mensah',
@@ -24,15 +26,6 @@ const ProfileScreen = () => {
     phoneNumber: '0241234567',
     level: 'l300',
   });
-  const [phoneInput, setPhoneInput] = useState(profileData.phoneNumber);
-
-  useEffect(() => {
-    loadProfileData();
-    if (openEditModal) {
-      setPhoneInput(profileData.phoneNumber);
-      setDisabledSave(true);
-    }
-  }, [openEditModal, profileData.phoneNumber]);
 
   const loadProfileData = async () => {
     try {
@@ -57,13 +50,34 @@ const ProfileScreen = () => {
   //   // router.push('/profile/edit');
   // };
 
-  const handleEditSave = () => {
+  const { control, handleSubmit, reset,watch, formState: { errors, isValid },
+  } = useForm<EditPhoneNumberFormType>({
+    resolver: zodResolver(EditPhoneNumberSchema),
+    defaultValues: { phoneNumber: profileData.phoneNumber,},
+    mode: 'onChange',
+  });
+
+  // Helper for saving edited phone number
+  const onEditSave = (data: EditPhoneNumberFormType) => {
    setProfileData(prev => ({
      ...prev,
-     phoneNumber: phoneInput,
+     phoneNumber: data.phoneNumber,
    }));
    setOpenEditModal(false);
   }
+
+  useEffect(() => {
+    loadProfileData();
+    if (openEditModal) {
+      reset({ phoneNumber: profileData.phoneNumber });
+    }
+  }, [openEditModal, profileData.phoneNumber, reset]);
+
+  // Check input field is valid before enabling save button
+  const phoneInput = watch("phoneNumber") as unknown as string;
+  const hasChanged = phoneInput !== profileData.phoneNumber;
+  const canSave = isValid && hasChanged;
+
 
   if (loading) {
     return <ProfileSkeleton />;
@@ -86,7 +100,7 @@ const ProfileScreen = () => {
         fullName={profileData.fullName}
         indexNumber={profileData.indexNumber}
         level={getLevelLabel(profileData.level)}
-        verified={true} //Need for verified field
+        verified={true} //Need verified field
       />
 
       <InfoSection title="Personal Information">
@@ -147,22 +161,29 @@ const ProfileScreen = () => {
       <EditModal
         visible={openEditModal}
         onClose={() => setOpenEditModal(false)}
-        onSave={handleEditSave}
+        onSave={handleSubmit(onEditSave)}
         title={"Phone Number"}
-        disabledSave={disabledSave}
+        disabledSave={!canSave}
       >
         <View>
-          <TextInput
-            value={phoneInput}
-            onChangeText={(value) => {
-              setPhoneInput(value)
-              const hasChanged = value !== profileData.phoneNumber;
-              const isValid = value.trim().length > 0;
-              setDisabledSave(!(hasChanged && isValid))
-            }}
-            multiline
-            textAlignVertical="top"
-            className="p-2 bg-gray-50 rounded-md border border-gray-100 h-40"
+          <Controller
+            control={control}
+            name={"phoneNumber"}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <View >
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  multiline
+                  textAlignVertical="top"
+                  className="p-2 bg-gray-50 rounded-md border border-gray-100 h-40"
+                />
+                {errors.phoneNumber?.message && (
+                  <Text className="text-rose-500">{errors.phoneNumber.message}</Text>
+                )}
+              </View>
+            )}
           />
         </View>
       </EditModal>

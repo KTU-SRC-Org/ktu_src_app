@@ -25,6 +25,19 @@ const SettingsLayout = () => {
           headerBackButtonDisplayMode: 'minimal',
         }}
       />
+      <Stack.Screen
+        name="security/index"
+        options={{
+          title: 'Password & Security',
+          headerBackTitle: '',
+          headerLargeTitleShadowVisible: true,
+          headerLargeTitle: false,
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: 'white' },
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+
+      />
     </Stack>
   );
 };

@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import {Href, useRouter} from 'expo-router';
 import { SettingSection } from '@/features/settings/setting-section';
 import { ExternalServicesSection } from '@/features/settings/external-services-section';
 import { DeveloperCredits } from '@/features/settings/developer-credits';
@@ -15,7 +15,7 @@ const SettingsScreen = () => {
       item.onPress();
     } else if (item.link) {
       console.log('Navigate to:', item.link);
-      router.push(item.link);
+      router.push(item.link as Href);
     }
   };
 
