@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
 import { StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CompleteProfileForm from '@/features/onboarding/complete-profile-form';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
+import { useUpdateProfile } from '@/hooks/onboarding/use-update-profile';
 import { router } from 'expo-router';
 
+import { Toast } from 'toastify-react-native'
+
 const CompleteProfileScreen = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { mutate: updateProfile, isPending: isSubmitting } = useUpdateProfile();
 
   const handleSubmit = async (data: CompleteProfileFormType) => {
-    setIsSubmitting(true);
     try {
-      console.log('Profile Data:', data);
-      router.replace('./(drawer)/(tabs)');
-    } finally {
-      setIsSubmitting(false);
+      updateProfile(data, {
+        onError: (error) => {
+          console.log('Profile update error:', error)
+          Toast.error('Failed to update profile. Please try again.');
+        },
+      });
+      // router.replace('./(drawer)/(tabs)');
+    } catch (error) {
+      console.error('Profile update error:', error);
+      Toast.error('Failed to update profile. Please try again.');
     }
   };
 
