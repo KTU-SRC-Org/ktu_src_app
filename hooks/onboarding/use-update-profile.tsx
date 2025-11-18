@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
-import { useUser } from '../auth/use-user';
 import { useAppStore } from '@/store/store';
 
 import { Toast } from 'toastify-react-native'

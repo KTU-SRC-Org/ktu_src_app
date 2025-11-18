@@ -5,7 +5,7 @@ import { AuthButton } from '@/components/shared/auth-button';
 import React, { useEffect, useState } from 'react';
 import { OTPFormType, OTPSchema } from '@/lib/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useVerifyOtp } from '@/hooks/auth/use-verify-otp';
 import { useResendOtp } from '@/hooks/auth/use-resend-otp';
 
@@ -71,9 +71,9 @@ const VerifyOtpForm = () => {
 
   return (
     <View className="flex flex-col items-center justify-center gap-12 pt-16">
-      <View className="w-full items-center">
-        <Text className="text-center text-2xl font-bold text-white">Check your email.</Text>
-        <Text className="mt-1 text-center text-base text-white">
+      <View className="items-center w-full">
+        <Text className="text-2xl font-bold text-center text-white">Check your email.</Text>
+        <Text className="mt-1 text-base text-center text-white">
           We’ve sent the code to {email}
         </Text>
       </View>
@@ -91,7 +91,7 @@ const VerifyOtpForm = () => {
         )}
       />
 
-      <View className="flex w-full flex-col items-center gap-4">
+      <View className="flex flex-col items-center w-full gap-4">
         {form.formState.errors.otpCode ? (
           <Text className="mt-2 text-center text-[#FF4D4D]">
             {form.formState.errors.otpCode.message}

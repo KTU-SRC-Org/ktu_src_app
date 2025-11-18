@@ -3,7 +3,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import CompleteProfileForm from '@/features/onboarding/complete-profile-form';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
 import { useUpdateProfile } from '@/hooks/onboarding/use-update-profile';
-import { router } from 'expo-router';
 
 import { Toast } from 'toastify-react-native'
 
