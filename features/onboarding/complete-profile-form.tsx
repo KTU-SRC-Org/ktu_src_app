@@ -8,6 +8,7 @@ import { SelectInputField } from '@/components/builders/select-input-field';
 import { useFaculties } from '@/hooks/onboarding/use-faculties';
 import { useDepartments } from '@/hooks/onboarding/use-departments';
 import { usePrograms } from '@/hooks/onboarding/use-programs';
+import { LEVEL_OPTIONS } from '@/constants/profile.constants';
 
 interface CompleteProfileFormProps {
   onSubmitPress: (data: CompleteProfileFormType) => void;
@@ -45,13 +46,6 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
   const facultyOptions = faculties?.map((f) => ({ label: f.name, value: f.id })) || [];
   const departmentOptions = departments?.map((d) => ({ label: d.name, value: d.id })) || [];
   const programOptions = programs?.map((p) => ({ label: p.name, value: p.id.toString() })) || [];
-
-  const levelOptions = [
-    { label: 'Level 100', value: 'l100' },
-    { label: 'Level 200', value: 'l200' },
-    { label: 'Level 300', value: 'l300' },
-    { label: 'Level 400', value: 'l400' },
-  ];
 
   return (
     <View style={styles.container}>
@@ -125,7 +119,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
             name="level"
             label="Level"
             placeholder="Select your level"
-            options={levelOptions}
+            options={LEVEL_OPTIONS}
           />
         </View>
       </ScrollView>
