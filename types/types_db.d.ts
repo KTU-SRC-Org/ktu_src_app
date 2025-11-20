@@ -68,6 +68,119 @@ export type Database = {
         }
         Relationships: []
       }
+      hostel_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          hostel_id: string
+          id: string
+          is_featured: boolean
+          position: number
+          storage_path: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          hostel_id: string
+          id?: string
+          is_featured?: boolean
+          position?: number
+          storage_path: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          hostel_id?: string
+          id?: string
+          is_featured?: boolean
+          position?: number
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hostel_photos_hostel_id_fkey"
+            columns: ["hostel_id"]
+            isOneToOne: false
+            referencedRelation: "hostels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hostels: {
+        Row: {
+          address: string | null
+          agent_avatar_url: string | null
+          agent_email: string | null
+          agent_name: string | null
+          bathrooms: number | null
+          bedrooms: number | null
+          campus: boolean
+          contact: string | null
+          created_at: string
+          description: string | null
+          facilities: string[]
+          hero_image_url: string | null
+          id: string
+          is_featured: boolean
+          name: string
+          payment_term:
+            | Database["public"]["Enums"]["hostel_payment_term"]
+            | null
+          price: number
+          rating: number | null
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          agent_avatar_url?: string | null
+          agent_email?: string | null
+          agent_name?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          campus?: boolean
+          contact?: string | null
+          created_at?: string
+          description?: string | null
+          facilities?: string[]
+          hero_image_url?: string | null
+          id?: string
+          is_featured?: boolean
+          name: string
+          payment_term?:
+            | Database["public"]["Enums"]["hostel_payment_term"]
+            | null
+          price: number
+          rating?: number | null
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          agent_avatar_url?: string | null
+          agent_email?: string | null
+          agent_name?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          campus?: boolean
+          contact?: string | null
+          created_at?: string
+          description?: string | null
+          facilities?: string[]
+          hero_image_url?: string | null
+          id?: string
+          is_featured?: boolean
+          name?: string
+          payment_term?:
+            | Database["public"]["Enums"]["hostel_payment_term"]
+            | null
+          price?: number
+          rating?: number | null
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -181,10 +294,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      refresh_hostel_hero_image: {
+        Args: { p_hostel_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
-      [_ in never]: never
+      hostel_payment_term: "yearly" | "semester" | "academic_year"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -311,7 +427,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      hostel_payment_term: ["yearly", "semester", "academic_year"],
+    },
   },
 } as const
 
