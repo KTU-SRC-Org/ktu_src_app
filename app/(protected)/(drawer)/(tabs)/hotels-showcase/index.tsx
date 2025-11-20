@@ -18,25 +18,17 @@ import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
+
 import { Card } from '@/components/cards/hostels-showcase/Card';
 import { FeaturedCard } from '@/components/cards/hostels-showcase/FeaturedCard';
-import { dummyProperties } from '@/constants/dummy-data/properties';
 import { DrawerToggleButton } from '@react-navigation/drawer';
+
+import { useFeaturedHostels, useRecommendedHostels, HostelCard as Property } from '@/hooks/hostel/use-hostel';
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
 
-// Properly typed property interface
-interface Property {
-  id: string;
-  image: string;
-  rating: number;
-  name: string;
-  address: string;
-  price: number;
-}
-
-// Create Animated version of FlashList with proper typing
+// Animated FlashList
 const AnimatedFlashList = Animated.createAnimatedComponent(
   FlashList
 ) as unknown as React.ComponentType<FlashListProps<Property>>;
@@ -44,13 +36,26 @@ const AnimatedFlashList = Animated.createAnimatedComponent(
 const HostelsShowcase = () => {
   const navigation = useNavigation();
 
-  // Use shared value for scroll offset
+  // Fetch data
+  const {
+    data: featuredHostels = [],
+    isLoading: featuredLoading,
+    isError: featuredError,
+  } = useFeaturedHostels();
+
+  const {
+    data: recommendedHostels = [],
+    isLoading: recommendedLoading,
+    isError: recommendedError,
+  } = useRecommendedHostels();
+
+  // scroll animation
   const scrollOffset = useSharedValue(0);
 
-  const latestPropertiesLoading = false;
-  const loading = false;
-
-  const handleCardPress = (id: string) => router.push(`/hostels/1`);
+  const handleCardPress = (id: string) => {
+    // navigate to details (use id instead of hard-coded '1')
+    router.push(`/hostels/${id}`);
+  };
 
   const shareListing = async () => {
     try {
@@ -60,37 +65,30 @@ const HostelsShowcase = () => {
     }
   };
 
-  // Animated scroll handler
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
       scrollOffset.value = event.contentOffset.y;
     },
   });
 
-  // Image animation styles
-  const imageAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        {
-          translateY: interpolate(
-            scrollOffset.value,
-            [-IMG_HEIGHT, 0, IMG_HEIGHT],
-            [-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.75]
-          ),
-        },
-        {
-          scale: interpolate(scrollOffset.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [2, 1, 1]),
-        },
-      ],
-    };
-  });
+  const imageAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(
+          scrollOffset.value,
+          [-IMG_HEIGHT, 0, IMG_HEIGHT],
+          [-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.75]
+        ),
+      },
+      {
+        scale: interpolate(scrollOffset.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [2, 1, 1]),
+      },
+    ],
+  }));
 
-  // Header animation styles
-  const headerAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(scrollOffset.value, [0, IMG_HEIGHT / 1.5], [0, 1]),
-    };
-  });
+  const headerAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scrollOffset.value, [0, IMG_HEIGHT / 1.5], [0, 1]),
+  }));
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -120,7 +118,7 @@ const HostelsShowcase = () => {
 
   const renderListHeader = () => (
     <>
-      {/* Animated Image - Wrapped in View to prevent overlap */}
+      {/* Animated header image */}
       <View style={styles.imageContainer}>
         <Animated.Image
           source={require('@/assets/images/hostels-showcase/House-For-Rent1.png')}
@@ -133,22 +131,21 @@ const HostelsShowcase = () => {
       <View style={styles.sectionContainer}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Featured</Text>
-          {/* <Pressable >
-            <Text style={styles.seeAllText}>See all</Text>
-          </Pressable> */}
         </View>
 
-        {latestPropertiesLoading ? (
+        {featuredLoading ? (
           <ActivityIndicator size="large" color="#0061FF" style={{ marginTop: 20 }} />
-        ) : !dummyProperties || dummyProperties.length === 0 ? (
+        ) : featuredError ? (
+          <Text style={{ color: 'red' }}>Could not load featured hostels.</Text>
+        ) : !featuredHostels || featuredHostels.length === 0 ? (
           <View>
-            <Text>No featured properties available.</Text>
+            <Text>No featured hostels available.</Text>
           </View>
         ) : (
           <FlatList
-            data={dummyProperties}
+            data={featuredHostels}
             renderItem={({ item }) => (
-              <FeaturedCard item={item} onPress={() => handleCardPress(item.name)} />
+              <FeaturedCard item={item} onPress={() => handleCardPress(item.id)} />
             )}
             keyExtractor={(item) => item.id}
             horizontal
@@ -160,7 +157,7 @@ const HostelsShowcase = () => {
 
       {/* Our Recommendation Section */}
       <View style={styles.sectionContainer}>
-        <View className="mb-2 mt-3 flex flex-row items-center justify-between">
+        <View className="flex flex-row items-center justify-between mt-3 mb-2">
           <Text style={styles.sectionTitle}>Our Recommendation</Text>
           <Pressable onPress={() => router.push('/hotels-showcase/all-hostels-screen')}>
             <Text style={styles.seeAllText}>See all</Text>
@@ -171,12 +168,15 @@ const HostelsShowcase = () => {
   );
 
   const renderListEmpty = () => {
-    if (loading) {
+    if (recommendedLoading) {
       return <ActivityIndicator size="large" color="#0061FF" style={{ marginTop: 20 }} />;
+    }
+    if (recommendedError) {
+      return <Text style={{ color: 'red' }}>Could not load recommended hostels.</Text>;
     }
     return (
       <View>
-        <Text>No featured properties available.</Text>
+        <Text>No recommended hostels available.</Text>
       </View>
     );
   };
@@ -184,7 +184,7 @@ const HostelsShowcase = () => {
   return (
     <View style={styles.container}>
       <AnimatedFlashList
-        data={dummyProperties || []}
+        data={recommendedHostels || []}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
