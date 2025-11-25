@@ -31,7 +31,7 @@ const EditModal = ({
   children,
   fullScreen = false,
   animationType = 'slide',
-  heightRatio = 0.9,
+  heightRatio = 0.8,
   closeOnTouchOutside = false,
   onSave,
   title,
@@ -51,15 +51,15 @@ const EditModal = ({
             styles.container,
             {
               height: modalHeight,
-              borderTopLeftRadius: fullScreen ? 0 : 16,
-              borderTopRightRadius: fullScreen ? 0 : 16,
+              borderTopLeftRadius: fullScreen ? 0 : 12,
+              borderTopRightRadius: fullScreen ? 0 : 12,
               borderBottomLeftRadius: 0,
               borderBottomRightRadius: 0,
               top: fullScreen ? 0 : undefined,
               bottom: fullScreen ? undefined : 0,
             },
           ]}>
-          <View className={'flex-row items-center justify-between p-4 mb-6'}>
+          <View className={'flex-row items-center justify-between px-4 py-6 mb-6'}>
             <Pressable onPress={onClose}>
               <Text className={"text-base text-red-600"}>Cancel</Text>
             </Pressable>

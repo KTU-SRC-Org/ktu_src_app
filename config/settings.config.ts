@@ -197,3 +197,57 @@ export const externalServices: ExternalService[] = [
     backgroundColor: '#06B6D4',
   },
 ];
+
+
+export const securityItems: SettingSection[] = [
+  {
+    id: "authentication",
+    items: [
+      {
+        id: "change-password",
+        name: "Change Password",
+        icon: "key",
+        backgroundColor: "#6366F1",
+        onPress: () => {}
+      },
+    ],
+  },
+  {
+    id: "account-protection",
+    items: [
+      {
+        id: "verification",
+        name: "Account Verification",
+        icon: "shield-checkmark",
+        backgroundColor: "#10B981",
+        link: "/settings/security/verification",
+      },
+      {
+        id: "recovery",
+        name: "Recovery Options",
+        icon: "mail",
+        backgroundColor: "#F59E0B",
+        link: "/settings/security/recovery",
+      },
+    ],
+  },
+  {
+    id: "safety",
+    items: [
+      {
+        id: "login-activity",
+        name: "Login Activity",
+        icon: "laptop",
+        backgroundColor: "#3B82F6",
+        link: "/settings/security/login-activity",
+      },
+      {
+        id: "danger-zone",
+        name: "Delete Account",
+        icon: "trash",
+        backgroundColor: "#EF4444",
+        link: "/settings/security/delete-account",
+      },
+    ],
+  },
+];

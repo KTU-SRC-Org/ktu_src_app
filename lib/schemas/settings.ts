@@ -9,4 +9,16 @@ export const EditPhoneNumberSchema = z.object({
 
 });
 
+
+export const ChangePasswordSchema = z.object({
+  oldPass: z.string().min(8, "Password must be at least 8 characters"),
+  newPass: z.string().min(8, "Password must be at least 8 characters"),
+  confirmPass: z.string().min(8, "Password must be at least 8 characters"),
+}).refine((data) => data.newPass === data.confirmPass, {
+  message: "Passwords do not match",
+  path: ["confirmPass"],
+});
+
+
+export type ChangePasswordFormType = z.infer<typeof ChangePasswordSchema>;
 export type EditPhoneNumberFormType = z.infer<typeof EditPhoneNumberSchema>;
