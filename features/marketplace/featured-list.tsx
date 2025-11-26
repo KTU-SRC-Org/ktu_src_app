@@ -4,12 +4,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from '@/features/marketplace/product-card';
 import CategoryCard from '@/features/marketplace/category-card';
-import { ALL_CATEGORIES, MOCK_ITEMS, ProductCardInterface } from '@/features/marketplace/index';
+import { ProductCardInterface } from '@/features/marketplace/index';
 import ProductSearchBar from '@/features/marketplace/product-search-bar';
+import { useMarketCategories } from '@/hooks/marketplace/use-market-categories';
+import { useFeaturedListings } from '@/hooks/marketplace/use-featured-listings';
 
 // This component contains ALL the content that appears ABOVE the product list
 const MarketplaceListHeader = () => {
   const router = useRouter();
+  const { data: categories = [] } = useMarketCategories();
 
   return (
     // This View replaces the original root View and provides spacing
@@ -60,13 +63,13 @@ const MarketplaceListHeader = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 12, paddingRight: 16 }}>
-          {ALL_CATEGORIES.slice(0, 5).map((category) => (
+          {categories.slice(0, 6).map((category) => (
             <CategoryCard
               key={category.id}
               id={category.id}
               name={category.name}
-              icon={category.icon}
-              color={category.color}
+              icon={category.icon ?? 'help-circle'}
+              color={category.color ?? '#000000'}
             />
           ))}
         </ScrollView>
@@ -87,13 +90,15 @@ const MarketplaceListHeader = () => {
 };
 
 export default function FeaturedList() {
-  const renderProduct = ({ item }: { item: ProductCardInterface }) => (
+  const { data: featuredItems = [] } = useFeaturedListings();
+
+  const renderProduct = ({ item }: { item: any }) => (
     <ProductCard
       key={item.id}
       id={item.id}
-      name={item.name}
+      name={item.title}
       price={item.price}
-      image={item.images[0]}
+      image={item.hero_image_url}
       rating={item.rating}
     />
   );
@@ -105,7 +110,7 @@ export default function FeaturedList() {
       // Pass all the header content here
       ListHeaderComponent={MarketplaceListHeader}
       // List data and props remain the same
-      data={MOCK_ITEMS.slice(0, 3)}
+      data={featuredItems}
       renderItem={renderProduct}
       keyExtractor={(item) => item.id}
       horizontal={false}
