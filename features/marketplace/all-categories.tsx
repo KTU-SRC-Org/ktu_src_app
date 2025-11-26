@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { CategoryInterface } from '@/features/marketplace/index';
 import { useMarketCategories } from '@/hooks/marketplace/use-market-categories';
 import { Skeleton } from '@/components/ui/skeleton';
 
