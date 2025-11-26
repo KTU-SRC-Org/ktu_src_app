@@ -29,7 +29,7 @@ export function useInfiniteListings(categoryId: string, search: string) {
       const from = currentPage * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
 
-      let query = (client as any)
+      let query = client
         .from('market_listings')
         .select('id, title, price, hero_image_url, rating, category_id', { count: 'exact' })
         .eq('is_active', true)
@@ -50,7 +50,7 @@ export function useInfiniteListings(categoryId: string, search: string) {
       const { data, error, count } = await query;
       if (error) throw error;
 
-      const items = (data ?? []).map((item: any) => ({
+      const items = (data ?? []).map((item) => ({
         id: item.id,
         title: item.title,
         price: Number(item.price),

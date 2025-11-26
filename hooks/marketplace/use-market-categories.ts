@@ -15,14 +15,14 @@ export function useMarketCategories() {
   const queryKey = ['market', 'categories'];
 
   const queryFn = async (): Promise<MarketCategory[]> => {
-    const { data, error } = await (client as any)
+    const { data, error } = await client
       .from('market_categories')
       .select('id, name, icon, color')
       .order('name', { ascending: true });
 
     if (error) throw error;
 
-    return (data as any ?? []) as MarketCategory[];
+    return (data ?? []) as MarketCategory[];
   };
 
   return useQuery({

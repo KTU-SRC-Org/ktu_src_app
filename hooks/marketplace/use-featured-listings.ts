@@ -16,7 +16,7 @@ export function useFeaturedListings() {
   const queryKey = ['market', 'listings', 'featured'];
 
   const queryFn = async (): Promise<FeaturedListing[]> => {
-    const { data, error } = await (client as any)
+    const { data, error } = await client
       .from('market_listings')
       .select('id, title, price, hero_image_url, rating')
       .eq('is_featured', true)
@@ -26,7 +26,7 @@ export function useFeaturedListings() {
 
     if (error) throw error;
 
-    return (data as any ?? []).map((item: any) => ({
+    return (data ?? []).map((item) => ({
       id: item.id,
       title: item.title,
       price: Number(item.price),
