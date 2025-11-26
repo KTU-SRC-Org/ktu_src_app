@@ -4,7 +4,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from '@/features/marketplace/product-card';
 import CategoryCard from '@/features/marketplace/category-card';
-import { ProductCardInterface } from '@/features/marketplace/index';
 import ProductSearchBar from '@/features/marketplace/product-search-bar';
 import { useMarketCategories } from '@/hooks/marketplace/use-market-categories';
 import { useFeaturedListings } from '@/hooks/marketplace/use-featured-listings';
@@ -33,13 +32,11 @@ const FeaturedSkeleton = () => (
   </View>
 );
 
-// This component contains ALL the content that appears ABOVE the product list
 const MarketplaceListHeader = () => {
   const router = useRouter();
   const { data: categories = [], isLoading: isCategoriesLoading } = useMarketCategories();
 
   return (
-    // This View replaces the original root View and provides spacing
     <View className="flex-col gap-8">
       <ProductSearchBar />
       {/* Banner */}
