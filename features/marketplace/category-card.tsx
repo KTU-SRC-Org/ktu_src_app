@@ -19,7 +19,7 @@ const CategoryCard = ({ id, name, icon, color }: CategoryCardProps) => {
       onPress={() =>
         router.push({
           pathname: '/marketplace/category/[id]',
-          params: { id: id },
+          params: { id: id, title: name },
         })
       }>
       <Text className="text-[30px]">{icon}</Text>

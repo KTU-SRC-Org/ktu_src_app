@@ -15,7 +15,7 @@ export default function AllCategories() {
       onPress={() =>
         router.push({
           pathname: '/marketplace/category/[id]',
-          params: { id: item.id },
+          params: { id: item.id, title: item.name },
         })
       }>
       <View
