@@ -138,7 +138,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
               overflow: 'hidden',
             }}>
             <ProductImageCarousel
-              images={product.hero_image_url ? [{ uri: product.hero_image_url }] : []}
+              images={product.images.map((img) => ({ uri: img }))}
             />
             <TouchableOpacity
               className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"

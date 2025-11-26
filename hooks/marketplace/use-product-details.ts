@@ -29,6 +29,7 @@ export type ProductDetails = {
     avatar_url: string | null;
   } | null;
   variants: ProductVariant[];
+  images: string[];
 };
 
 const STALE_TIME_1_HOUR = 1000 * 60 * 60;
@@ -39,7 +40,7 @@ export function useProductDetails(id: string) {
 
   const queryFn = async (): Promise<ProductDetails | null> => {
     // Fetch listing details
-    const { data: listing, error: listingError } = await (client as any)
+    const { data: listing, error: listingError } = await client
       .from('market_listings')
       .select(`
         *,
@@ -56,13 +57,28 @@ export function useProductDetails(id: string) {
     if (!listing) return null;
 
     // Fetch variants
-    const { data: variants, error: variantsError } = await (client as any)
+    const { data: variants, error: variantsError } = await client
       .from('market_listing_variants')
       .select('*')
       .eq('listing_id', id)
       .eq('is_active', true);
 
     if (variantsError) throw variantsError;
+
+    // Fetch photos
+    const { data: photos, error: photosError } = await client
+      .from('market_photos')
+      .select('storage_path')
+      .eq('listing_id', id)
+      .order('position', { ascending: true });
+
+    if (photosError) throw photosError;
+
+    const images = (photos ?? []).map((p) => p.storage_path);
+    // Ensure hero image is included if no photos found, or just use photos if available
+    // Assuming photos table contains all images including hero.
+    // If photos is empty, fallback to hero_image_url
+    const finalImages = images.length > 0 ? images : (listing.hero_image_url ? [listing.hero_image_url] : []);
 
     return {
       id: listing.id,
@@ -86,6 +102,7 @@ export function useProductDetails(id: string) {
         is_in_stock: v.is_in_stock,
         attributes: v.attributes,
       })),
+      images: finalImages,
     };
   };
 
