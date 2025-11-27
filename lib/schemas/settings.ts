@@ -11,7 +11,7 @@ export const EditPhoneNumberSchema = z.object({
 
 
 export const ChangePasswordSchema = z.object({
-  oldPass: z.string().min(8, "Password must be at least 8 characters"),
+  oldPass: z.string().min(8, "Password must be at least 8 characters").optional(),
   newPass: z.string().min(8, "Password must be at least 8 characters"),
   confirmPass: z.string().min(8, "Password must be at least 8 characters"),
 }).refine((data) => data.newPass === data.confirmPass, {

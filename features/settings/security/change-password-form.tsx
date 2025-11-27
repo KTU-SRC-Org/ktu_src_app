@@ -1,4 +1,4 @@
-import React, {useState, useRef, forwardRef, useImperativeHandle, useEffect} from "react";
+import React, {useState, useRef, forwardRef, useImperativeHandle, useEffect, Dispatch, SetStateAction} from "react";
 import {
   View,
   Text,
@@ -20,7 +20,7 @@ const STEPS = {
 
 interface ChangePasswordProps {
   onSubmit: () => void;
-  setCanSave: (value: boolean) => void;
+  setCanSave: Dispatch<SetStateAction<boolean>>;
 }
 
 const passwordLength = 8;
@@ -65,9 +65,13 @@ const ChangePasswordForm = forwardRef(({onSubmit, setCanSave}: ChangePasswordPro
   useEffect(() => {
     if(step === STEPS.OLD) {
       setCanSave(false)
-      setEnableVerify(oldPass?.length >= passwordLength)
+      setEnableVerify(oldPass ? oldPass?.length >= passwordLength : false)
     }
+    console.log("isValid", isValid)
+    console.log("step", step)
+
     if(step === STEPS.NEW && isValid ){
+      console.log("setCanSave")
       setCanSave(true);
     }
   }, [isValid, oldPass?.length, setCanSave, step]);

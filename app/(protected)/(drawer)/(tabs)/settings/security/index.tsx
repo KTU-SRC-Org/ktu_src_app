@@ -73,7 +73,7 @@ const PasswordAndSecurityScreen = () => {
        >
          <ChangePasswordForm
            ref={formRef}
-           setCanSave={() => setCanSave}
+           setCanSave={setCanSave}
            onSubmit={handleSubmit}
          />
        </EditModal>
