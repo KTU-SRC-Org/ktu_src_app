@@ -93,7 +93,7 @@ const NotificationGroupComponent = ({
       <View className="overflow-hidden rounded-lg bg-white">
         {group.items.map((item, index) => (
           <View key={item.id}>
-            <View className="flex-row items-center justify-between p-2">
+            <View className="flex-row items-center justify-between p-3">
               <Text className="text-base text-gray-800">{item.label}</Text>
               <Switch
                 value={enabled[item.id]}
@@ -103,7 +103,7 @@ const NotificationGroupComponent = ({
               />
             </View>
             {index < group.items.length - 1 &&
-              <View className="border-b border-gray-200" />
+              <View className="border-b border-gray-200 ml-8" />
             }
           </View>
         ))}
