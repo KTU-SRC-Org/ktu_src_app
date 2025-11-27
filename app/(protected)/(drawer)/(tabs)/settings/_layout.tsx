@@ -14,7 +14,7 @@ const SettingsLayout = () => {
         }}
       />
       <Stack.Screen
-        name="profile-account/index"
+        name="profile-account"
         options={{
           title: 'Profile',
           headerBackTitle: '',
@@ -26,7 +26,7 @@ const SettingsLayout = () => {
         }}
       />
       <Stack.Screen
-        name="security/index"
+        name="security"
         options={{
           title: 'Password & Security',
           headerBackTitle: '',
@@ -38,6 +38,30 @@ const SettingsLayout = () => {
         }}
 
       />
+        <Stack.Screen
+          name="security/verification"
+          options={{
+              title: 'Account Verification',
+              headerBackTitle: '',
+              headerLargeTitleShadowVisible: true,
+              headerLargeTitle: false,
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: 'white' },
+              headerBackButtonDisplayMode: 'minimal',
+          }}
+        />
+        <Stack.Screen
+          name="security/login-device"
+          options={{
+              title: 'Device',
+              headerBackTitle: '',
+              headerLargeTitleShadowVisible: true,
+              headerLargeTitle: false,
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: 'white' },
+              headerBackButtonDisplayMode: 'minimal',
+          }}
+        />
     </Stack>
   );
 };
