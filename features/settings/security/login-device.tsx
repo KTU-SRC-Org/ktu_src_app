@@ -73,8 +73,7 @@ const LoginDevice = () => {
       >
         <View className="flex-col gap-4">
           <View className={"w-full flex items-center justify-center"}>
-            <View
-              className="w-14 h-14 items-center justify-center p-4 border border-neutral-500 rounded-full">
+            <View className="w-16 h-16 items-center justify-center p-4 border border-neutral-500 rounded-full">
               <DeviceIcon />
             </View>
           </View>
@@ -126,7 +125,7 @@ const LoginDevice = () => {
             <View className="w-full items-start flex-col gap-2">
               <View className={"w-full flex items-center justify-center"}>
                 <View
-                  className="w-14 h-14 items-center justify-center p-4 border border-neutral-500 rounded-full">
+                  className="w-16 h-16 items-center justify-center p-4 border border-neutral-500 rounded-full">
                   <DeviceIcon />
                 </View>
               </View>

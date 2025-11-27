@@ -29,7 +29,6 @@ const SettingsLayout = () => {
         name="security"
         options={{
           title: 'Password & Security',
-          headerBackTitle: '',
           headerLargeTitleShadowVisible: true,
           headerLargeTitle: false,
           headerShadowVisible: false,
@@ -42,7 +41,6 @@ const SettingsLayout = () => {
           name="security/verification"
           options={{
               title: 'Account Verification',
-              headerBackTitle: '',
               headerLargeTitleShadowVisible: true,
               headerLargeTitle: false,
               headerShadowVisible: false,
@@ -54,7 +52,6 @@ const SettingsLayout = () => {
           name="security/login-device"
           options={{
               title: 'Device',
-              headerBackTitle: '',
               headerLargeTitleShadowVisible: true,
               headerLargeTitle: false,
               headerShadowVisible: false,
