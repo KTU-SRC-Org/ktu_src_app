@@ -181,6 +181,250 @@ export type Database = {
         }
         Relationships: []
       }
+      listing_fee_plans: {
+        Row: {
+          active: boolean
+          created_at: string
+          currency: string
+          featured_fee: number
+          id: string
+          name: string
+          normal_fee: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          currency?: string
+          featured_fee: number
+          id?: string
+          name: string
+          normal_fee: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          currency?: string
+          featured_fee?: number
+          id?: string
+          name?: string
+          normal_fee?: number
+        }
+        Relationships: []
+      }
+      market_categories: {
+        Row: {
+          color: string | null
+          created_at: string
+          icon: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      market_listing_variants: {
+        Row: {
+          attributes: Json
+          created_at: string
+          currency: string | null
+          id: string
+          is_active: boolean
+          is_in_stock: boolean
+          label: string
+          listing_id: string
+          price: number | null
+          sku: string | null
+          stock_qty: number | null
+          updated_at: string
+        }
+        Insert: {
+          attributes?: Json
+          created_at?: string
+          currency?: string | null
+          id?: string
+          is_active?: boolean
+          is_in_stock?: boolean
+          label: string
+          listing_id: string
+          price?: number | null
+          sku?: string | null
+          stock_qty?: number | null
+          updated_at?: string
+        }
+        Update: {
+          attributes?: Json
+          created_at?: string
+          currency?: string | null
+          id?: string
+          is_active?: boolean
+          is_in_stock?: boolean
+          label?: string
+          listing_id?: string
+          price?: number | null
+          sku?: string | null
+          stock_qty?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_listing_variants_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "market_listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      market_listings: {
+        Row: {
+          call_contact: string | null
+          category_id: string | null
+          condition: string | null
+          created_at: string
+          currency: string
+          description: string | null
+          hero_image_url: string | null
+          id: string
+          is_active: boolean
+          is_approved: boolean
+          is_featured: boolean
+          is_in_stock: boolean
+          placement_fee_amount: number | null
+          placement_fee_currency: string | null
+          placement_fee_paid: boolean
+          placement_paid_at: string | null
+          placement_type: Database["public"]["Enums"]["market_placement_type"]
+          price: number
+          rating: number
+          rating_count: number
+          seller_id: string | null
+          stock_qty: number | null
+          title: string
+          updated_at: string
+          whatsapp_contact: string | null
+        }
+        Insert: {
+          call_contact?: string | null
+          category_id?: string | null
+          condition?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean
+          is_approved?: boolean
+          is_featured?: boolean
+          is_in_stock?: boolean
+          placement_fee_amount?: number | null
+          placement_fee_currency?: string | null
+          placement_fee_paid?: boolean
+          placement_paid_at?: string | null
+          placement_type?: Database["public"]["Enums"]["market_placement_type"]
+          price: number
+          rating?: number
+          rating_count?: number
+          seller_id?: string | null
+          stock_qty?: number | null
+          title: string
+          updated_at?: string
+          whatsapp_contact?: string | null
+        }
+        Update: {
+          call_contact?: string | null
+          category_id?: string | null
+          condition?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_active?: boolean
+          is_approved?: boolean
+          is_featured?: boolean
+          is_in_stock?: boolean
+          placement_fee_amount?: number | null
+          placement_fee_currency?: string | null
+          placement_fee_paid?: boolean
+          placement_paid_at?: string | null
+          placement_type?: Database["public"]["Enums"]["market_placement_type"]
+          price?: number
+          rating?: number
+          rating_count?: number
+          seller_id?: string | null
+          stock_qty?: number | null
+          title?: string
+          updated_at?: string
+          whatsapp_contact?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_listings_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "market_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "market_listings_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      market_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          is_featured: boolean
+          listing_id: string
+          position: number
+          storage_path: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean
+          listing_id: string
+          position?: number
+          storage_path: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_featured?: boolean
+          listing_id?: string
+          position?: number
+          storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_photos_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "market_listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -289,6 +533,30 @@ export type Database = {
           },
         ]
       }
+      todo: {
+        Row: {
+          completed: boolean | null
+          created_at: string
+          id: number
+          title: string | null
+          user_id: string | null
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string
+          id?: number
+          title?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string
+          id?: number
+          title?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -298,9 +566,22 @@ export type Database = {
         Args: { p_hostel_id: string }
         Returns: undefined
       }
+      refresh_listing_hero_image: {
+        Args: { p_listing_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       hostel_payment_term: "yearly" | "semester" | "academic_year"
+      listing_submission_status:
+        | "submitted"
+        | "payment_pending"
+        | "paid"
+        | "approved"
+        | "rejected"
+      market_placement_type: "normal" | "featured"
+      payment_status: "pending" | "succeeded" | "failed" | "refunded"
+      payment_type: "listing_fee" | "purchase" | "wallet_topup" | "booking_fee"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -429,6 +710,16 @@ export const Constants = {
   public: {
     Enums: {
       hostel_payment_term: ["yearly", "semester", "academic_year"],
+      listing_submission_status: [
+        "submitted",
+        "payment_pending",
+        "paid",
+        "approved",
+        "rejected",
+      ],
+      market_placement_type: ["normal", "featured"],
+      payment_status: ["pending", "succeeded", "failed", "refunded"],
+      payment_type: ["listing_fee", "purchase", "wallet_topup", "booking_fee"],
     },
   },
 } as const

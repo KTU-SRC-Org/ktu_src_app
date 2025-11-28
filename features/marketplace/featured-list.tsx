@@ -4,15 +4,39 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from '@/features/marketplace/product-card';
 import CategoryCard from '@/features/marketplace/category-card';
-import { ALL_CATEGORIES, MOCK_ITEMS, ProductCardInterface } from '@/features/marketplace/index';
 import ProductSearchBar from '@/features/marketplace/product-search-bar';
+import { useMarketCategories } from '@/hooks/marketplace/use-market-categories';
+import { useFeaturedListings } from '@/hooks/marketplace/use-featured-listings';
+import { Skeleton } from '@/components/ui/skeleton';
 
-// This component contains ALL the content that appears ABOVE the product list
+const CategoriesSkeleton = () => (
+  <View className="flex-row gap-3">
+    {[1, 2, 3, 4].map((i) => (
+      <View key={i} className="items-center gap-2">
+        <Skeleton className="h-16 w-16 rounded-full" />
+        <Skeleton className="h-4 w-12" />
+      </View>
+    ))}
+  </View>
+);
+
+const FeaturedSkeleton = () => (
+  <View className="flex-row flex-wrap justify-between px-4">
+    {[1, 2, 3, 4].map((i) => (
+      <View key={i} className="mb-4 w-[48%] gap-2">
+        <Skeleton className="h-40 w-full rounded-xl" />
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-4 w-1/2" />
+      </View>
+    ))}
+  </View>
+);
+
 const MarketplaceListHeader = () => {
   const router = useRouter();
+  const { data: categories = [], isLoading: isCategoriesLoading } = useMarketCategories();
 
   return (
-    // This View replaces the original root View and provides spacing
     <View className="flex-col gap-8">
       <ProductSearchBar />
       {/* Banner */}
@@ -60,15 +84,19 @@ const MarketplaceListHeader = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ gap: 12, paddingRight: 16 }}>
-          {ALL_CATEGORIES.slice(0, 5).map((category) => (
-            <CategoryCard
-              key={category.id}
-              id={category.id}
-              name={category.name}
-              icon={category.icon}
-              color={category.color}
-            />
-          ))}
+          {isCategoriesLoading ? (
+            <CategoriesSkeleton />
+          ) : (
+            categories.slice(0, 6).map((category) => (
+              <CategoryCard
+                key={category.id}
+                id={category.id}
+                name={category.name}
+                icon={category.icon ?? 'help-circle'}
+                color={category.color ?? '#000000'}
+              />
+            ))
+          )}
         </ScrollView>
       </View>
 
@@ -87,16 +115,27 @@ const MarketplaceListHeader = () => {
 };
 
 export default function FeaturedList() {
-  const renderProduct = ({ item }: { item: ProductCardInterface }) => (
+  const { data: featuredItems = [], isLoading: isFeaturedLoading } = useFeaturedListings();
+
+  const renderProduct = ({ item }: { item: any }) => (
     <ProductCard
       key={item.id}
       id={item.id}
-      name={item.name}
+      name={item.title}
       price={item.price}
-      image={item.images[0]}
+      image={item.hero_image_url}
       rating={item.rating}
     />
   );
+
+  if (isFeaturedLoading) {
+    return (
+      <View className="flex-1">
+        <MarketplaceListHeader />
+        <FeaturedSkeleton />
+      </View>
+    );
+  }
 
   return (
     // The root component is now the FlatList
@@ -105,7 +144,12 @@ export default function FeaturedList() {
       // Pass all the header content here
       ListHeaderComponent={MarketplaceListHeader}
       // List data and props remain the same
-      data={MOCK_ITEMS.slice(0, 3)}
+      data={featuredItems}
+      ListEmptyComponent={
+        <View className="py-10 items-center justify-center">
+          <Text className="text-gray-500">No featured items found</Text>
+        </View>
+      }
       renderItem={renderProduct}
       keyExtractor={(item) => item.id}
       horizontal={false}

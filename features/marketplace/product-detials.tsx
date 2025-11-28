@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -12,21 +12,30 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { MOCK_ITEMS } from '@/features/marketplace/index';
 import { ProductImageCarousel } from '@/features/marketplace/product-image-carousel';
+import { useProductDetails, ProductVariant } from '@/hooks/marketplace/use-product-details';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const { width } = Dimensions.get('window');
 
 const ProductDetails = ({ id, category }: { id: string; category?: string }) => {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
 
-  console.log('category from product details : ?', category); //Query from category
-  //Dummy fetch data sample
-  const product = MOCK_ITEMS.find((item) => item.id === id);
+  const { data: product, isLoading } = useProductDetails(id);
 
-  const phoneNumber = product?.seller?.phoneNumber;
-  const whatsappNumber = product?.seller?.whatsappNumber;
+  const selectedVariant = useMemo(() => {
+    if (!product || !selectedVariantId) return null;
+    return product.variants.find((v) => v.id === selectedVariantId);
+  }, [product, selectedVariantId]);
+
+  const currentPrice = selectedVariant?.price ?? product?.price;
+  const currentStock = selectedVariant?.stock_qty ?? product?.stock_qty;
+  const isInStock = selectedVariant ? selectedVariant.is_in_stock : product?.is_in_stock;
+
+  const phoneNumber = product?.call_contact;
+  const whatsappNumber = product?.whatsapp_contact;
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
   const telLink = `tel:${phoneNumber}`;
 
@@ -80,6 +89,19 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
     Linking.openURL(telLink);
   };
 
+  if (isLoading) {
+    return (
+      <View className="flex-1 bg-white">
+        <Skeleton className="h-[375px] w-full" />
+        <View className="p-4 gap-4">
+          <Skeleton className="h-8 w-3/4" />
+          <Skeleton className="h-6 w-1/2" />
+          <Skeleton className="h-20 w-full" />
+        </View>
+      </View>
+    );
+  }
+
   if (!product) {
     return (
       <View className="flex-1 items-center justify-center">
@@ -115,7 +137,9 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
               height: width,
               overflow: 'hidden',
             }}>
-            <ProductImageCarousel images={product.images} />
+            <ProductImageCarousel
+              images={product.images.map((img) => ({ uri: img }))}
+            />
             <TouchableOpacity
               className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"
               style={{
@@ -130,21 +154,23 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
           </View>
 
           <View className="px-4 pt-4">
-            <Text className="mb-2 text-3xl font-bold text-[#FF8C42]">₵{product.price}</Text>
+            <Text className="mb-2 text-3xl font-bold text-[#FF8C42]">
+              {product.currency} {currentPrice?.toFixed(2)}
+            </Text>
             <Text className="mb-3 flex-row text-lg font-semibold text-gray-800">
-              {product.name}{' '}
+              {product.title}{' '}
               <Text
                 className={`text-xs font-semibold ${
-                  (product.stock ?? 0) === 0
+                  !isInStock
                     ? 'text-red-500'
-                    : (product.stock ?? 0) <= 5
+                    : (currentStock ?? 0) <= 5
                       ? 'text-yellow-600'
                       : 'text-green-600'
                 }`}>
-                {(product.stock ?? 0) === 0
+                {!isInStock
                   ? '- [ Out of stock ]'
-                  : (product.stock ?? 0) <= 5
-                    ? `- [ ${product.stock} left ]`
+                  : (currentStock ?? 0) <= 5
+                    ? `- [ ${currentStock} left ]`
                     : '- [ In stock ]'}
               </Text>
             </Text>
@@ -160,21 +186,31 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
                 ))}
               </View>
               <Text className="text-sm text-gray-500">
-                {product.rating.toFixed(1)} ({product.reviews ?? 0} reviews)
+                {product.rating.toFixed(1)} ({product.rating_count ?? 0} reviews)
               </Text>
             </View>
 
-            {product.sizes && product.sizes.length > 0 && (
+            {product.variants && product.variants.length > 0 && (
               <View className="mb-4">
-                <Text className="mb-2 text-base font-semibold text-gray-800">Available Sizes</Text>
+                <Text className="mb-2 text-base font-semibold text-gray-800">Available Options</Text>
 
                 <View className="flex-row flex-wrap gap-2">
-                  {product.sizes.map((size) => (
-                    <View
-                      key={size}
-                      className="rounded-full border border-gray-300 bg-gray-50 px-4 py-2">
-                      <Text className="text-sm font-medium text-gray-700">{size}</Text>
-                    </View>
+                  {product.variants.map((variant) => (
+                    <TouchableOpacity
+                      key={variant.id}
+                      onPress={() => setSelectedVariantId(selectedVariantId === variant.id ? null : variant.id)}
+                      className={`rounded-full border px-4 py-2 ${
+                        selectedVariantId === variant.id
+                          ? 'border-[#FF8C42] bg-[#FF8C42]/10'
+                          : 'border-gray-300 bg-gray-50'
+                      }`}>
+                      <Text
+                        className={`text-sm font-medium ${
+                          selectedVariantId === variant.id ? 'text-[#FF8C42]' : 'text-gray-700'
+                        }`}>
+                        {variant.label}
+                      </Text>
+                    </TouchableOpacity>
                   ))}
                 </View>
               </View>
@@ -193,10 +229,10 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
                   <Ionicons name="person" size={24} color="#666" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-base font-semibold">{product.seller.name}</Text>
+                  <Text className="text-base font-semibold">{product.seller.full_name || 'Unknown Seller'}</Text>
                   <Text className="flex text-sm text-gray-600">
                     <Ionicons name={'star'} size={18} color="#FFD700" />
-                    {product.seller.rating} • {product.seller.sales} sales
+                    4.5 • 100 sales
                   </Text>
                 </View>
                 <Ionicons name="chevron-forward" size={24} color="#999" />

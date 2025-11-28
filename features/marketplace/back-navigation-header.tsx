@@ -8,12 +8,14 @@ const BackNavigationHeader = ({ title, itemCount }: { title: string; itemCount?:
         <BackButton />
       </View>
 
-      <Text className="text-center text-lg font-bold text-black">
-        {title}
-        {itemCount !== undefined && itemCount > 0 && (
-          <Text className="text-black">{` [${itemCount}]`}</Text>
-        )}
+      <View className="flex-col">
+        <Text className="text-center text-lg font-bold text-black">
+        {title}  
       </Text>
+      {itemCount !== undefined && itemCount > 0 && (
+          <Text className="text-black font-normal text-xs -mt-1">{` ${itemCount} items`}</Text>
+        )}
+      </View>
     </View>
   );
 };
