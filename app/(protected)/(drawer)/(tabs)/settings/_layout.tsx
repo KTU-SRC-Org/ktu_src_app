@@ -2,7 +2,11 @@ import { Stack } from 'expo-router';
 
 const SettingsLayout = () => {
   return (
-    <Stack>
+    <Stack
+    screenOptions={{
+      headerBackButtonDisplayMode: 'minimal'
+    }}
+    >
       <Stack.Screen
         name="index"
         options={{
@@ -14,7 +18,7 @@ const SettingsLayout = () => {
         }}
       />
       <Stack.Screen
-        name="profile-account/index"
+        name="profile-account"
         options={{
           title: 'Profile',
           headerBackTitle: '',
@@ -25,6 +29,40 @@ const SettingsLayout = () => {
           headerBackButtonDisplayMode: 'minimal',
         }}
       />
+      <Stack.Screen
+        name="security"
+        options={{
+          title: 'Password & Security',
+          headerLargeTitleShadowVisible: true,
+          headerLargeTitle: false,
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: 'white' },
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+
+      />
+        <Stack.Screen
+          name="security/verification"
+          options={{
+              title: 'Account Verification',
+              headerLargeTitleShadowVisible: true,
+              headerLargeTitle: false,
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: 'white' },
+              headerBackButtonDisplayMode: 'minimal',
+          }}
+        />
+        <Stack.Screen
+          name="security/login-device"
+          options={{
+              title: 'Device',
+              headerLargeTitleShadowVisible: true,
+              headerLargeTitle: false,
+              headerShadowVisible: false,
+              headerStyle: { backgroundColor: 'white' },
+              headerBackButtonDisplayMode: 'minimal',
+          }}
+        />
     </Stack>
   );
 };

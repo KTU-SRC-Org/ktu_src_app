@@ -41,9 +41,9 @@ const HomeCustomHeader = () => {
 
         <View className="flex flex-row items-start justify-between px-5">
           <View>
-            <Text className="mb-1 text-xl font-normal">Hello, John Doe</Text>
-            <Text className="font-normal">Here&apos;s what happening</Text>
-            <Text>on campus today</Text>
+            <Text className="mb-1 text-xl font-normal text-black">Hello, John Doe</Text>
+            <Text className="font-normal text-muted-foreground">Here&apos;s what happening</Text>
+            <Text className='text-serene font-bold'>on campus today</Text>
           </View>
           <UiView paddingL-15 className="">
             <Avatar alt={'avatar'}>
