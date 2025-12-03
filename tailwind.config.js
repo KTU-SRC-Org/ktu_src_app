@@ -18,7 +18,7 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: 'var(--color-primary)',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -26,7 +26,7 @@ module.exports = {
           foreground: 'hsl(var(--secondary-foreground))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
+          DEFAULT: 'hsl(var(--color-destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
         muted: {
@@ -44,6 +44,14 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        serene: {
+          DEFAULT: 'hsl(var(--color-serene-500))',
+          foreground: 'hsl(var(--color-serene-foreground))',
+        },
+        velora: {
+          DEFAULT: 'hsl(var(--color-velora-500))',
+          foreground: 'hsl(var(--color-velora-foreground))',
         },
       },
       borderRadius: {
@@ -73,5 +81,14 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'),
+
+     ({ addBase }) =>
+      addBase({
+        ":root": {
+          "--color-values": "255 0 0",
+        },
+      }),
+
+  ],
 };

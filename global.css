@@ -10,7 +10,7 @@
         --card-foreground: 0 0% 3.9%;
         --popover: 0 0% 100%;
         --popover-foreground: 0 0% 3.9%;
-        --primary: 0 0% 9%;
+        --color-primary: '#aff';
         --primary-foreground: 0 0% 98%;
         --secondary: 0 0% 96.1%;
         --secondary-foreground: 0 0% 9%;
@@ -18,7 +18,7 @@
         --muted-foreground: 0 0% 45.1%;
         --accent: 0 0% 96.1%;
         --accent-foreground: 0 0% 9%;
-        --destructive: 0 84.2% 60.2%;
+        --color-destructive: 0 84.2% 60.2%;
         --border: 0 0% 89.8%;
         --input: 0 0% 89.8%;
         --ring: 0 0% 63%;
@@ -30,12 +30,12 @@
         --chart-5: 27 87% 67%;
 
         /*primary color - ktu dark blue color*/
-        --serene-50: 218 80% 97%;
-        --serene-100: 218 85% 92%;
-        --serene-200: 218 80% 82%;
-        --serene-300: 218 75% 65%;
-        --serene-400: 218 80% 45%;
-        --serene-500: 218 93% 22%; /*Base color*/
+        --color-serene-50: 218 80% 97%;
+        --color-serene-100: 218 85% 92%;
+        --color-serene-200: 218 80% 82%;
+        --color-serene-300: 218 75% 65%;
+        --color-serene-400: 218 80% 45%;
+        --color-serene-500: 218 93% 22%; /*Base color*/
         --serene-600: 218 90% 18%;
         --serene-700: 218 85% 14%;
         --serene-800: 218 80% 10%;
@@ -47,7 +47,7 @@
         --velora-200: 28 85% 85%;
         --velora-300: 28 80% 75%;
         --velora-400: 28 85% 65%;
-        --velora-500: 28 90% 57%; /*Base color */
+        --color-velora-500: 28 90% 57%; /*Base color */
         --velora-600: 28 85% 50%;
         --velora-700: 28 80% 42%;
         --velora-800: 28 75% 35%;

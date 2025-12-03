@@ -2,7 +2,11 @@ import { Stack } from 'expo-router';
 
 const SettingsLayout = () => {
   return (
-    <Stack>
+    <Stack
+    screenOptions={{
+      headerBackButtonDisplayMode: 'minimal'
+    }}
+    >
       <Stack.Screen
         name="index"
         options={{

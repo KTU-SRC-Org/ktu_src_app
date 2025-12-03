@@ -52,6 +52,7 @@ const PasswordAndSecurityScreen = () => {
        <Stack.Screen
          options={{
            title: "Password & Security",
+           headerBackButtonDisplayMode: 'minimal'
          }}
        />
        {/* Security Sections */}

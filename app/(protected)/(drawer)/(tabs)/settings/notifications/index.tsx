@@ -1,13 +1,13 @@
 import {Stack} from "expo-router";
-import {SafeAreaView} from "react-native-safe-area-context";
 import NotificationOptions from "@/features/settings/notifications/notification-options";
+import {View} from "react-native";
 
 const NotificationsScreen = () => {
   return(
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <Stack.Screen options={{ title: "Edit Notification"}}/>
       <NotificationOptions/>
-    </SafeAreaView>
+    </View>
   )
 }
 export default NotificationsScreen;
