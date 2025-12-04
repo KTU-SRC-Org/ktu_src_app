@@ -44,6 +44,193 @@ export type Database = {
           },
         ]
       }
+      event_attendance: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          profile_id: string
+          status: Database["public"]["Enums"]["event_attendance_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          profile_id: string
+          status: Database["public"]["Enums"]["event_attendance_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          profile_id?: string
+          status?: Database["public"]["Enums"]["event_attendance_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_attendance_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_attendance_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_invites: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          profile_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          profile_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          profile_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_invites_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_invites_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_scopes: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          scope_type: Database["public"]["Enums"]["event_scope_type"]
+          scope_value: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          scope_type: Database["public"]["Enums"]["event_scope_type"]
+          scope_value: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          scope_type?: Database["public"]["Enums"]["event_scope_type"]
+          scope_value?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_scopes_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          can_book_canopy: boolean
+          capacity: number | null
+          category: string
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          disable_attendance: boolean
+          ends_at: string | null
+          going_count: number
+          id: string
+          interested_count: number
+          is_featured: boolean
+          location: string | null
+          organizer_id: string | null
+          starts_at: string
+          title: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["event_visibility"]
+        }
+        Insert: {
+          can_book_canopy?: boolean
+          capacity?: number | null
+          category?: string
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          disable_attendance?: boolean
+          ends_at?: string | null
+          going_count?: number
+          id?: string
+          interested_count?: number
+          is_featured?: boolean
+          location?: string | null
+          organizer_id?: string | null
+          starts_at: string
+          title: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["event_visibility"]
+        }
+        Update: {
+          can_book_canopy?: boolean
+          capacity?: number | null
+          category?: string
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          disable_attendance?: boolean
+          ends_at?: string | null
+          going_count?: number
+          id?: string
+          interested_count?: number
+          is_featured?: boolean
+          location?: string | null
+          organizer_id?: string | null
+          starts_at?: string
+          title?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["event_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_organizer_id_fkey"
+            columns: ["organizer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       faculties: {
         Row: {
           created_at: string
@@ -572,6 +759,9 @@ export type Database = {
       }
     }
     Enums: {
+      event_attendance_status: "interested" | "going" | "not_going"
+      event_scope_type: "faculty" | "department" | "level"
+      event_visibility: "public" | "scoped" | "invite_only"
       hostel_payment_term: "yearly" | "semester" | "academic_year"
       listing_submission_status:
         | "submitted"
@@ -709,6 +899,9 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      event_attendance_status: ["interested", "going", "not_going"],
+      event_scope_type: ["faculty", "department", "level"],
+      event_visibility: ["public", "scoped", "invite_only"],
       hostel_payment_term: ["yearly", "semester", "academic_year"],
       listing_submission_status: [
         "submitted",

@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 import { Event } from '@/types/events.types';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { Database } from '@/types/types_db';
 
 const STALE_TIME_10_MINS = 1000 * 60 * 10;
 
-const fetchUpcomingEvents = async (client: any) => {
+const fetchUpcomingEvents = async (client: SupabaseClient<Database>) => {
   const now = new Date().toISOString();
 
   const { data, error } = await client

@@ -2,12 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 import { Event } from '@/types/events.types';
 import { useAppStore } from '@/store/store';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { Database } from '@/types/types_db';
 
 const STALE_TIME_1_HOUR = 1000 * 60 * 60;
 
 type FetchEventDetailsParams = {
   eventId: string;
-  client: any;
+  client: SupabaseClient<Database>;
   userId: string | null;
 };
 

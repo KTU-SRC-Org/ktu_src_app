@@ -1,13 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 import { Event, TabKeys } from '@/types/events.types';
+import { SupabaseClient } from '@supabase/supabase-js';
+import { Database } from '@/types/types_db';
 
 const EVENTS_PER_PAGE = 10;
 
 type FetchEventsParams = {
   pageParam?: number;
   filter: TabKeys;
-  client: any;
+  client: SupabaseClient<Database>;
 };
 
 const STALE_TIME_1_HOUR = 1000 * 60 * 60;
