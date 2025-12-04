@@ -45,13 +45,7 @@ console.log(error);
     );
   };
 
-  if (isLoading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
+
 
   if (isError) {
     return (
@@ -103,6 +97,17 @@ console.log(error);
         ListFooterComponent={renderFooter}
         refreshing={isLoading}
         onRefresh={refetch}
+        ListEmptyComponent={
+          isLoading ? (
+            <View className="flex-1 items-center justify-center py-20">
+              <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+          ) : (
+            <View className="flex-1 items-center justify-center py-20">
+              <Text className="text-gray-500">No events found</Text>
+            </View>
+          )
+        }
       />
     </View>
   );
