@@ -1,5 +1,7 @@
 export type TabKeys = 'featured' | 'popular' | 'upcoming';
 
+export type EventAttendanceStatus = 'going' | 'interested' | 'not_going' | null;
+
 export interface Event {
   id: string;
   title: string;
@@ -16,6 +18,9 @@ export interface Event {
   created_at: string;
   going_count: number;
   interested_count: number;
+  can_book_canopy: boolean;
+  disable_attendance: boolean;
+  user_attendance_status?: EventAttendanceStatus;
   organizer?: {
     full_name: string | null;
     avatar_url: string | null;
