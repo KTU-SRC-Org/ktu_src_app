@@ -74,7 +74,9 @@ const EventDetails = ({ id }: { id: string }) => {
           <View className="relative w-full" style={{ height: imageHeight }}>
             <Image
               source={{
-                uri: event.cover_image || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1',
+                uri:
+                  event.cover_image ||
+                  'https://images.unsplash.com/photo-1523050854058-8df90110c9f1',
               }}
               className="h-full w-full"
             />

@@ -14,27 +14,6 @@ export interface NewsItemData {
   readMoreLink?: string;
 }
 
-const dummyNewsItems: NewsItemData[] = [
-  {
-    id: '1',
-    title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description:
-      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
-  },
-  {
-    id: '2',
-    title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description:
-      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
-  },
-  {
-    id: '3',
-    title: 'SRC Secures 20% Student Discount at XYZ Bookstore',
-    description:
-      'Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has...',
-  },
-];
-
 export function CampusNewsSection() {
   const router = useRouter();
 

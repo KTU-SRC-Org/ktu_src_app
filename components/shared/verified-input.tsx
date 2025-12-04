@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInputField } from '@/components/builders/text-input-field';
-import {Control, FieldValues, Path} from "react-hook-form";
+import { Control, FieldValues, Path } from 'react-hook-form';
 
 interface VerifiedInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -24,7 +24,7 @@ export function VerifiedInput<T extends FieldValues>({
   showVerified = false,
   disabled = true,
   verifiedText = 'Verified',
-}: VerifiedInputProps<T>){
+}: VerifiedInputProps<T>) {
   return (
     <View className="flex-col gap-2">
       <TextInputField
@@ -44,4 +44,4 @@ export function VerifiedInput<T extends FieldValues>({
       )}
     </View>
   );
-};
+}

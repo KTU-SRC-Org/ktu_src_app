@@ -64,7 +64,7 @@ export function useUpdateAttendance() {
 
       // Invalidate the event details query to refetch with updated counts
       queryClient.invalidateQueries({ queryKey: ['event', variables.eventId] });
-      
+
       // Also invalidate the events list to update counts there
       queryClient.invalidateQueries({ queryKey: ['events'] });
     },

@@ -15,20 +15,19 @@ type FetchEventsParams = {
 const STALE_TIME_1_HOUR = 1000 * 60 * 60;
 
 const fetchEvents = async ({ pageParam = 0, filter, client }: FetchEventsParams) => {
- 
   const from = pageParam * EVENTS_PER_PAGE;
   const to = from + EVENTS_PER_PAGE - 1;
 
-  let query = client
-    .from('events')
-    .select('id, title, starts_at, location')
-    .range(from, to);
+  let query = client.from('events').select('id, title, starts_at, location').range(from, to);
 
   const now = new Date().toISOString();
 
   switch (filter) {
     case 'featured':
-      query = query.eq('is_featured', true).gte('starts_at', now).order('starts_at', { ascending: true });
+      query = query
+        .eq('is_featured', true)
+        .gte('starts_at', now)
+        .order('starts_at', { ascending: true });
       break;
     case 'popular':
       // Popular events: most going_count in the next 7 days
@@ -55,8 +54,7 @@ const fetchEvents = async ({ pageParam = 0, filter, client }: FetchEventsParams)
 };
 
 export const useInfiniteEvents = (filter: TabKeys) => {
-
-   const client = useSupabase();
+  const client = useSupabase();
   return useInfiniteQuery({
     queryKey: ['events', filter],
     queryFn: ({ pageParam }) => fetchEvents({ pageParam, filter, client }),

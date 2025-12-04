@@ -93,7 +93,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
     return (
       <View className="flex-1 bg-white">
         <Skeleton className="h-[375px] w-full" />
-        <View className="p-4 gap-4">
+        <View className="gap-4 p-4">
           <Skeleton className="h-8 w-3/4" />
           <Skeleton className="h-6 w-1/2" />
           <Skeleton className="h-20 w-full" />
@@ -137,9 +137,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
               height: width,
               overflow: 'hidden',
             }}>
-            <ProductImageCarousel
-              images={product.images.map((img) => ({ uri: img }))}
-            />
+            <ProductImageCarousel images={product.images.map((img) => ({ uri: img }))} />
             <TouchableOpacity
               className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"
               style={{
@@ -192,13 +190,17 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
 
             {product.variants && product.variants.length > 0 && (
               <View className="mb-4">
-                <Text className="mb-2 text-base font-semibold text-gray-800">Available Options</Text>
+                <Text className="mb-2 text-base font-semibold text-gray-800">
+                  Available Options
+                </Text>
 
                 <View className="flex-row flex-wrap gap-2">
                   {product.variants.map((variant) => (
                     <TouchableOpacity
                       key={variant.id}
-                      onPress={() => setSelectedVariantId(selectedVariantId === variant.id ? null : variant.id)}
+                      onPress={() =>
+                        setSelectedVariantId(selectedVariantId === variant.id ? null : variant.id)
+                      }
                       className={`rounded-full border px-4 py-2 ${
                         selectedVariantId === variant.id
                           ? 'border-[#FF8C42] bg-[#FF8C42]/10'
@@ -229,7 +231,9 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
                   <Ionicons name="person" size={24} color="#666" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-base font-semibold">{product.seller.full_name || 'Unknown Seller'}</Text>
+                  <Text className="text-base font-semibold">
+                    {product.seller.full_name || 'Unknown Seller'}
+                  </Text>
                   <Text className="flex text-sm text-gray-600">
                     <Ionicons name={'star'} size={18} color="#FFD700" />
                     4.5 • 100 sales

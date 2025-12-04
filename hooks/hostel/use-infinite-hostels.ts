@@ -43,9 +43,7 @@ export function useInfiniteHostels(search: string) {
         .range(from, to);
 
       if (normalizedSearch) {
-        query = query.or(
-          `name.ilike.%${normalizedSearch}%,address.ilike.%${normalizedSearch}%`
-        );
+        query = query.or(`name.ilike.%${normalizedSearch}%,address.ilike.%${normalizedSearch}%`);
       }
 
       const { data, error, count } = await query;

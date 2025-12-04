@@ -87,15 +87,17 @@ const MarketplaceListHeader = () => {
           {isCategoriesLoading ? (
             <CategoriesSkeleton />
           ) : (
-            categories.slice(0, 6).map((category) => (
-              <CategoryCard
-                key={category.id}
-                id={category.id}
-                name={category.name}
-                icon={category.icon ?? 'help-circle'}
-                color={category.color ?? '#000000'}
-              />
-            ))
+            categories
+              .slice(0, 6)
+              .map((category) => (
+                <CategoryCard
+                  key={category.id}
+                  id={category.id}
+                  name={category.name}
+                  icon={category.icon ?? 'help-circle'}
+                  color={category.color ?? '#000000'}
+                />
+              ))
           )}
         </ScrollView>
       </View>
@@ -146,7 +148,7 @@ export default function FeaturedList() {
       // List data and props remain the same
       data={featuredItems}
       ListEmptyComponent={
-        <View className="py-10 items-center justify-center">
+        <View className="items-center justify-center py-10">
           <Text className="text-gray-500">No featured items found</Text>
         </View>
       }

@@ -3,10 +3,9 @@ import { Stack } from 'expo-router';
 const SettingsLayout = () => {
   return (
     <Stack
-    screenOptions={{
-      headerBackButtonDisplayMode: 'minimal'
-    }}
-    >
+      screenOptions={{
+        headerBackButtonDisplayMode: 'minimal',
+      }}>
       <Stack.Screen
         name="index"
         options={{
@@ -39,30 +38,29 @@ const SettingsLayout = () => {
           headerStyle: { backgroundColor: 'white' },
           headerBackButtonDisplayMode: 'minimal',
         }}
-
       />
-        <Stack.Screen
-          name="security/verification"
-          options={{
-              title: 'Account Verification',
-              headerLargeTitleShadowVisible: true,
-              headerLargeTitle: false,
-              headerShadowVisible: false,
-              headerStyle: { backgroundColor: 'white' },
-              headerBackButtonDisplayMode: 'minimal',
-          }}
-        />
-        <Stack.Screen
-          name="security/login-device"
-          options={{
-              title: 'Device',
-              headerLargeTitleShadowVisible: true,
-              headerLargeTitle: false,
-              headerShadowVisible: false,
-              headerStyle: { backgroundColor: 'white' },
-              headerBackButtonDisplayMode: 'minimal',
-          }}
-        />
+      <Stack.Screen
+        name="security/verification"
+        options={{
+          title: 'Account Verification',
+          headerLargeTitleShadowVisible: true,
+          headerLargeTitle: false,
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: 'white' },
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+      />
+      <Stack.Screen
+        name="security/login-device"
+        options={{
+          title: 'Device',
+          headerLargeTitleShadowVisible: true,
+          headerLargeTitle: false,
+          headerShadowVisible: false,
+          headerStyle: { backgroundColor: 'white' },
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+      />
     </Stack>
   );
 };

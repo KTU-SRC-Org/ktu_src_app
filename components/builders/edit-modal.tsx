@@ -22,7 +22,7 @@ interface FormModalProps {
   closeOnTouchOutside?: boolean;
   onSave: () => void;
   title?: string;
-  disabledSave?: boolean
+  disabledSave?: boolean;
 }
 
 const EditModal = ({
@@ -35,7 +35,7 @@ const EditModal = ({
   closeOnTouchOutside = false,
   onSave,
   title,
-  disabledSave = true
+  disabledSave = true,
 }: FormModalProps) => {
   const modalHeight = fullScreen ? height : height * heightRatio;
 
@@ -59,17 +59,22 @@ const EditModal = ({
               bottom: fullScreen ? undefined : 0,
             },
           ]}>
-          <View className={'flex-row items-center justify-between px-4 py-6 mb-6'}>
+          <View className={'mb-6 flex-row items-center justify-between px-4 py-6'}>
             <Pressable onPress={onClose}>
-              <Text className={"text-base text-red-600"}>Cancel</Text>
+              <Text className={'text-base text-red-600'}>Cancel</Text>
             </Pressable>
 
             {title ? (
-              <View><Text className={"text-base"}>{title}</Text></View>
-            ): <View/>}
+              <View>
+                <Text className={'text-base'}>{title}</Text>
+              </View>
+            ) : (
+              <View />
+            )}
 
             <Pressable onPress={onSave} disabled={disabledSave}>
-              <Text  className={ disabledSave ? "text-base text-gray-300" : "text-base text-blue-600"}>
+              <Text
+                className={disabledSave ? 'text-base text-gray-300' : 'text-base text-blue-600'}>
                 Save
               </Text>
             </Pressable>

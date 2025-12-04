@@ -11,11 +11,19 @@ const EventsDisplay = () => {
   const [selectedTab, setSelectedTab] = useState<TabKeys>('featured');
   const scrollY = useRef(new Animated.Value(0)).current;
 
-  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, error } =
-    useInfiniteEvents(selectedTab);
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+    error,
+  } = useInfiniteEvents(selectedTab);
 
   const events = data?.pages.flat() || [];
-console.log(error);
+  console.log(error);
   const HEADER_HEIGHT = 300;
 
   //On scroll event set opacity to display event top bar
@@ -27,12 +35,7 @@ console.log(error);
 
   const renderItem = ({ item }: { item: Event }) => (
     <View className={'px-4'}>
-      <EventCard
-        id={item.id}
-        title={item.title}
-        date={item.starts_at}
-        location={item.location}
-      />
+      <EventCard id={item.id} title={item.title} date={item.starts_at} location={item.location} />
     </View>
   );
 
@@ -44,8 +47,6 @@ console.log(error);
       </View>
     );
   };
-
-
 
   if (isError) {
     return (

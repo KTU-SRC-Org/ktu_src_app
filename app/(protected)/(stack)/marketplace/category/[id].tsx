@@ -4,7 +4,7 @@ import CategoryItems from '@/features/marketplace/category-items';
 import { StyleSheet } from 'react-native';
 
 const CategoryScreen = () => {
-  const { id , title } = useLocalSearchParams();
+  const { id, title } = useLocalSearchParams();
   const categoryId = Array.isArray(id) ? id[0] : (id ?? '');
   const categoryTitle = Array.isArray(title) ? title[0] : (title ?? '');
   console.log(categoryTitle);
