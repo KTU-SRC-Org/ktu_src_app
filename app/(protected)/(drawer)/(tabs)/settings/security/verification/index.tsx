@@ -1,17 +1,17 @@
-import {SafeAreaView} from "react-native-safe-area-context";
-import AccountVerification from "@/features/settings/security/account-verification";
-import {Stack} from "expo-router";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AccountVerification from '@/features/settings/security/account-verification';
+import { Stack } from 'expo-router';
 
 const AccountVerificationScreen = () => {
-  return(
+  return (
     <SafeAreaView style={{ flex: 1 }}>
       <Stack.Screen
         options={{
-          title: "Account Verification",
+          title: 'Account Verification',
         }}
       />
-      <AccountVerification/>
+      <AccountVerification />
     </SafeAreaView>
-  )
-}
+  );
+};
 export default AccountVerificationScreen;

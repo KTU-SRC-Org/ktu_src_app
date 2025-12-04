@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import {Ionicons, MaterialIcons} from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { getInitials } from '@/utils/profile.utils';
 
 type ProfileHeaderProps = {
@@ -13,7 +13,13 @@ type ProfileHeaderProps = {
   verified: boolean;
 };
 
-export const ProfileHeader = ({ imageUri, fullName, indexNumber, level, verified }: ProfileHeaderProps) => {
+export const ProfileHeader = ({
+  imageUri,
+  fullName,
+  indexNumber,
+  level,
+  verified,
+}: ProfileHeaderProps) => {
   return (
     <View className="mb-6">
       <LinearGradient
@@ -32,7 +38,7 @@ export const ProfileHeader = ({ imageUri, fullName, indexNumber, level, verified
             <View className="absolute bottom-1 right-3">
               {verified ? (
                 <MaterialIcons name="verified" size={20} color="#FFFFFF" />
-              ): (
+              ) : (
                 <MaterialIcons name="info-outline" size={20} color="#FFFFFF" />
               )}
             </View>

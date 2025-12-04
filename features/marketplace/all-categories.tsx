@@ -56,7 +56,7 @@ export default function AllCategories() {
         contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
-          <View className="py-10 items-center justify-center">
+          <View className="items-center justify-center py-10">
             <Text className="text-gray-500">No categories found</Text>
           </View>
         }

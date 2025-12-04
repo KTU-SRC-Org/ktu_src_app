@@ -1,17 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import { Link } from 'expo-router';
 import MemoEventSectionImage from '../icons/EventSectionImage';
 import { Event } from '@/types/events.types';
 import EventCard from '@/features/events/event-card';
-import { eventsData } from '@/features/events';
+import { useUpcomingEventsHome } from '@/hooks/events/use-upcoming-events-home';
 
 const UpcomingEventsSection = () => {
-  //Future events and nearest first 5 events
-  const upcomingEvents = eventsData
-    .filter((event) => new Date(event.date) >= new Date())
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .slice(0, 5);
+  const { data: upcomingEvents, isLoading } = useUpcomingEventsHome();
+
+  if (isLoading) {
+    return (
+      <View className="relative mt-24">
+        <View style={styles.container} className="z-10 mx-2 mb-10 rounded-lg bg-white px-3 py-5 ">
+          <ActivityIndicator size="small" color="#0000ff" />
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View className="relative mt-24">
@@ -24,14 +30,14 @@ const UpcomingEventsSection = () => {
         </View>
 
         <View className="mt-4 bg-white">
-          {upcomingEvents.length > 0 ? (
+          {upcomingEvents && upcomingEvents.length > 0 ? (
             <View className={'flex flex-col gap-4'}>
               {upcomingEvents.map((event: Event) => (
                 <EventCard
                   key={event.id}
                   id={event.id}
                   title={event.title}
-                  date={event.date}
+                  date={event.starts_at}
                   location={event.location}
                 />
               ))}

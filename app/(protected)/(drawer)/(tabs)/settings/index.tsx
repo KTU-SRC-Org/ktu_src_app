@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
-import {Href, useRouter} from 'expo-router';
+import { Href, useRouter } from 'expo-router';
 import { SettingSection } from '@/features/settings/setting-section';
 import { ExternalServicesSection } from '@/features/settings/external-services-section';
 import { DeveloperCredits } from '@/features/settings/developer-credits';

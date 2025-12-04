@@ -43,7 +43,7 @@ const HomeCustomHeader = () => {
           <View>
             <Text className="mb-1 text-xl font-normal text-black">Hello, John Doe</Text>
             <Text className="font-normal text-muted-foreground">Here&apos;s what happening</Text>
-            <Text className='text-serene font-bold'>on campus today</Text>
+            <Text className="font-bold text-serene">on campus today</Text>
           </View>
           <UiView paddingL-15 className="">
             <Avatar alt={'avatar'}>

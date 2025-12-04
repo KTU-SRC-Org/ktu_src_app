@@ -52,16 +52,16 @@ const Header = memo(function Header({
           transition={1000}
         />
         <View style={styles.overlay} />
-        <View className="absolute z-50 inset-x-7" style={{ top: Platform.OS === 'ios' ? 70 : 20 }}>
-          <View className="flex flex-row items-center justify-between w-full">
+        <View className="absolute inset-x-7 z-50" style={{ top: Platform.OS === 'ios' ? 70 : 20 }}>
+          <View className="flex w-full flex-row items-center justify-between">
             <Pressable
               onPress={() => router.back()}
-              className="flex flex-row items-center justify-center bg-white rounded-full size-11">
+              className="flex size-11 flex-row items-center justify-center rounded-full bg-white">
               <Ionicons name="chevron-back" size={24} color="#000" />
             </Pressable>
 
             <View className="flex flex-row items-center gap-3">
-              <Pressable className="items-center justify-center bg-white rounded-full size-11">
+              <Pressable className="size-11 items-center justify-center rounded-full bg-white">
                 <Ionicons name="share-outline" size={24} color="#191D31" />
               </Pressable>
             </View>

@@ -14,7 +14,7 @@ import { useAuthSyncStore } from '@/hooks/auth/use-auth-sync-store';
 import { useAuthSession } from '@/hooks/auth/use-auth-session';
 import { useRegisterAutoRefresh } from '@/lib/supabase/use-register-auto-refresh';
 import { useAuthChangeListener } from '@/lib/supabase/use-auth-change-listener';
-import {SafeAreaProvider} from "react-native-safe-area-context";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.

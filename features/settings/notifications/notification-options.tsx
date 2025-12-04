@@ -49,20 +49,15 @@ const NotificationOptions = () => {
   const [enabled, setEnabled] = useState<{ [key: string]: boolean }>(initialState);
 
   const toggleSwitch = (id: string) => {
-    setEnabled((prev) => (
-      { ...prev,
-        [id]: !prev[id]
-      }
-    ));
+    setEnabled((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   return (
     <ScrollView
       className="flex-1"
-      contentInsetAdjustmentBehavior={"automatic"}
-      showsVerticalScrollIndicator={false}
-    >
-      <View className={"flex-col gap-4 p-4"}>
+      contentInsetAdjustmentBehavior={'automatic'}
+      showsVerticalScrollIndicator={false}>
+      <View className={'flex-col gap-4 p-4'}>
         {notificationGroups.map((group) => (
           <NotificationGroupComponent
             key={group.title}
@@ -88,7 +83,7 @@ const NotificationGroupComponent = ({
   toggleSwitch: (id: string) => void;
 }) => {
   return (
-    <View className={"flex-col gap-2"}>
+    <View className={'flex-col gap-2'}>
       <Text className="font-semibold text-gray-400">{group.title}</Text>
       <View className="overflow-hidden rounded-lg bg-white">
         {group.items.map((item, index) => (
@@ -102,9 +97,7 @@ const NotificationGroupComponent = ({
                 thumbColor={enabled[item.id] ? '#ffffff' : '#f9fafb'}
               />
             </View>
-            {index < group.items.length - 1 &&
-              <View className="border-b border-gray-200 ml-8" />
-            }
+            {index < group.items.length - 1 && <View className="ml-8 border-b border-gray-200" />}
           </View>
         ))}
       </View>

@@ -198,48 +198,47 @@ export const externalServices: ExternalService[] = [
   },
 ];
 
-
 export const securityItems: SettingSection[] = [
   {
-    id: "authentication",
+    id: 'authentication',
     items: [
       {
-        id: "change-password",
-        name: "Change Password",
-        icon: "key",
-        backgroundColor: "#6366F1",
-        onPress: () => {}
+        id: 'change-password',
+        name: 'Change Password',
+        icon: 'key',
+        backgroundColor: '#6366F1',
+        onPress: () => {},
       },
     ],
   },
   {
-    id: "account-protection",
+    id: 'account-protection',
     items: [
       {
-        id: "verification",
-        name: "Account Verification",
-        icon: "shield-checkmark",
-        backgroundColor: "#10B981",
-        link: "/settings/security/verification",
+        id: 'verification',
+        name: 'Account Verification',
+        icon: 'shield-checkmark',
+        backgroundColor: '#10B981',
+        link: '/settings/security/verification',
       },
     ],
   },
   {
-    id: "safety",
+    id: 'safety',
     items: [
       {
-        id: "login-device",
-        name: "Login Device",
-        icon: "laptop",
-        backgroundColor: "#3B82F6",
-        link: "/settings/security/login-device",
+        id: 'login-device',
+        name: 'Login Device',
+        icon: 'laptop',
+        backgroundColor: '#3B82F6',
+        link: '/settings/security/login-device',
       },
       {
-        id: "delete-account",
-        name: "Delete Account",
-        icon: "trash",
-        backgroundColor: "#EF4444",
-        onPress: () => {}
+        id: 'delete-account',
+        name: 'Delete Account',
+        icon: 'trash',
+        backgroundColor: '#EF4444',
+        onPress: () => {},
       },
     ],
   },

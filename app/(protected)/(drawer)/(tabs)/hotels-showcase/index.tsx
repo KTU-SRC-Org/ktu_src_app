@@ -23,7 +23,11 @@ import { Card } from '@/components/cards/hostels-showcase/Card';
 import { FeaturedCard } from '@/components/cards/hostels-showcase/FeaturedCard';
 import { DrawerToggleButton } from '@react-navigation/drawer';
 
-import { useFeaturedHostels, useRecommendedHostels, HostelCard as Property } from '@/hooks/hostel/use-hostel';
+import {
+  useFeaturedHostels,
+  useRecommendedHostels,
+  HostelCard as Property,
+} from '@/hooks/hostel/use-hostel';
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
@@ -157,7 +161,7 @@ const HostelsShowcase = () => {
 
       {/* Our Recommendation Section */}
       <View style={styles.sectionContainer}>
-        <View className="flex flex-row items-center justify-between mt-3 mb-2">
+        <View className="mb-2 mt-3 flex flex-row items-center justify-between">
           <Text style={styles.sectionTitle}>Our Recommendation</Text>
           <Pressable onPress={() => router.push('/hotels-showcase/all-hostels-screen')}>
             <Text style={styles.seeAllText}>See all</Text>

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import * as Device from "expo-device";
-import * as Location from "expo-location";
+import { useState, useEffect } from 'react';
+import * as Device from 'expo-device';
+import * as Location from 'expo-location';
 
 export type DeviceLocation = {
   latitude: number | null;
@@ -27,7 +27,7 @@ export const useDeviceDetails = () => {
       const name = Device.deviceName ?? null;
       const model = Device.modelName ?? null;
       const brand = Device.brand ?? null;
-      const os = Device.osName ?? "Unknown";
+      const os = Device.osName ?? 'Unknown';
       const osVersion = Device.osVersion ?? null;
 
       // Location Info
@@ -36,10 +36,9 @@ export const useDeviceDetails = () => {
       let city: string | null = null;
       let country: string | null = null;
 
-      const { status } =
-        await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-      if (status === "granted") {
+      if (status === 'granted') {
         const pos = await Location.getCurrentPositionAsync({});
         latitude = pos.coords.latitude;
         longitude = pos.coords.longitude;

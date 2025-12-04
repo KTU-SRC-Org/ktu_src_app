@@ -81,14 +81,14 @@ module.exports = {
   future: {
     hoverOnlyWhenSupported: true,
   },
-  plugins: [require('tailwindcss-animate'),
+  plugins: [
+    require('tailwindcss-animate'),
 
-     ({ addBase }) =>
+    ({ addBase }) =>
       addBase({
-        ":root": {
-          "--color-values": "255 0 0",
+        ':root': {
+          '--color-values': '255 0 0',
         },
       }),
-
   ],
 };

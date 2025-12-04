@@ -43,7 +43,6 @@ export type HostelDetails = HostelCard & {
   gallery: HostelGalleryItem[];
 };
 
-
 const STALE_TIME_1_HOUR = 1000 * 60 * 60;
 
 export function useFeaturedHostels() {
@@ -173,7 +172,7 @@ export function useHostel(hostelId?: string) {
 
       const details: HostelDetails = {
         id: data.id,
-        image: data.hero_image_url ?? (gallery[0]?.image ?? null),
+        image: data.hero_image_url ?? gallery[0]?.image ?? null,
         rating: data.rating,
         name: data.name,
         address: data.address,

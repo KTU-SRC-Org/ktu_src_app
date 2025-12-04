@@ -4,7 +4,7 @@ import CompleteProfileForm from '@/features/onboarding/complete-profile-form';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
 import { useUpdateProfile } from '@/hooks/onboarding/use-update-profile';
 
-import { Toast } from 'toastify-react-native'
+import { Toast } from 'toastify-react-native';
 
 const CompleteProfileScreen = () => {
   const { mutate: updateProfile, isPending: isSubmitting } = useUpdateProfile();
@@ -13,7 +13,7 @@ const CompleteProfileScreen = () => {
     try {
       updateProfile(data, {
         onError: (error) => {
-          console.log('Profile update error:', error)
+          console.log('Profile update error:', error);
           Toast.error('Failed to update profile. Please try again.');
         },
       });

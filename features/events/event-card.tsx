@@ -7,7 +7,7 @@ export interface EventCardProps {
   id: string;
   date: Date | string;
   title: string;
-  location: string;
+  location: string | null;
 }
 
 const EventCard = ({ date, title, location, id }: EventCardProps) => {
@@ -48,10 +48,10 @@ const EventCard = ({ date, title, location, id }: EventCardProps) => {
             <Text className="text-xs text-slate-700">{time}</Text>
           </View>
 
-          <View className="flex flex-row items-center gap-1">
+          <View className="flex flex-row items-center gap-1" style={{ flex: 1 }}>
             <MapPin size={12} color="#334155" />
-            <Text className="text-xs text-slate-700" numberOfLines={1}>
-              {location}
+            <Text className="text-xs text-slate-700" numberOfLines={1} style={{ flexShrink: 1 }}>
+              {location || 'TBA'}
             </Text>
           </View>
         </View>

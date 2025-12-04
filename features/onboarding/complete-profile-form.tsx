@@ -130,7 +130,7 @@ const CompleteProfileForm = ({ onSubmitPress, isSubmitting }: CompleteProfileFor
           onPress={handleSubmit(onSubmitPress)}
           loading={isSubmitting}
           disabled={!isValid || isSubmitting}
-          className="p-0 py-2 rounded-sm"
+          className="rounded-sm p-0 py-2"
         />
       </View>
     </View>

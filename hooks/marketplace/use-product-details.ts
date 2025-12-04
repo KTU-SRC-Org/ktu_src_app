@@ -42,14 +42,16 @@ export function useProductDetails(id: string) {
     // Fetch listing details
     const { data: listing, error: listingError } = await client
       .from('market_listings')
-      .select(`
+      .select(
+        `
         *,
         seller:profiles (
           id,
           full_name,
           avatar_url
         )
-      `)
+      `
+      )
       .eq('id', id)
       .single();
 
@@ -78,7 +80,8 @@ export function useProductDetails(id: string) {
     // Ensure hero image is included if no photos found, or just use photos if available
     // Assuming photos table contains all images including hero.
     // If photos is empty, fallback to hero_image_url
-    const finalImages = images.length > 0 ? images : (listing.hero_image_url ? [listing.hero_image_url] : []);
+    const finalImages =
+      images.length > 0 ? images : listing.hero_image_url ? [listing.hero_image_url] : [];
 
     return {
       id: listing.id,

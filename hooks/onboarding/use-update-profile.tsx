@@ -3,14 +3,13 @@ import { useSupabase } from '@/lib/supabase/use-supabase';
 import { CompleteProfileFormType } from '@/lib/schemas/onboarding';
 import { useAppStore } from '@/store/store';
 
-import { Toast } from 'toastify-react-native'
-
+import { Toast } from 'toastify-react-native';
 
 export function useUpdateProfile() {
   const client = useSupabase();
   const queryClient = useQueryClient();
   const userId = useAppStore((s) => s.userId);
-  const setProfileSummary = useAppStore((s) => s.setProfileSummary)
+  const setProfileSummary = useAppStore((s) => s.setProfileSummary);
 
   const mutationFn = async (profileData: CompleteProfileFormType) => {
     if (!userId) {
@@ -45,7 +44,7 @@ export function useUpdateProfile() {
     mutationFn,
     onSuccess: (data) => {
       Toast.success('Profile updated successfully!');
-        
+
       // Invalidate and refetch the profile query to get fresh data
       queryClient.invalidateQueries({ queryKey: ['profile', userId] });
 
