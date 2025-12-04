@@ -1,16 +1,21 @@
 import { useRef, useState } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, Text, ActivityIndicator } from 'react-native';
 import EventsHeader from '@/features/events/events-header';
 import EventsTabs from '@/features/events/events-tabs';
 import EventCard from '@/features/events/event-card';
-import { eventsData } from '@/features/events/index';
 import { TabKeys, Event } from '@/types/events.types';
 import TabsTopNav from '@/components/shared/tabs-top-nav';
+import { useInfiniteEvents } from '@/hooks/events/use-infinite-events';
 
 const EventsDisplay = () => {
   const [selectedTab, setSelectedTab] = useState<TabKeys>('featured');
   const scrollY = useRef(new Animated.Value(0)).current;
 
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, error } =
+    useInfiniteEvents(selectedTab);
+
+  const events = data?.pages.flat() || [];
+console.log(error);
   const HEADER_HEIGHT = 300;
 
   //On scroll event set opacity to display event top bar
@@ -22,9 +27,39 @@ const EventsDisplay = () => {
 
   const renderItem = ({ item }: { item: Event }) => (
     <View className={'px-4'}>
-      <EventCard id={item.id} title={item.title} date={item.date} location={item.location} />
+      <EventCard
+        id={item.id}
+        title={item.title}
+        date={item.starts_at}
+        location={item.location}
+      />
     </View>
   );
+
+  const renderFooter = () => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4">
+        <ActivityIndicator size="small" color="#0000ff" />
+      </View>
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <Text>Error loading events</Text>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-white">
@@ -43,7 +78,7 @@ const EventsDisplay = () => {
       </Animated.View>
 
       <Animated.FlatList
-        data={eventsData}
+        data={events}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
@@ -59,6 +94,15 @@ const EventsDisplay = () => {
           </>
         }
         contentContainerStyle={{ paddingBottom: 20 }}
+        onEndReached={() => {
+          if (hasNextPage) {
+            fetchNextPage();
+          }
+        }}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={renderFooter}
+        refreshing={isLoading}
+        onRefresh={refetch}
       />
     </View>
   );
