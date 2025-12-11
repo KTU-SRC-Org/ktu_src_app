@@ -13,7 +13,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ProductImageCarousel } from '@/features/marketplace/product-image-carousel';
-import { useProductDetails, ProductVariant } from '@/hooks/marketplace/use-product-details';
+import { useProductDetails} from '@/hooks/marketplace/use-product-details';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const { width } = Dimensions.get('window');
@@ -94,9 +94,9 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
       <View className="flex-1 bg-white">
         <Skeleton className="h-[375px] w-full" />
         <View className="gap-4 p-4">
-          <Skeleton className="h-8 w-3/4" />
-          <Skeleton className="h-6 w-1/2" />
-          <Skeleton className="h-20 w-full" />
+          <Skeleton className="w-3/4 h-8" />
+          <Skeleton className="w-1/2 h-6" />
+          <Skeleton className="w-full h-20" />
         </View>
       </View>
     );
@@ -104,7 +104,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
 
   if (!product) {
     return (
-      <View className="flex-1 items-center justify-center">
+      <View className="items-center justify-center flex-1">
         <Text className="text-gray-500">Product not found.</Text>
       </View>
     );
@@ -113,14 +113,14 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
   return (
     <>
       <View className="flex-1 bg-white">
-        <View className="absolute left-0 right-0 top-0 z-10 flex-row justify-between p-4 pb-2">
+        <View className="absolute top-0 left-0 right-0 z-10 flex-row justify-between p-4 pb-2">
           <TouchableOpacity
             onPress={() => router.back()}
-            className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
+            className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
             <Ionicons name="arrow-back" size={24} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full bg-white/90">
+          <TouchableOpacity className="items-center justify-center w-10 h-10 rounded-full bg-white/90">
             <Ionicons name="share-social-outline" size={24} color="#000" />
           </TouchableOpacity>
         </View>
@@ -139,7 +139,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
             }}>
             <ProductImageCarousel images={product.images.map((img) => ({ uri: img }))} />
             <TouchableOpacity
-              className="absolute bottom-5 right-5 h-12 w-12 items-center justify-center rounded-full bg-white shadow-md"
+              className="absolute items-center justify-center w-12 h-12 bg-white rounded-full shadow-md bottom-5 right-5"
               style={{
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
@@ -155,7 +155,7 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
             <Text className="mb-2 text-3xl font-bold text-[#FF8C42]">
               {product.currency} {currentPrice?.toFixed(2)}
             </Text>
-            <Text className="mb-3 flex-row text-lg font-semibold text-gray-800">
+            <Text className="flex-row mb-3 text-lg font-semibold text-gray-800">
               {product.title}{' '}
               <Text
                 className={`text-xs font-semibold ${
@@ -172,8 +172,8 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
                     : '- [ In stock ]'}
               </Text>
             </Text>
-            <View className="mb-4 flex-row items-center">
-              <View className="mr-2 flex-row">
+            <View className="flex-row items-center mb-4">
+              <View className="flex-row mr-2">
                 {[1, 2, 3, 4, 5].map((star, index) => (
                   <Ionicons
                     key={index}
@@ -226,8 +226,8 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
             </View>
 
             {product.seller && (
-              <TouchableOpacity className="mb-8 flex-row items-center rounded-xl bg-gray-100 p-4">
-                <View className="mr-3 h-12 w-12 items-center justify-center rounded-full bg-gray-200">
+              <TouchableOpacity className="flex-row items-center p-4 mb-8 bg-gray-100 rounded-xl">
+                <View className="items-center justify-center w-12 h-12 mr-3 bg-gray-200 rounded-full">
                   <Ionicons name="person" size={24} color="#666" />
                 </View>
                 <View className="flex-1">
@@ -245,9 +245,9 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
           </View>
         </ScrollView>
 
-        <View className="absolute bottom-0 left-0 right-0 flex-row px-4 pb-2 pt-4">
+        <View className="absolute bottom-0 left-0 right-0 flex-row px-4 pt-4 pb-2">
           <TouchableOpacity
-            className="flex-1 flex-row items-center justify-center rounded-xl bg-gray-800 py-4"
+            className="flex-row items-center justify-center flex-1 py-4 bg-gray-800 rounded-xl"
             onPress={handleContactPress}>
             <Ionicons name="call-outline" size={20} color="#fff" />
             <Text className="ml-2 text-base font-semibold text-white">Contact Seller</Text>
@@ -261,13 +261,13 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
         transparent
         animationType="slide"
         onRequestClose={() => setShowModal(false)}>
-        <View className="flex-1 justify-end bg-black/40">
-          <View className="rounded-t-2xl bg-white p-6">
-            <Text className="mb-4 text-center text-lg font-semibold">Contact Seller</Text>
+        <View className="justify-end flex-1 bg-black/40">
+          <View className="p-6 bg-white rounded-t-2xl">
+            <Text className="mb-4 text-lg font-semibold text-center">Contact Seller</Text>
 
             {whatsappNumber && (
               <TouchableOpacity
-                className="mb-3 flex-row items-center justify-center rounded-xl bg-green-600 py-3"
+                className="flex-row items-center justify-center py-3 mb-3 bg-green-600 rounded-xl"
                 onPress={handleChatOnWhatsApp}>
                 <Ionicons name="logo-whatsapp" size={22} color="#fff" />
                 <Text className="ml-2 text-base font-semibold text-white">WhatsApp</Text>
@@ -276,14 +276,14 @@ const ProductDetails = ({ id, category }: { id: string; category?: string }) => 
 
             {phoneNumber && (
               <TouchableOpacity
-                className="mb-3 flex-row items-center justify-center rounded-xl bg-blue-600 py-3"
+                className="flex-row items-center justify-center py-3 mb-3 bg-blue-600 rounded-xl"
                 onPress={handlePhoneCall}>
                 <Ionicons name="call" size={22} color="#fff" />
                 <Text className="ml-2 text-base font-semibold text-white">Voice Call</Text>
               </TouchableOpacity>
             )}
 
-            <TouchableOpacity className="mt-3 items-center" onPress={() => setShowModal(false)}>
+            <TouchableOpacity className="items-center mt-3" onPress={() => setShowModal(false)}>
               <Text className="font-medium text-gray-500">Cancel</Text>
             </TouchableOpacity>
           </View>

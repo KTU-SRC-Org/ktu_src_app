@@ -3,6 +3,86 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          address: string | null;
+          attachments: Json;
+          author_id: string | null;
+          body: string | null;
+          category: string;
+          contact: string | null;
+          created_at: string;
+          ends_at: string | null;
+          heads_up: string | null;
+          id: string;
+          is_important: boolean;
+          is_public: boolean;
+          location: string | null;
+          notice: string | null;
+          pinned: boolean;
+          quick_facts: Json;
+          starts_at: string | null;
+          subtitle: string | null;
+          summary: string | null;
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          address?: string | null;
+          attachments?: Json;
+          author_id?: string | null;
+          body?: string | null;
+          category?: string;
+          contact?: string | null;
+          created_at?: string;
+          ends_at?: string | null;
+          heads_up?: string | null;
+          id?: string;
+          is_important?: boolean;
+          is_public?: boolean;
+          location?: string | null;
+          notice?: string | null;
+          pinned?: boolean;
+          quick_facts?: Json;
+          starts_at?: string | null;
+          subtitle?: string | null;
+          summary?: string | null;
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          address?: string | null;
+          attachments?: Json;
+          author_id?: string | null;
+          body?: string | null;
+          category?: string;
+          contact?: string | null;
+          created_at?: string;
+          ends_at?: string | null;
+          heads_up?: string | null;
+          id?: string;
+          is_important?: boolean;
+          is_public?: boolean;
+          location?: string | null;
+          notice?: string | null;
+          pinned?: boolean;
+          quick_facts?: Json;
+          starts_at?: string | null;
+          subtitle?: string | null;
+          summary?: string | null;
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'announcements_author_id_fkey';
+            columns: ['author_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       departments: {
         Row: {
           created_at: string;
@@ -596,6 +676,63 @@ export type Database = {
             columns: ['listing_id'];
             isOneToOne: false;
             referencedRelation: 'market_listings';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      notifications: {
+        Row: {
+          actor_id: string | null;
+          body: string | null;
+          created_at: string;
+          data: Json;
+          id: string;
+          link_id: string | null;
+          link_type: string | null;
+          read: boolean;
+          recipient_id: string;
+          title: string;
+          type: string;
+        };
+        Insert: {
+          actor_id?: string | null;
+          body?: string | null;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          link_id?: string | null;
+          link_type?: string | null;
+          read?: boolean;
+          recipient_id: string;
+          title: string;
+          type: string;
+        };
+        Update: {
+          actor_id?: string | null;
+          body?: string | null;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          link_id?: string | null;
+          link_type?: string | null;
+          read?: boolean;
+          recipient_id?: string;
+          title?: string;
+          type?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'notifications_actor_id_fkey';
+            columns: ['actor_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notifications_recipient_id_fkey';
+            columns: ['recipient_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
             referencedColumns: ['id'];
           },
         ];

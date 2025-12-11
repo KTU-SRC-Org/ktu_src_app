@@ -4,12 +4,13 @@ import { StyleSheet } from 'react-native';
 import InfoDetails from '@/features/info-center/info-details';
 
 const InfoScreen = () => {
-  const { id } = useLocalSearchParams();
+  const { id, type } = useLocalSearchParams<{ id: string; type: string }>();
   const infoId = Array.isArray(id) ? id[0] : (id ?? '');
+  const infoType = Array.isArray(type) ? type[0] : (type ?? 'announcement'); // Default to announcement if missing
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} style={styles.container}>
-      <InfoDetails id={infoId} />
+      <InfoDetails id={infoId} type={infoType as 'notification' | 'announcement'} />
     </SafeAreaView>
   );
 };
