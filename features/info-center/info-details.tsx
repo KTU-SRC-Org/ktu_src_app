@@ -45,18 +45,29 @@ const InfoDetails = ({ id, type }: InfoDetailsProps) => {
   const announceData = isAnnouncement ? (info as AnnouncementItem) : null;
   const notifData = !isAnnouncement ? (info as NotificationItem) : null;
 
+  const metadata = (notifData?.data ?? {}) as Record<string, any>;
+
   const title = info.title;
   const subtitle = announceData?.subtitle;
-  const message = announceData ? announceData.body || announceData.summary : notifData?.body;
-  const notice = announceData?.notice; // Notifications from DB don't strictly have 'notice' col, but `data` might.
-  const headsUp = announceData?.headsUp;
-  const details = announceData?.body; // Using body as details for now
-  const location = announceData?.location;
-  const address = announceData?.address;
-  const quickFacts = announceData?.quickFacts;
-  const attachments = announceData?.attachments as any; // Cast to match AttachmentList expected type if needed
+  const message = isAnnouncement
+    ? announceData?.summary || announceData?.body
+    : notifData?.body || metadata?.message || metadata?.summary;
+  const notice = isAnnouncement ? announceData?.notice : metadata?.notice;
+  const headsUp = isAnnouncement ? announceData?.headsUp : metadata?.headsUp || metadata?.heads_up;
+  const details = isAnnouncement ? announceData?.body : metadata?.details;
+  const location = isAnnouncement ? announceData?.location : metadata?.location;
+  const address = isAnnouncement ? announceData?.address : metadata?.address;
+  const quickFactsSource = isAnnouncement
+    ? announceData?.quickFacts
+    : metadata?.quickFacts || metadata?.quick_facts;
+  const quickFacts = Array.isArray(quickFactsSource) ? quickFactsSource : undefined;
+  const attachmentsSource = isAnnouncement ? announceData?.attachments : metadata?.attachments;
+  const attachments = Array.isArray(attachmentsSource) ? (attachmentsSource as any) : undefined;
+  const linkLabel = isAnnouncement ? 'Event' : metadata?.linkLabel || notifData?.linkType || 'Link';
 
-  const timestamp = isAnnouncement ? announceData?.updatedAt || announceData?.createdAt : notifData?.createdAt;
+  const timestamp = isAnnouncement
+    ? announceData?.updatedAt || announceData?.createdAt
+    : notifData?.createdAt;
   const updatedAgo = timestamp ? formatTime(timestamp) : '';
 
   return (
@@ -98,7 +109,7 @@ const InfoDetails = ({ id, type }: InfoDetailsProps) => {
 
         <View className="flex-row gap-2 px-4">
           <Pressable className="flex-1 rounded-xl bg-neutral-900 py-3 active:opacity-90">
-            <Text className="text-center text-sm font-semibold text-white">Open {isAnnouncement ? 'Event' : 'Link'}</Text>
+            <Text className="text-center text-sm font-semibold text-white">Open {linkLabel}</Text>
           </Pressable>
           <Pressable className="flex-1 rounded-xl bg-neutral-200 py-3 active:opacity-90">
             <Text className="text-center text-sm font-semibold text-neutral-800">Acknowledge</Text>

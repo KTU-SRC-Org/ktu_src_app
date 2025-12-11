@@ -1,3 +1,4 @@
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { useQuery } from '@tanstack/react-query';
 import { useSupabase } from '@/lib/supabase/use-supabase';
 import { NotificationItem } from '@/features/info-center/types';
@@ -7,55 +8,57 @@ interface UseNotificationsQueryProps {
   userId?: string;
 }
 
+const STALE_TIME_30_MIN = 1000 * 60 * 30;
+
+const mapNotificationFromDB = (item: any): NotificationItem => ({
+  id: item.id,
+  recipientId: item.recipient_id,
+  actorId: item.actor_id,
+  type: item.type,
+  title: item.title,
+  body: item.body,
+  data: item.data ?? {},
+  linkType: item.link_type,
+  linkId: item.link_id,
+  read: item.read,
+  createdAt: item.created_at,
+});
+
+const resolveRecipientId = async (supabase: SupabaseClient, userId?: string) => {
+  if (userId) return userId;
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) throw error;
+  if (!user) throw new Error('No authenticated user found');
+
+  return user.id;
+};
+
 export const useNotificationsQuery = ({ enabled = true, userId }: UseNotificationsQueryProps = {}) => {
   const supabase = useSupabase();
 
   return useQuery({
     queryKey: ['notifications', { recipientId: userId }],
     queryFn: async (): Promise<NotificationItem[]> => {
-      // Stub implementation - replace with actual Supabase call
-      // const { data, error } = await supabase
-      //   .from('notifications')
-      //   .select('*')
-      //   .eq('recipient_id', userId)
-      //   .order('created_at', { ascending: false });
+      const recipientId = await resolveRecipientId(supabase, userId);
 
-      // if (error) throw error;
-      // return data as NotificationItem[];
-      
-      // Mock data for now
-      await new Promise((resolve) => setTimeout(resolve, 800)); // Simulate network delay
-      return [
-        {
-          id: '1',
-          recipientId: userId || 'user-1',
-          type: 'info',
-          title: 'System Update Available',
-          body: 'A new system update is now available for your student app.',
-          read: false,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), // 2 hours ago
-        },
-        {
-          id: '3',
-          recipientId: userId || 'user-1',
-          type: 'alert',
-          title: 'Power Interruption',
-          body: 'Scheduled maintenance in Engineering Block today.',
-          read: true,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(), // 2 days ago
-        },
-        {
-          id: '6',
-          recipientId: userId || 'user-1',
-          type: 'feature',
-          title: 'Dark Mode Available',
-          body: 'You can now switch to Dark Mode in settings.',
-          read: true,
-          createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5).toISOString(), // 5 days ago
-        },
-      ];
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('recipient_id', recipientId)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      return data.map(mapNotificationFromDB);
     },
     enabled,
+    staleTime: STALE_TIME_30_MIN,
+    gcTime: STALE_TIME_30_MIN,
   });
 };
 
@@ -65,19 +68,19 @@ export const useNotificationQuery = (id: string) => {
   return useQuery({
     queryKey: ['notification', id],
     queryFn: async (): Promise<NotificationItem | null> => {
-       // Mock fetch
-       await new Promise((resolve) => setTimeout(resolve, 500));
-       return {
-          id,
-          recipientId: 'user-1',
-          type: 'info',
-          title: 'System Update Available',
-          body: 'A new system update is now available for your student app.',
-          read: false,
-          createdAt: new Date().toISOString(),
-          // Add other fields as needed
-       };
+      const { data, error } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) throw error;
+      if (!data) return null;
+
+      return mapNotificationFromDB(data);
     },
     enabled: !!id,
+    staleTime: STALE_TIME_30_MIN,
+    gcTime: STALE_TIME_30_MIN,
   });
 };

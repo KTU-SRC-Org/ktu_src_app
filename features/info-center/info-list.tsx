@@ -30,7 +30,7 @@ const InfoList = ({ type }: { type: InfoCenterType }) => {
     enabled: activeTab === 'announcements',
   });
 
-  const data = activeTab === 'notifications' ? notifications : announcements;
+  const data = (activeTab === 'notifications' ? notifications : announcements) ?? [];
   const isLoading = activeTab === 'notifications' ? isLoadingNotifications : isLoadingAnnouncements;
 
   const renderItem = ({ item }: { item: NotificationItem | AnnouncementItem }) => {
@@ -60,7 +60,6 @@ const InfoList = ({ type }: { type: InfoCenterType }) => {
         );
     } else {
         const announce = item as AnnouncementItem;
-        console.log('Rendering announcement:', announce);
         return (
             <View key={item.id} className="pb-4">
                 <InfoCard

@@ -5,7 +5,7 @@ export interface NotificationItem {
   type: string;
   title: string;
   body?: string | null;
-  data?: Record<string, any>;
+  data: Record<string, any>;
   linkType?: string | null;
   linkId?: string | null;
   read: boolean;
