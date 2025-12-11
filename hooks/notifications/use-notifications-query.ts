@@ -38,7 +38,10 @@ const resolveRecipientId = async (supabase: SupabaseClient, userId?: string) => 
   return user.id;
 };
 
-export const useNotificationsQuery = ({ enabled = true, userId }: UseNotificationsQueryProps = {}) => {
+export const useNotificationsQuery = ({
+  enabled = true,
+  userId,
+}: UseNotificationsQueryProps = {}) => {
   const supabase = useSupabase();
 
   return useQuery({

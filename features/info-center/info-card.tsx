@@ -21,7 +21,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
   badge,
   isImportant,
 }) => {
-  console.log("time ",timestamp)
+  console.log('time ', timestamp);
   return (
     <Link href={href} asChild>
       <Pressable
@@ -32,7 +32,10 @@ const InfoCard: React.FC<InfoCardProps> = ({
         )}>
         <View className="flex-row items-start justify-between gap-2">
           <Text
-            className={cn('flex-1 text-base', unread ? 'font-bold text-black' : 'font-semibold text-neutral-900')}
+            className={cn(
+              'flex-1 text-base',
+              unread ? 'font-bold text-black' : 'font-semibold text-neutral-900'
+            )}
             numberOfLines={2}>
             {title}
           </Text>
@@ -43,12 +46,14 @@ const InfoCard: React.FC<InfoCardProps> = ({
           {message}
         </Text>
 
-        <View className="flex-row items-center justify-between mt-2">
-            {badge ? (
-                <View className="rounded-md bg-neutral-200 px-2 py-0.5">
-                    <Text className="text-[10px] font-medium text-neutral-600">{badge}</Text>
-                </View>
-            ) : <View />}
+        <View className="mt-2 flex-row items-center justify-between">
+          {badge ? (
+            <View className="rounded-md bg-neutral-200 px-2 py-0.5">
+              <Text className="text-[10px] font-medium text-neutral-600">{badge}</Text>
+            </View>
+          ) : (
+            <View />
+          )}
           <Text className="text-xs text-neutral-400">{formatTime(timestamp)}</Text>
         </View>
       </Pressable>

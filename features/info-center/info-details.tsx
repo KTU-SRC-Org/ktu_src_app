@@ -91,17 +91,18 @@ const InfoDetails = ({ id, type }: InfoDetailsProps) => {
           </View>
         </View>
 
-        {updatedAgo && (
-          <Text className="px-4 text-xs text-neutral-400">
-            {updatedAgo}
-          </Text>
-        )}
+        {updatedAgo && <Text className="px-4 text-xs text-neutral-400">{updatedAgo}</Text>}
 
         {message && (
           <View className={'px-4'}>
-             {/* Styling differently if it's a simple message vs a "native" notice */}
-            <View className={isAnnouncement ? "rounded-lg border-l-4 border-amber-400 bg-amber-50 p-3" : "p-2"}>
-               {isAnnouncement && <Text className="mb-1 text-sm font-semibold text-amber-800">Notice</Text>}
+            {/* Styling differently if it's a simple message vs a "native" notice */}
+            <View
+              className={
+                isAnnouncement ? 'rounded-lg border-l-4 border-amber-400 bg-amber-50 p-3' : 'p-2'
+              }>
+              {isAnnouncement && (
+                <Text className="mb-1 text-sm font-semibold text-amber-800">Notice</Text>
+              )}
               <Text className="text-base text-gray-800">{message}</Text>
             </View>
           </View>
@@ -117,13 +118,11 @@ const InfoDetails = ({ id, type }: InfoDetailsProps) => {
         </View>
 
         {details && isAnnouncement && (
-            <Card className="mx-4">
+          <Card className="mx-4">
             <CardContent>
-                <Text className="text-base leading-6 text-gray-700">
-                {details}
-                </Text>
+              <Text className="text-base leading-6 text-gray-700">{details}</Text>
             </CardContent>
-            </Card>
+          </Card>
         )}
 
         {headsUp && (
@@ -151,9 +150,7 @@ const InfoDetails = ({ id, type }: InfoDetailsProps) => {
           </View>
         )}
 
-        {attachments && attachments.length > 0 && (
-          <AttachmentsList resources={attachments} />
-        )}
+        {attachments && attachments.length > 0 && <AttachmentsList resources={attachments} />}
 
         {(location || address) && (
           <Card className={'mx-4'}>

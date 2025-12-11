@@ -37,46 +37,52 @@ const InfoList = ({ type }: { type: InfoCenterType }) => {
     // Determine props based on item type
     // We can differentiate by checking for unique properties or just casting if we're confident
     const isNotification = 'recipientId' in item;
-    
+
     // Common props
     const props = {
-        href: { pathname: '/info-center/info/[id]', params: { id: item.id } } as const, // Cast to satisfy Expo Router types
-        title: item.title,
+      href: { pathname: '/info-center/info/[id]', params: { id: item.id } } as const, // Cast to satisfy Expo Router types
+      title: item.title,
     };
 
     if (isNotification) {
-        const notif = item as NotificationItem;
-        return (
-            <View key={item.id} className="pb-4">
-                <InfoCard
-                    {...props}
-                    href={{ pathname: '/info-center/info/[id]', params: { id: item.id, type: 'notification' } }}
-                    message={notif.body || 'No details available'}
-                    timestamp={notif.createdAt}
-                    unread={!notif.read}
-                    badge={notif.type}
-                />
-            </View>
-        );
+      const notif = item as NotificationItem;
+      return (
+        <View key={item.id} className="pb-4">
+          <InfoCard
+            {...props}
+            href={{
+              pathname: '/info-center/info/[id]',
+              params: { id: item.id, type: 'notification' },
+            }}
+            message={notif.body || 'No details available'}
+            timestamp={notif.createdAt}
+            unread={!notif.read}
+            badge={notif.type}
+          />
+        </View>
+      );
     } else {
-        const announce = item as AnnouncementItem;
-        return (
-            <View key={item.id} className="pb-4">
-                <InfoCard
-                    {...props}
-                    href={{ pathname: '/info-center/info/[id]', params: { id: item.id, type: 'announcement' } }}
-                    message={announce.summary || announce.body || 'No details available'}
-                    timestamp={announce.startsAt || announce.createdAt}
-                    isImportant={announce.isImportant}
-                    badge={announce.category}
-                />
-            </View>
-        );
+      const announce = item as AnnouncementItem;
+      return (
+        <View key={item.id} className="pb-4">
+          <InfoCard
+            {...props}
+            href={{
+              pathname: '/info-center/info/[id]',
+              params: { id: item.id, type: 'announcement' },
+            }}
+            message={announce.summary || announce.body || 'No details available'}
+            timestamp={announce.startsAt || announce.createdAt}
+            isImportant={announce.isImportant}
+            badge={announce.category}
+          />
+        </View>
+      );
     }
   };
 
   const EmptyState = () => (
-    <View className="items-center justify-center flex-1 py-20">
+    <View className="flex-1 items-center justify-center py-20">
       <Text className="text-neutral-400">
         {activeTab === 'notifications' ? 'No notifications yet' : 'No announcements yet'}
       </Text>
@@ -119,19 +125,21 @@ const InfoList = ({ type }: { type: InfoCenterType }) => {
       </View>
 
       {isLoading ? (
-        <View className="items-center justify-center flex-1">
-            <ActivityIndicator size="small" color="#000000" />
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="small" color="#000000" />
         </View>
       ) : (
         <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
-            renderItem={renderItem}
-            ListEmptyComponent={EmptyState}
-            refreshing={activeTab === 'notifications' ? isRefetchingNotifications : isRefetchingAnnouncements}
-            onRefresh={activeTab === 'notifications' ? refetchNotifications : refetchAnnouncements}
+          data={data}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 14, paddingVertical: 20 }}
+          renderItem={renderItem}
+          ListEmptyComponent={EmptyState}
+          refreshing={
+            activeTab === 'notifications' ? isRefetchingNotifications : isRefetchingAnnouncements
+          }
+          onRefresh={activeTab === 'notifications' ? refetchNotifications : refetchAnnouncements}
         />
       )}
     </View>

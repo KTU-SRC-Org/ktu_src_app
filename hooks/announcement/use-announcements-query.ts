@@ -90,16 +90,16 @@ export const useAnnouncementQuery = (id: string) => {
   return useQuery({
     queryKey: ['announcement', id],
     queryFn: async (): Promise<AnnouncementItem | null> => {
-       const { data, error } = await supabase
-         .from('announcements')
-         .select('*')
-         .eq('id', id)
-         .single();
+      const { data, error } = await supabase
+        .from('announcements')
+        .select('*')
+        .eq('id', id)
+        .single();
 
-       if (error) throw error;
-       if (!data) return null;
+      if (error) throw error;
+      if (!data) return null;
 
-       return mapAnnouncementFromDB(data);
+      return mapAnnouncementFromDB(data);
     },
     enabled: !!id,
     staleTime: STALE_TIME_1_HOUR,
