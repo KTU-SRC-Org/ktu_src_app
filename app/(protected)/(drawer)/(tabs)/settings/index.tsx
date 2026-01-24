@@ -1,13 +1,16 @@
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, Alert } from 'react-native';
 import { Href, useRouter } from 'expo-router';
 import { SettingSection } from '@/features/settings/setting-section';
 import { ExternalServicesSection } from '@/features/settings/external-services-section';
 import { DeveloperCredits } from '@/features/settings/developer-credits';
 import { settingsSections, externalServices } from '@/config/settings.config';
 import { SettingItem, ExternalService } from '@/types/settings.types';
+import { useSignOut } from '@/hooks/auth/use-signout';
 
 const SettingsScreen = () => {
   const router = useRouter();
+  const signOut = useSignOut();
+
   const handleItemPress = (item: SettingItem) => {
     if (item.disabled || item.comingSoon) return;
 
@@ -32,7 +35,23 @@ const SettingsScreen = () => {
   };
 
   const handleSignOut = () => {
-    console.log('log out');
+    Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Sign Out',
+        style: 'destructive',
+        onPress: () => {
+          signOut.mutate(undefined, {
+            onError: (error) => {
+              Alert.alert('Error', error.message);
+            },
+          });
+        },
+      },
+    ]);
   };
 
   return (
@@ -52,8 +71,14 @@ const SettingsScreen = () => {
       <DeveloperCredits onPress={handleDeveloperCreditsPress} />
 
       {/* Sign Out Button */}
-      <TouchableOpacity onPress={handleSignOut} className="mb-2 mt-4" activeOpacity={0.7}>
-        <Text className="py-4 text-center text-lg font-semibold text-blue-600">Log Out</Text>
+      <TouchableOpacity
+        onPress={handleSignOut}
+        className="mb-2 mt-4"
+        activeOpacity={0.7}
+        disabled={signOut.isPending}>
+        <Text className="py-4 text-center text-lg font-semibold text-blue-600">
+          {signOut.isPending ? 'Signing Out...' : 'Log Out'}
+        </Text>
       </TouchableOpacity>
 
       {/* Version Info */}
